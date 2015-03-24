@@ -1,8 +1,10 @@
-# Widgets-for-fhem-tablet-ui
+# Widgets for fhem-tablet-ui
 
 Die Widgets dieser Sammlung sind zur Verwendung in [fhem-tablet-ui](https://github.com/knowthelist/fhem-tablet-ui/). Zur Installation werden die js-Dateien dieser Sammlung ins Verzeichnis "js" der fhem-tablet-ui-Installation kopiert.
 
 ## klimatrend
+
+![klimatrend screenshot](/../screenshots/screenshots/klimatrend.png?raw=true)
 
 klimatrend wandelt Daten aus dem [statistics-Modul](http://fhem.de/commandref.html#statistics) in einen Pfeil um, der den aktuellen Trend anzeigt. Steigender Wert: Pfeil nach oben; Fallender Wert: Pfeil nach unten. Dazu farbcodiert und mit Extra-Icon versehene Marken für steile Bewegungen im Trend. 
 
@@ -72,3 +74,124 @@ Farbcode für steil ansteigenden Trend. Default ist rgb(255,80,80)
 
 #### highmark-falling-color
 Farbcode für steil fallenden Trend. Default ist rgb(80,80,255)
+
+## kodinowplaying
+![kodinowplaying screenshot](/../screenshots/screenshots/kodinowplaying_music.png?raw=true)
+![kodinowplaying screenshot](/../screenshots/screenshots/kodinowplaying_tvshow_paused.png?raw=true)
+
+kodinowplaying zeigt Informationen zu grade in KODI gespielten Medien in Form eines Labels an. Die Screenshots zeigen das Standardformat. Alle einzelnen Felder sind abschaltbar und durch Zuweisung
+von CSS-Klassen stylebar.
+
+### HTML-Code
+
+    <div data-type="kodinowplaying" data-device="W_XBMC"></div>
+    
+"W_XBMC" ist ein Device vom [Modul XBMC](http://fhem.de/commandref.html#XBMC). Dadurch wird ein Label erzeugt, dass Informationen zu den grade in der zugehörigen KODI-Installation abgespielten
+Medien anzeigt. In der Standardkonfiguration wird angezeigt
+
+bei Musik:
+
+    Artist - Album - Titel [ Zeit(MM:SS) / Gesamtzeit(MM:SS) ] (paused/stopped)
+
+bei Serien:
+
+    Serie S(Season)E(Episode) Episodentitel [ Zeit(HH:MM:SS) / Gesamtzeit(HH:MM:SS) ] (paused/stopped)
+
+bei Filmen:
+
+    Titel [ Zeit(HH:MM:SS) / Gesamtzeit(HH:MM:SS) ] (paused/stopped)
+
+Ein vollständiger HTML-Code mit allen möglichen Attributen:  
+
+    <div data-type="kodinowplaying" 
+        data-device="W_XBMC" 
+        data-show="yes"
+        data-season="yes"
+        data-episode="yes"
+        data-title="yes"
+        data-artist="yes"
+        data-album="yes"
+        data-time="yes"
+        data-totaltime="yes"
+        data-playstatus="yes"
+        data-class-show=""
+        data-class-season=""
+        data-class-episode=""
+        data-class-title=""
+        data-class-artist=""
+        data-class-album=""
+        data-class-time=""
+        data-class-totaltime=""
+        data-class-playstatus=""
+        data-timeformat="HH:MM:SS"
+        data-playstatus-pauseonly="yes"
+        class="titleonly|short|notime"
+        ></div>
+
+### Klassen
+
+#### titleonly
+
+Alle Felder ausser title werden ausgeblendet
+
+#### short
+
+Alle Felder ausser show, title und time werden ausgeblendet
+
+#### notime
+
+Wie das Standardformat, aber ohne time und totaltime
+
+### Attribute
+
+#### device
+
+Name eines Devices vom [Modul XBMC](http://fhem.de/commandref.html#XBMC).
+
+#### show
+
+Anzeige des Show-Titles bei Fernsehsendungen. Default yes.
+
+#### season
+
+Anzeige der Seasonnummer bei Fernsehsendungen. Default yes.
+
+#### episode
+
+Anzeige der Episodennummer bei Fernsehsendungen. Default yes.
+
+#### title
+
+Anzeige des Titels. Default yes.
+
+#### artist
+
+Anzeige des Künstlers bei Musik. Default yes.
+
+#### album
+
+Anzeige des Albums bei Musik. Default yes.
+
+#### time
+
+Anzeige des aktuellen Zeitpunktes. Achtung: Wird nur bei Änderung des Playstatus o.ä. aktualisiert. Default yes.
+
+#### totaltime
+
+Anzeige der Gesamtzeit. Default yes.
+
+#### timeformat
+
+Format für die Anzeige von time und totaltime in der Form "HH:MM:SS". Default "MM:SS" für Musik und "HH:MM" für andere Medien.
+
+#### playstatus
+
+Anzeige des playstatus. Default yes.
+
+#### playstatus-pauseonly
+
+Playstatusanzeige nur bei Pause und Stop. Default yes.
+
+#### class-show|season...
+
+CSS-Klasse für das enstprechende Feld. Die Klasse wird auf ein span-Element das das Feld umschliesst angewendet. Kein Default.
