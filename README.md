@@ -18,7 +18,7 @@ Dadurch werden u.a. Readings in folgender Form erzeugt:
 
 ### HTML-Code:
 
-    <div data-type="klimatrend" data-device="W_HUMID"></div>
+    <div data-type="klimatrend" data-device="W_HUMID" data-get="statTemperatureTendency"></div>
 
 Dadurch wird (mit den Beispieldaten) ein leuchtend roter Doppelpfeil nach oben erzeugt, der einen steilen Anstieg der Temperatur in der letzten Stunde symbolisiert. Ein vollständiger HTML-Code mit allen möglichen Attributen:
 
