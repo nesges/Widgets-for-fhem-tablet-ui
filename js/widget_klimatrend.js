@@ -5,7 +5,8 @@ var widget_klimatrend = {
         _klimatrend=this;
         _klimatrend.elements = $('div[data-type="klimatrend"]');
         _klimatrend.elements.each(function(index) {
-            $(this).data('get', $(this).data('get') || 'statTemperatureTendency'); // TODO: doesnt' work reliably because fhem-table-ui.js 104ff collects readings according to data-get attributes in html
+            $(this).data('get', $(this).data('get') || 'statTemperatureTendency'); 
+            readings[$(this).data('get')] = true;
         });
     },
     update: function (dev,par) {
