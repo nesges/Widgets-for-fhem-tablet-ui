@@ -20,8 +20,8 @@ var widget_button = {
         _button.elements.each(function(index) {
             var device = $(this).data('device');
             $(this).data('get', $(this).data('get') || 'STATE');
-            $(this).data('get-on', $(this).attr('data-get-on') || $(this).attr('data-on') || 'on');
-            $(this).data('get-off', $(this).attr('data-get-off') || $(this).attr('data-off') || 'off');
+            $(this).data('get-on', $(this).attr('data-get-on') || 'on');
+            $(this).data('get-off', $(this).attr('data-get-off') || 'off');
             
             var elem = $(this).famultibutton({
                 icon: 'fa-check-circle',
