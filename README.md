@@ -195,3 +195,54 @@ Playstatusanzeige nur bei Pause und Stop. Default yes.
 #### class-show|season...
 
 CSS-Klasse für das enstprechende Feld. Die Klasse wird auf ein span-Element das das Feld umschliesst angewendet. Kein Default.
+
+## button
+Variante der push und switch Widgets, die entweder einen URL ansteuern oder einen Fhem-Befehl absetzen kann.
+
+### HTML-Code
+
+    <div data-type="button" data-url="wohnzimmer.html"></div>
+
+Wechselt zu der Seite wohnzimmer.html. 
+
+    <div data-type="button" data-fhem-cmd="set+MILIGHT_Zone1_Wohnzimmer+hue+50" data-icon="fa-paint-brush" data-color="hsl(50,100%,50%)" class="cell"></div>
+    
+Sendet den Befehl "set MILIGHT_Zone1_Wohnzimmer hue 50" an fhem. Als Icon wird ein Malpinsel auf gelbem (HUE 50) Hintergrund angezeigt. Der Befehl muss urlencoded notiert werden. Fhem wird über den Metatag fhemweb_url lokalisiert, ist der Metatag nicht gesetzt wird "/fhem" als Default angenommen.
+    
+### Attribute
+
+#### url
+
+URL zu dem beim Klick auf den Button gewechselt werden soll.
+
+#### fhem-cmd
+
+Fhem-Befehl der beim Klick auf den Button gesetzt werden soll. fhem-cmd und url können nicht gleichzeitig verwendet werden. url hat Vorrang, wenn beide notiert werden.
+
+#### color
+
+Hintergrundfarbe des Buttons im Status "on". Default #aa6900.
+
+#### offColor
+
+Hintergrundfarbe des Buttons im Status "off". Default #aa6900.
+                
+#### icon
+
+Icon zur Anzeige auf dem Button. Default fa-check-circle
+
+#### device
+
+Optional kann ein Device angegeben werden, dessen Status mit dem Button angezeigt wird. Es können keine Befehle an dieses Device gesendet werden.
+
+#### get
+
+Reading des Devices dass gelesen werden soll um den Status zu ermitteln. Default: STATE
+
+#### get-on
+
+Wert des o.g. Readings für den Status "on". Default "on"
+
+#### get-off
+
+Wert des o.g. Readings für den Status "off". Default "off"
