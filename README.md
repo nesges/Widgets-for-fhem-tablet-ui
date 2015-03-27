@@ -246,3 +246,53 @@ Wert des o.g. Readings fÃ¼r den Status "on". Default "on"
 #### get-off
 
 Wert des o.g. Readings fÃ¼r den Status "off". Default "off"
+
+
+## clock
+
+Das Widget "clock" stellt eine einfach Uhr zur verfügung.
+
+### HTML
+
+    <div data-type="clock"></div>
+
+Zeigt eine Uhr in der Form HH:MM:SS an, die sekündlich aktualisiert wird.
+
+    <div data-type="clock" data-format="Y-m-d H:i:s"></div>
+
+Zeigt eine Uhr in der Form YYYY-MM-DD HH:MM:SS an, die sekündlich aktualisiert wird.
+
+    <div data-type="clock" data-format="Y-m-d H:i:s.u" data-interval="1"></div>
+
+Zeigt eine Uhr in der Form YYYY-MM-DD HH:MM:SS.MILI an, die im Milisekundentakt aktualisiert wird.
+
+    <div data-type="clock" data-format="U"></div>
+
+Zeigt eine Uhr im UNIX-Timestamp Format an.
+
+### Attribute
+
+#### format
+
+Die Formatangabe nutzt die gleichen Kennzeichner wie php date(), unterstützt aber nur die folgenden:
+
+    Y: Jahreszahl, vierstellig
+    y: Jahreszahl, zweistellig
+    m: Monatszahl, mit führender Null
+    n: Monatszahl, ohne führende Null
+    d: Tag des Monats, mit führender Null
+    j: Tag des Monats, ohne führende Null
+    H: Stunde des Tages, mit führender Null
+    G: Stunde im 24-Stunden-Format, ohne führender Null
+    i: Minute der Stunde, mit führender Null
+    s: Sekunde der Minute, mit führender Null
+    w: Wochentagszahl (Sonntag = 0)
+    u: Millisekunden mit führender Null
+    O: Zeitunterschied zur Greenwich time (GMT) in Stunden
+    U: Sekunden seit Beginn der UNIX-Epoche (January 1 1970 00:00:00 GMT)
+    
+Das Format wird als String angegeben, Kennzeichner werden ersetzt, die übrigen Zeichen bleiben stehen. Default "H:i:s"
+
+#### interval
+
+Das Aktualisierungsinterval in Milisekunden. Default 1000.
