@@ -27,7 +27,7 @@ var widget_button = {
                 icon: 'fa-check-circle',
                 backgroundIcon: 'fa-circle',
                 onBackgroundColor:$(this).data('color')||'#aa6900',
-                offBackgroundColor:$(this).data('offColor')||'#aa6900',
+                offBackgroundColor:$(this).data('offcolor')||'#aa6900',
                 offColor: '#2A2A2A',
                 onColor: '#2A2A2A',
             
@@ -69,14 +69,15 @@ var widget_button = {
                 } else {
                     var state = getDeviceValue( $(this), 'get' );
                     if (state) {
-                        if ( state == $(this).data('get-on') )
+                        if ( state == $(this).data('get-on') ) {
                             $(this).data('famultibutton').setOn();
-                        else if ( state == $(this).data('get-off') )
+                        } else if ( state == $(this).data('get-off') ) {
                             $(this).data('famultibutton').setOff();
-                        else if ( state.match(RegExp('^' + $(this).data('get-on') + '$')) )
+                        }else if ( state.match(RegExp('^' + $(this).data('get-on') + '$')) ) {
                             $(this).data('famultibutton').setOn();
-                        else if ( state.match(RegExp('^' + $(this).data('get-off') + '$')) )
+                        } else if ( state.match(RegExp('^' + $(this).data('get-off') + '$')) ) {
                             $(this).data('famultibutton').setOff();
+                        }
                     }
                 }
             }
