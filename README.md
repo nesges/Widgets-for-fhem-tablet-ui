@@ -6,7 +6,7 @@ Die Widgets dieser Sammlung sind zur Verwendung in [fhem-tablet-ui](https://gith
 
 ![klimatrend screenshot](/../screenshots/screenshots/klimatrend.png?raw=true)
 
-klimatrend wandelt Daten aus dem [statistics-Modul](http://fhem.de/commandref.html#statistics) in einen Pfeil um, der den aktuellen Trend anzeigt. Steigender Wert: Pfeil nach oben; Fallender Wert: Pfeil nach unten. Dazu farbcodiert und mit Extra-Icon versehene Marken fÃ¼r steile Bewegungen im Trend. 
+klimatrend wandelt Daten aus dem [statistics-Modul](http://fhem.de/commandref.html#statistics) in einen Pfeil um, der den aktuellen Trend anzeigt. Steigender Wert: Pfeil nach oben; Fallender Wert: Pfeil nach unten. Dazu farbcodiert und mit Extra-Icon versehene Marken für steile Bewegungen im Trend. 
 
 
 ### Voraussetzung: [statistics-Modul](http://fhem.de/commandref.html#statistics)
@@ -15,16 +15,18 @@ klimatrend wandelt Daten aus dem [statistics-Modul](http://fhem.de/commandref.ht
     attr STATISTICS ignoreDefaultAssignments 1
     attr STATISTICS tendencyReadings temperature,humidity
 
-Dadurch werden u.a. Readings in folgender Form erzeugt:
+Dadurch werden im Device W_HUMID u.a. Readings in folgender Form erzeugt:
 
     statTemperatureTendency 1h: +1.3 2h: +0.3 3h: +0.1 6h: +1.4
     statHumidityTendency 1h: +1 2h: -2 3h: -1 6h: -1
+
+Diese Readings werden im klimatrend-Widget verwendet. Das statistics-Modul direkt wird nicht ausgewertet.
 
 ### HTML-Code:
 
     <div data-type="klimatrend" data-device="W_HUMID" data-get="statTemperatureTendency"></div>
 
-Dadurch wird (mit den Beispieldaten) ein leuchtend roter Doppelpfeil nach oben erzeugt, der einen steilen Anstieg der Temperatur in der letzten Stunde symbolisiert. Ein vollstÃ¤ndiger HTML-Code mit allen mÃ¶glichen Attributen:
+Dadurch wird (mit den Beispieldaten) ein leuchtend roter Doppelpfeil nach oben erzeugt, der einen steilen Anstieg der Temperatur in der letzten Stunde symbolisiert. Ein vollständiger HTML-Code mit allen möglichen Attributen:
 
     <div data-type="klimatrend"
         data-device="W_HUMID"
@@ -46,34 +48,34 @@ Dadurch wird (mit den Beispieldaten) ein leuchtend roter Doppelpfeil nach oben e
 Name eines Devices mit statistics-Werten. Kein Default.
 
 #### get
-Name des Readings mit statistics-Werten. Default ist "statTemperatureTendency". Die Standardbelegung fÃ¼r data-get funktioniert derzeit nur, wenn ein gleichnamiges Reading auch einmal explizit im HTML-Code notiert wird. 
+Name des Readings mit statistics-Werten. Default ist "statTemperatureTendency". Die Standardbelegung für data-get funktioniert derzeit nur, wenn ein gleichnamiges Reading auch einmal explizit im HTML-Code notiert wird. 
 
 #### refperiod
-Referenzzeitraum mit dem der aktuelle Wert verglichen werden soll. statistics liefert die Werte fÃ¼r 1h, 2h, 3h und 6h. refperiod wird entsprechend mit 1,2,3,6 angegeben. Alternativ kann auch data-part 2,4,6,8 verwendet werden. Default ist 1
+Referenzzeitraum mit dem der aktuelle Wert verglichen werden soll. statistics liefert die Werte für 1h, 2h, 3h und 6h. refperiod wird entsprechend mit 1,2,3,6 angegeben. Alternativ kann auch data-part 2,4,6,8 verwendet werden. Default ist 1
 
 #### stagnating-color
-Farbcode fÃ¼r unverÃ¤nderten Wert. Default ist rgb(80,80,80)
+Farbcode für unveränderten Wert. Default ist rgb(80,80,80)
 
 #### icon
 Font-Awesome-Icon das zur Darstellung benutzt werden soll. Default ist: "fa-angle"
 
 #### rising-color
-Farbcode fÃ¼r ansteigenden Trend. Default ist rgb(180,80,80)
+Farbcode für ansteigenden Trend. Default ist rgb(180,80,80)
 
 #### falling-color
-Farbcode fÃ¼r fallenden Trend. Default ist rgb(80,80,180)
+Farbcode für fallenden Trend. Default ist rgb(80,80,180)
 
 #### highmark
-Wertunterschied ab der der Trend als "steil" gilt und entsprechend gekennzeichnet ist. Default ist "1" fÃ¼r Temperaturwerte und "5" fÃ¼r Humidity-Werte. 
+Wertunterschied ab der der Trend als "steil" gilt und entsprechend gekennzeichnet ist. Default ist "1" für Temperaturwerte und "5" für Humidity-Werte. 
 
 #### highmark-icon
 Font-Awesome-Icon das zur Darstellung oberhalb der highmark benutzt werden soll. Default ist: "fa-angle-double"
 
 #### highmark-rising-color
-Farbcode fÃ¼r steil ansteigenden Trend. Default ist rgb(255,80,80)
+Farbcode für steil ansteigenden Trend. Default ist rgb(255,80,80)
 
 #### highmark-falling-color
-Farbcode fÃ¼r steil fallenden Trend. Default ist rgb(80,80,255)
+Farbcode für steil fallenden Trend. Default ist rgb(80,80,255)
 
 ## kodinowplaying
 ![kodinowplaying screenshot](/../screenshots/screenshots/kodinowplaying_music.png?raw=true)
@@ -86,7 +88,7 @@ von CSS-Klassen stylebar.
 
     <div data-type="kodinowplaying" data-device="W_XBMC"></div>
     
-"W_XBMC" ist ein Device vom [Modul XBMC](http://fhem.de/commandref.html#XBMC). Dadurch wird ein Label erzeugt, dass Informationen zu den grade in der zugehÃ¶rigen KODI-Installation abgespielten
+"W_XBMC" ist ein Device vom [Modul XBMC](http://fhem.de/commandref.html#XBMC). Dadurch wird ein Label erzeugt, dass Informationen zu den grade in der zugehörigen KODI-Installation abgespielten
 Medien anzeigt. In der Standardkonfiguration wird angezeigt
 
 bei Musik:
@@ -101,7 +103,7 @@ bei Filmen:
 
     Titel [ Zeit(HH:MM:SS) / Gesamtzeit(HH:MM:SS) ] (paused/stopped)
 
-Ein vollstÃ¤ndiger HTML-Code mit allen mÃ¶glichen Attributen:  
+Ein vollständiger HTML-Code mit allen möglichen Attributen:  
 
     <div data-type="kodinowplaying" 
         data-device="W_XBMC" 
@@ -166,7 +168,7 @@ Anzeige des Titels. Default yes.
 
 #### artist
 
-Anzeige des KÃ¼nstlers bei Musik. Default yes.
+Anzeige des Künstlers bei Musik. Default yes.
 
 #### album
 
@@ -174,7 +176,7 @@ Anzeige des Albums bei Musik. Default yes.
 
 #### time
 
-Anzeige des aktuellen Zeitpunktes. Achtung: Wird nur bei Ã„nderung des Playstatus o.Ã¤. aktualisiert. Default yes.
+Anzeige des aktuellen Zeitpunktes. Achtung: Wird nur bei Ã„nderung des Playstatus o.ä. aktualisiert. Default yes.
 
 #### totaltime
 
@@ -182,7 +184,7 @@ Anzeige der Gesamtzeit. Default yes.
 
 #### timeformat
 
-Format fÃ¼r die Anzeige von time und totaltime in der Form "HH:MM:SS". Default "MM:SS" fÃ¼r Musik und "HH:MM" fÃ¼r andere Medien.
+Format für die Anzeige von time und totaltime in der Form "HH:MM:SS". Default "MM:SS" für Musik und "HH:MM" für andere Medien.
 
 #### playstatus
 
@@ -194,7 +196,7 @@ Playstatusanzeige nur bei Pause und Stop. Default yes.
 
 #### class-show|season...
 
-CSS-Klasse fÃ¼r das enstprechende Feld. Die Klasse wird auf ein span-Element das das Feld umschliesst angewendet. Kein Default.
+CSS-Klasse für das enstprechende Feld. Die Klasse wird auf ein span-Element das das Feld umschliesst angewendet. Kein Default.
 
 ## button
 Variante der push und switch Widgets, die entweder einen URL ansteuern oder einen Fhem-Befehl absetzen kann.
@@ -207,7 +209,7 @@ Wechselt zu der Seite wohnzimmer.html.
 
     <div data-type="button" data-fhem-cmd="set+MILIGHT_Zone1_Wohnzimmer+hue+50" data-icon="fa-paint-brush" data-color="hsl(50,100%,50%)" class="cell"></div>
     
-Sendet den Befehl "set MILIGHT_Zone1_Wohnzimmer hue 50" an fhem. Als Icon wird ein Malpinsel auf gelbem (HUE 50) Hintergrund angezeigt. Der Befehl muss urlencoded notiert werden. Fhem wird Ã¼ber den Metatag fhemweb_url lokalisiert, ist der Metatag nicht gesetzt wird "/fhem" als Default angenommen.
+Sendet den Befehl "set MILIGHT_Zone1_Wohnzimmer hue 50" an fhem. Als Icon wird ein Malpinsel auf gelbem (HUE 50) Hintergrund angezeigt. Der Befehl muss urlencoded notiert werden. Fhem wird über den Metatag fhemweb_url lokalisiert, ist der Metatag nicht gesetzt wird "/fhem" als Default angenommen.
     
 ### Attribute
 
@@ -217,7 +219,7 @@ URL zu dem beim Klick auf den Button gewechselt werden soll.
 
 #### fhem-cmd
 
-Fhem-Befehl der beim Klick auf den Button gesetzt werden soll. fhem-cmd und url kÃ¶nnen nicht gleichzeitig verwendet werden. url hat Vorrang, wenn beide notiert werden.
+Fhem-Befehl der beim Klick auf den Button gesetzt werden soll. fhem-cmd und url können nicht gleichzeitig verwendet werden. url hat Vorrang, wenn beide notiert werden.
 
 #### color
 
@@ -233,7 +235,7 @@ Icon zur Anzeige auf dem Button. Default fa-check-circle
 
 #### device
 
-Optional kann ein Device angegeben werden, dessen Status mit dem Button angezeigt wird. Es kÃ¶nnen keine Befehle an dieses Device gesendet werden.
+Optional kann ein Device angegeben werden, dessen Status mit dem Button angezeigt wird. Es können keine Befehle an dieses Device gesendet werden.
 
 #### get
 
@@ -241,11 +243,11 @@ Reading des Devices dass gelesen werden soll um den Status zu ermitteln. Default
 
 #### get-on
 
-Wert des o.g. Readings fÃ¼r den Status "on". Default "on"
+Wert des o.g. Readings für den Status "on". Default "on"
 
 #### get-off
 
-Wert des o.g. Readings fÃ¼r den Status "off". Default "off"
+Wert des o.g. Readings für den Status "off". Default "off"
 
 
 ## clock
