@@ -146,15 +146,6 @@ var widget_kodinowplaying = {
                 + (time || totaltime    ? ' ] ' : '')
                 + (playStatus && playStatus!="playing"? ' <span class="'+$(this).data('class-playstatus') +'">(' +playStatus+')</span> '                :'')
             );
-            
-            // TODO: to avoid getting old readings when changing media types enforce updating of all readings
-            // otherwise when for example changing from music to a tv show, currentArtist, currentAlbum and 
-            // currentShowtitle will always keep their value
-            // 
-            // patch needed: fhem-tablet-ui.js 222:
-            //  var regParaname = /^(\S{3,}):\s?(.*)$/;
-            //
-            // https://github.com/knowthelist/fhem-tablet-ui/pull/8
         });
     }
 };
