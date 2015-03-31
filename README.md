@@ -300,3 +300,36 @@ Das Format wird als String angegeben, Kennzeichner werden ersetzt, die übrigen 
 #### interval
 
 Das Aktualisierungsinterval in Milisekunden. Default 1000.
+
+## weather
+
+![weather screenshot](/../screenshots/screenshots/weather-demo.png?raw=true)
+
+Das Widget "weather" wandelt Bezeichnungen von Wetterlagen verschiedener Wetter-Module in Icons um. Der Screenshot zeigt neben dem eigentlichen "weather"-Widget verschiedene Labels. Der vollständige Code zur Erzeugung dieser Ansicht ist in [weather-demo](weather-demo.html) zu finden. Das "weather"-Widget ist die angezeigte Wolke.
+
+Insbesondere das Modul Weather liefert eine wesentlich differenziertere Beschreibung der Wetterlage, als mit diesem Widget darstellbar ist. Es sollte daher grundsätzlich zusammen mit einem normalen "label"-Widget verwendet werden, das die genaue Bezeichnung darstellt.
+
+### HTML
+
+In Verbindung mit dem Modul [Weather](http://fhem.de/commandref.html#Weather) zB:
+
+    <div data-type="weather" 
+        data-device="WEATHER"
+        data-get="condition"></div>
+
+In Verbindung mit dem Modul [PROPLANTA](http://fhem.de/commandref.html#PROPLANTA) zB:
+
+    <div data-type="weather" 
+        data-device="WEATHER_PROPLANTA"
+        data-get="fc0_weatherEvening"></div>
+
+### Attribute
+
+#### device
+
+Ein Device von einem der unterstützten Typen. Aktuell sind Weather oder PROPLANTA möglich.
+
+#### get
+
+Reading dessen Wettertext in ein Icon umgewandelt werden soll. Möglich sind alle Readings, die eine textuelle Beschreibung der Wetterlage enthalten. zB condition, fc#_condition, fc#_weather(Morning|Day|Evening|Night)
+
