@@ -90,6 +90,49 @@ var widget_weather = {
         'Schneeschauer' :               ':snow showers',
         'vereinzelt Gewitter' :         ':isolated thundershowers',
         
+        // Weather (YAHOO) nl
+        'zware storm' :                 ':tropical storm',
+        'orkaan' :                      ':hurricane',
+        'hevig onweer' :                ':severe thunderstorms',
+        'onweer' :                      ':thunderstorms',
+        'regen en sneeuw' :             ':mixed rain and snow',
+        'regen en ijzel' :              ':mixed rain and sleet',
+        'sneeuw en ijzel' :             ':mixed snow and sleet',
+        'aanvriezende motregen' :       ':freezing drizzle',
+        'motregen' :                    ':drizzle',
+        'aanvriezende regen' :          ':freezing rain',
+        'buien' :                       ':showers',
+        'sneeuw windstoten' :           ':snow flurries',
+        'lichte sneeuwbuien' :          ':light snow showers',
+        'stuifsneeuw' :                 ':blowing snow',
+        'sneeuw' :                      ':snow',
+        'hagel' :                       ':hail',
+        'ijzel' :                       ':sleet',
+        'stof' :                        ':dust',
+        'mist' :                        ':foggy',
+        'waas' :                        ':haze',
+        'smog' :                        ':smoky',
+        'heftig' :                      ':blustery',
+        'winderig' :                    ':windy',
+        'koud' :                        ':cold',
+        'bewolkt' :                     ':cloudy',
+        'overwegend bewolkt' :          ':mostly cloudy',
+        'gedeeltelijk bewolkt' :        ':partly cloudy',
+        'helder' :                      ':clear',
+        'zonnig' :                      ':sunny',
+        'mooi' :                        ':fair',
+        'regen en hagel' :              ':mixed rain and hail',
+        'heet' :                        ':hot',
+        'plaatselijk onweer' :          ':isolated thunderstorms',
+        'af en toe onweer' :            ':scattered thunderstorms',
+        'af en toe regenbuien' :        ':scattered showers',
+        'hevige sneeuwval' :            ':heavy snow',
+        'af en toe sneeuwbuien' :       ':scattered snow showers',
+        'deels bewolkt' :               ':partly cloudy',
+        'onweersbuien' :                ':thundershowers',
+        'sneeuwbuien' :                 ':snow showers',
+        'af en toe onweersbuien' :      ':isolated thundershowers',
+        
         // PROPLANTA
         "heiter":"H",
         "wolkig":"N",
@@ -136,5 +179,5 @@ var widget_weather = {
                  }
             }
         });
-    }
+    }         
 };
