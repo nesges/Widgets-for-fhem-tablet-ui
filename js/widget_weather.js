@@ -60,7 +60,7 @@ var widget_weather = {
         // OPENWEATHER (Wetter.com) (incomplete)
         'leichter Schnee - Schauer' :   'U',
         'leichter Schnee-Regen' :       'V',
-        'mäßiger Schneefall' :          'U',
+        'm��iger Schneefall' :          'U',
         'leichter Regen' :              'R',
         
         // others
@@ -127,7 +127,7 @@ var widget_weather = {
         // OPENWEATHER (wetter.com) (incomplete)
         'leichter Schnee - Schauer' :   '/images/default/weather/chance_of_snow.png',
         'leichter Schnee-Regen' :       '/images/default/weather/rainsnow.png',
-        'mäßiger Schneefall' :          '/images/default/weather/chance_of_snow.png',
+        'm��iger Schneefall' :          '/images/default/weather/chance_of_snow.png',
         'leichter Regen' :              '/images/default/weather/drizzle.png',
         
         // others
@@ -163,13 +163,13 @@ var widget_weather = {
         'windig' :                      ':windy',
         'kalt' :                        ':cold',
         'wolkig' :                      ':cloudy',
-        'Ã¼berwiegend wolkig' :         ':mostly cloudy',
+        'überwiegend wolkig' :         ':mostly cloudy',
         'teilweise wolkig' :            ':partly cloudy',
         'klar' :                        ':clear',
         'sonnig' :                      ':sunny',
         'heiter' :                      ':fair',
         'Regen und Hagel' :             ':mixed rain and hail',
-        'heiÃŸ' :                       ':hot',
+        'heiß' :                       ':hot',
         'einzelne Gewitter' :           ':isolated thunderstorms',
         'vereinzelt Gewitter' :         ':scattered thunderstorms',
         'vereinzelt Schauer' :          ':scattered showers',
@@ -270,16 +270,6 @@ var widget_weather = {
         '95' :                          ':scattered thunderstorms',
         '96' :                          ':thunderstorms',
         '999' :                         ':undefined',
-
-        // PROPLANTA
-        "heiter":"H",
-        "wolkig":"N",
-        "Regenschauer":"Q",
-        "stark bewoelkt":"Y",
-        "Regen":"R",
-        "bedeckt":"N",
-        "sonnig":"B",
-        "Schnee":"U"
     },
   
     init: function () {
