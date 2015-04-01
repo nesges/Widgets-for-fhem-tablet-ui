@@ -4,7 +4,7 @@ function widget_button_clicked(target, type) {
             document.location.href = target;
             break;
         case 'url-xhr':
-            $.get(target) + '&XHR=1';
+            $.get(target);
             break;
         case 'fhem-cmd':
             var fhem = $("meta[name='fhemweb_url']").attr("content") || "../fhem/";
