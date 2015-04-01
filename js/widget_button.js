@@ -3,6 +3,9 @@ function widget_button_clicked(target, type) {
         case 'url':
             document.location.href = target;
             break;
+        case 'url-xhr':
+            $.get(target) + '&XHR=1';
+            break;
         case 'fhem-cmd':
             var fhem = $("meta[name='fhemweb_url']").attr("content") || "../fhem/";
             $.get(fhem + '?cmd='+ target +'&XHR=1');
@@ -27,7 +30,7 @@ var widget_button = {
                 icon: 'fa-check-circle',
                 backgroundIcon: 'fa-circle',
                 onBackgroundColor:$(this).data('color')||'#aa6900',
-                offBackgroundColor:$(this).data('offcolor')||'#aa6900',
+                offBackgroundColor:$(this).data('offcolor')||'#505050',
                 offColor: '#2A2A2A',
                 onColor: '#2A2A2A',
             
@@ -35,6 +38,8 @@ var widget_button = {
                 toggleOn: function( ) {
                     if($(this).attr('data-url')) {
                         widget_button_clicked($(this).attr('data-url'), 'url');
+                    } else if($(this).attr('data-url-xhr')) {
+                        widget_button_clicked($(this).attr('data-url-xhr'), 'url-xhr');
                     } else if($(this).attr('data-fhem-cmd')) {
                         widget_button_clicked($(this).attr('data-fhem-cmd'), 'fhem-cmd');
                     }
@@ -43,6 +48,8 @@ var widget_button = {
                 toggleOff: function( ) {
                     if($(this).attr('data-url')) {
                         widget_button_clicked($(this).attr('data-url'), 'url');
+                    } else if($(this).attr('data-url-xhr')) {
+                        widget_button_clicked($(this).attr('data-url-xhr'), 'url-xhr');
                     } else if($(this).attr('data-fhem-cmd')) {
                         widget_button_clicked($(this).attr('data-fhem-cmd'), 'fhem-cmd');
                     }
@@ -67,7 +74,9 @@ var widget_button = {
                 if(! $(this).data('device')) {
                     $(this).data('famultibutton').setOn();
                 } else {
-                    var state = getDeviceValue( $(this), 'get' );
+                    var value = getDeviceValue( $(this), 'get' );
+                    var part =  $(this).data('part') || -1;
+				    var state = getPart(value,part);
                     if (state) {
                         if ( state == $(this).data('get-on') ) {
                             $(this).data('famultibutton').setOn();
