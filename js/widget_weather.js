@@ -60,7 +60,7 @@ var widget_weather = {
         // OPENWEATHER (Wetter.com) (incomplete)
         'leichter Schnee - Schauer' :   'U',
         'leichter Schnee-Regen' :       'V',
-        'm��iger Schneefall' :          'U',
+        'mäßiger Schneefall' :          'U',
         'leichter Regen' :              'R',
         
         // others
@@ -127,7 +127,7 @@ var widget_weather = {
         // OPENWEATHER (wetter.com) (incomplete)
         'leichter Schnee - Schauer' :   '/images/default/weather/chance_of_snow.png',
         'leichter Schnee-Regen' :       '/images/default/weather/rainsnow.png',
-        'm��iger Schneefall' :          '/images/default/weather/chance_of_snow.png',
+        'mäßiger Schneefall' :          '/images/default/weather/chance_of_snow.png',
         'leichter Regen' :              '/images/default/weather/drizzle.png',
         
         // others
@@ -163,13 +163,13 @@ var widget_weather = {
         'windig' :                      ':windy',
         'kalt' :                        ':cold',
         'wolkig' :                      ':cloudy',
-        'überwiegend wolkig' :         ':mostly cloudy',
+        'Ã¼berwiegend wolkig' :         ':mostly cloudy',
         'teilweise wolkig' :            ':partly cloudy',
         'klar' :                        ':clear',
         'sonnig' :                      ':sunny',
         'heiter' :                      ':fair',
         'Regen und Hagel' :             ':mixed rain and hail',
-        'heiß' :                       ':hot',
+        'heiÃŸ' :                       ':hot',
         'einzelne Gewitter' :           ':isolated thunderstorms',
         'vereinzelt Gewitter' :         ':scattered thunderstorms',
         'vereinzelt Schauer' :          ':scattered showers',
@@ -299,10 +299,12 @@ var widget_weather = {
                     //wheater icons
                     $(this).empty();
                     // translate val to a ':key'
-                    var mapped = _weather.translationmap[val];
+                    var translation = _weather.translationmap[val];
                     while(typeof mapped != "undefined" && !mapped.match(/^:/)) {
-                        mapped = _weather.translationmap[mapped];
+                        translation = _weather.translationmap[mapped];
                     }
+
+                    var mapped = typeof translation == "undefined"?val:translation;
                     if($(this).data('imageset')=="kleinklima") {
                         mapped = _weather.kleinklimamap[mapped.replace(/^:/, '')];
                         var fhem = $("meta[name='fhemweb_url']").attr("content").replace(/\/$/, '') || "../fhem";
