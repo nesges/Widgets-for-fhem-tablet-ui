@@ -343,9 +343,12 @@ In Verbindung mit dem Modul [PROPLANTA](http://fhem.de/commandref.html#PROPLANTA
 
 #### device
 
-Ein Device von einem der unterstützten Typen. Aktuell sind Weather oder PROPLANTA möglich.
+Ein Device von einem der unterstützten Typen. Aktuell sind Weather, PROPLANTA und (eingeschränkt) OPENWEATHER möglich.
 
 #### get
 
-Reading dessen Wettertext in ein Icon umgewandelt werden soll. Möglich sind alle Readings, die eine textuelle Beschreibung der Wetterlage enthalten. zB condition, fc#_condition, fc#_weather(Morning|Day|Evening|Night)
+Reading dessen Wettertext in ein Icon umgewandelt werden soll. Möglich sind alle Readings, die eine textuelle Beschreibung der Wetterlage enthalten. zB condition, fc#_condition, fc#_weather(Morning|Day|Evening|Night). Für das OPENWEATHER Modul können auch die weatherCode-Readings verwendet werden.
 
+#### imageset
+
+Bildsammlung mit der die Wetterlagen dargestellt werden sollen. Zur Wahl stehen [meteocons](http://www.alessioatzeni.com/meteocons/) (wird mit fhem-tablet-ui geliefert) und [kleinklima](http://kleinklima.de/) (wird mit fhem geliefert). Default: meteocons
