@@ -7,7 +7,7 @@ function widget_button_clicked(target, type) {
             $.get(target);
             break;
         case 'fhem-cmd':
-            var fhem = $("meta[name='fhemweb_url']").attr("content") || "../fhem/";
+            var fhem = $("meta[name='fhemweb_url']").attr("content") || "../fhem";
             $.get(fhem + '?cmd='+ target +'&XHR=1');
             break;
     }
