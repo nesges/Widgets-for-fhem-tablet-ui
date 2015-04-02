@@ -69,6 +69,26 @@ var widget_wind_direction = {
                 $(this).data('size', 12);
             }
             
+            $(this).data('compass', {
+                "N"     : 0    ,    // 360/16 * 0
+                "NNO"   : 22.5 ,    // 360/16 * 1
+                "NO"    : 45   ,    // 360/16 * 2
+                "ONO"   : 67.5 ,    // 360/16 * 3
+                "O"     : 90   ,    // 360/16 * 4
+                "OSO"   : 112.5,    // ...
+                "SO"    : 135  ,
+                "SSO"   : 157.5,
+                "S"     : 180  ,
+                "SSW"   : 202.5,
+                "SW"    : 225  ,
+                "WSW"   : 247.5,
+                "W"     : 270  ,
+                "WNW"   : 292.5,
+                "NW"    : 315  ,
+                "NNW"   : 337.5,
+                "N2"    : 360
+            });
+            
             knob_elem.knob({
                 'min': 0,
                 'max': 360,
@@ -102,37 +122,38 @@ var widget_wind_direction = {
         
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*'){    
-                var val = getDeviceValue( $(this), 'get' );
+                var value = getDeviceValue( $(this), 'get');
+                var part =  $(this).data('part') || -1;
+				var val = getPart(value,part);
+                
                 var knob_elem = $(this).find('input');
-                if (val){
+                if (val) {
+                    var compass = $(this).data('compass');
+
+                    if(!$.isNumeric(val)) {
+                        // if the reading ist something like 'NNO', fetch it's numerical representation from compass
+                        val = compass[val]||0;
+                    }
                     if ( knob_elem.val() != val ){
                         knob_elem.val( val ).trigger('change');
                         if($(this).hasClass('tiny')) {
+                            // don't display val in the middle of the widget
                             knob_elem.val('');
                         } else {
-                            var valt='';
-                            if(val < 23+45*0) {
-                                valt='N'
-                            } else if(val < 23+45*1) {
-                                valt='NO'
-                            } else if(val < 23+45*2) {
-                                valt='O'
-                            } else if(val < 23+45*3) {
-                                valt='SO'
-                            } else if(val < 23+45*4) {
-                                valt='S'
-                            } else if(val < 23+45*5) {
-                                valt='SW'
-                            } else if(val < 23+45*6) {
-                                valt='W'
-                            } else if(val < 23+45*7) {
-                                valt='NW'
-                            } else if(val < 23+45*8) {
-                                valt='N'
-                            } else {
-                                valt='WTF';
+                            // search compass for the literal representation to val
+                            var ckeys=Object.keys(compass);
+                            var valt='WTF';
+                            for(var k=0; k<ckeys.length; k++) {
+                                var key = ckeys[k];
+                                var kev = compass[key];
+                                // the compass is divided into 16 section, which are split into 11,25 degrees before val and 11,25 degrees after val
+                                // iow: val is in the middle of a 22,5 degree wide section of the compass
+                                if(val > kev - 360/32 && val <= kev + 360/32 ) {
+                                    valt=key;
+                                    break;
+                                }
                             }
-                            knob_elem.val(valt);
+                            knob_elem.val(valt=="N2"?"N":valt);
                         }
                     }   
                 }
