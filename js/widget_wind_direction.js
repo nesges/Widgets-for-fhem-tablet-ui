@@ -26,15 +26,11 @@ var widget_wind_direction = {
         // draw ticks
         for (tick = this.startAngle; tick < this.endAngle + 0.00001; tick+=tick_w*dist) {
             i = step * (tick-this.startAngle)+this.o.min;
-            
             c.beginPath();
-            
             // draw normal ticks
-            c.strokeStyle = this.o.tkColor;//'#4477ff';
-            
+            c.strokeStyle = this.o.tkColor;
             w = tick_w;
-            w *= (c.strokeStyle != this.o.tkColor) ? 2 : 1;
-        
+            w *= (c.strokeStyle != this.o.tkColor) ? 2 : (this.o.tiny?6:1);
             c.arc( this.xy, this.xy, this.radius, tick, tick+w , false);
             c.stroke();
         }
@@ -63,34 +59,32 @@ var widget_wind_direction = {
             $(this).data('get', $(this).data('get') || 'STATE');
             readings[$(this).data('get')] = true;
             
-            var hdDefaultColor='#aa6900';
-            
-            $(this).data('height', 1*$(this).attr('data-height')||150);
-            $(this).data('height', 1*$(this).attr('data-width')||150);
+            // height and width can't be different
+            $(this).data('size', 1*$(this).attr('data-height')||1*$(this).attr('data-width')||1*$(this).attr('data-size')||150);
             if($(this).hasClass('small')) {
-                $(this).data('height', 100);
-                $(this).data('width', 100);
-            }
-            if($(this).hasClass('mini')) {
-                $(this).data('height', 52);
-                $(this).data('width', 52);
+                $(this).data('size', 100);
+            } else if($(this).hasClass('mini')) {
+                $(this).data('size', 52);
+            } else if($(this).hasClass('tiny')) {
+                $(this).data('size', 12);
             }
             
             knob_elem.knob({
                 'min': 0,
                 'max': 360,
-                'height':$(this).data('height'),
-                'width':$(this).data('width'),
+                'height':$(this).data('size'),
+                'width':$(this).data('size'),
                 'angleOffset': $(this).attr('data-angleoffset')?$(this).attr('data-angleoffset')*1:0,
                 'angleArc': 360,
                 'bgColor': $(this).data('bgcolor') || 'transparent',
                 'fgColor': $(this).data('fgcolor') || '#cccccc',
                 'tkColor': $(this).data('tkcolor') || '#696969',
-                'hdColor': $(this).data('hdcolor') || hdDefaultColor,
-                'thickness': 0.25,
-                'tickdistance': $(this).data('tickstep') || 45,
+                'hdColor': $(this).data('hdcolor') || '#aa6900',
+                'tiny': $(this).hasClass('tiny'),
+                'thickness': $(this).hasClass('tiny')?0.5:0.25,
+                'tickdistance': $(this).data('tickstep') || ($(this).hasClass('tiny')?90:45),
                 'mode': 0,
-                'cursor': 6,
+                'cursor': $(this).hasClass('tiny')?18:6,
                 'draw' : _wind_direction.drawDial,
                 'readOnly' : true,
                 'change' : function (v) { 
@@ -113,29 +107,33 @@ var widget_wind_direction = {
                 if (val){
                     if ( knob_elem.val() != val ){
                         knob_elem.val( val ).trigger('change');
-                        var valt='';
-                        if(val < 23+45*0) {
-                            valt='N'
-                        } else if(val < 23+45*1) {
-                            valt='NO'
-                        } else if(val < 23+45*2) {
-                            valt='O'
-                        } else if(val < 23+45*3) {
-                            valt='SO'
-                        } else if(val < 23+45*4) {
-                            valt='S'
-                        } else if(val < 23+45*5) {
-                            valt='SW'
-                        } else if(val < 23+45*6) {
-                            valt='W'
-                        } else if(val < 23+45*7) {
-                            valt='NW'
-                        } else if(val < 23+45*8) {
-                            valt='N'
+                        if($(this).hasClass('tiny')) {
+                            knob_elem.val('');
                         } else {
-                            valt='WTF';
+                            var valt='';
+                            if(val < 23+45*0) {
+                                valt='N'
+                            } else if(val < 23+45*1) {
+                                valt='NO'
+                            } else if(val < 23+45*2) {
+                                valt='O'
+                            } else if(val < 23+45*3) {
+                                valt='SO'
+                            } else if(val < 23+45*4) {
+                                valt='S'
+                            } else if(val < 23+45*5) {
+                                valt='SW'
+                            } else if(val < 23+45*6) {
+                                valt='W'
+                            } else if(val < 23+45*7) {
+                                valt='NW'
+                            } else if(val < 23+45*8) {
+                                valt='N'
+                            } else {
+                                valt='WTF';
+                            }
+                            knob_elem.val(valt);
                         }
-                        knob_elem.val(valt);
                     }   
                 }
                 knob_elem.css({visibility:'visible'});
