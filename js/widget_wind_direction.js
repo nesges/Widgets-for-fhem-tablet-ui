@@ -135,27 +135,28 @@ var widget_wind_direction = {
                         val = compass[val]||0;
                     }
                     if ( knob_elem.val() != val ){
+                        // not sure if this is needed
                         knob_elem.val( val ).trigger('change');
-                        if($(this).hasClass('tiny')) {
-                            // don't display val in the middle of the widget
-                            knob_elem.val('');
-                        } else {
-                            // search compass for the literal representation to val
-                            var ckeys=Object.keys(compass);
-                            var valt='WTF';
-                            for(var k=0; k<ckeys.length; k++) {
-                                var key = ckeys[k];
-                                var kev = compass[key];
-                                // the compass is divided into 16 section, which are split into 11,25 degrees before val and 11,25 degrees after val
-                                // iow: val is in the middle of a 22,5 degree wide section of the compass
-                                if(val > kev - 360/32 && val <= kev + 360/32 ) {
-                                    valt=key;
-                                    break;
-                                }
+                    }
+                    if($(this).hasClass('tiny')) {
+                        // don't display val in the middle of the widget
+                        knob_elem.val('');
+                    } else {
+                        // search compass for the literal representation to val
+                        var ckeys=Object.keys(compass);
+                        var valt='WTF';
+                        for(var k=0; k<ckeys.length; k++) {
+                            var key = ckeys[k];
+                            var kev = compass[key];
+                            // the compass is divided into 16 sections, which are split into 11,25 degrees before val and 11,25 degrees after val
+                            // iow: val is the middle of a 22,5 degree wide section of the compass
+                            if(val > kev - 360/32 && val <= kev + 360/32 ) {
+                                valt=key;
+                                break;
                             }
-                            knob_elem.val(valt=="N2"?"N":valt);
                         }
-                    }   
+                        knob_elem.val(valt=="N2"?"N":valt);
+                    }
                 }
                 knob_elem.css({visibility:'visible'});
             }
