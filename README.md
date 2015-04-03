@@ -9,6 +9,7 @@ Widgets:
 * [button] (#button)
 * [clock] (#clock)
 * [weather] (#weather)
+* [wind_direction] (#wind_direction)
 
 ## klimatrend
 
@@ -352,3 +353,62 @@ Reading dessen Wettertext in ein Icon umgewandelt werden soll. Möglich sind all
 #### imageset
 
 Bildsammlung mit der die Wetterlagen dargestellt werden sollen. Zur Wahl stehen [meteocons](http://www.alessioatzeni.com/meteocons/) (wird mit fhem-tablet-ui geliefert) und [kleinklima](http://kleinklima.de/) (wird mit fhem geliefert). Default: meteocons
+
+
+## wind_direction
+
+![wind_direction screenshot](/../screenshots/screenshots/wind_direction.png?raw=true)
+
+Zeigt die Windrichtung auf einer Windrose an. Benötigt ein Reading mit einer Textdarstellung der Windrichtung in der Form "N", "NNW" etc. oder mit der Gradzahl der Windrichtung.
+
+### HTML
+
+    <div data-type="wind_direction" 
+        data-device="WETTERCOM"
+        data-get="fc0_windDir"></div>
+
+Zeigt die Windrichtung anhand der Gradzahl im Reading fc0_windDir eines Device vom Modul [OPENWEATHER](http://fhem.de/commandref.html#OPENWEATHER) an.
+
+    <div data-type="wind_direction" 
+        data-device="YAHOO"
+        data-get="wind_condition"
+        data-part="2"></div>
+
+Zeigt die Windrichtung anhand der Textdarstellung im Reading wind_condition eines Device vom Modul [Weather](http://fhem.de/commandref.html#Weather) an.
+
+    <div data-type="wind_direction" 
+        data-device="YAHOO"
+        data-get="wind_direction"
+        data-size="150"
+        data-tickstep="45"
+        data-angleoffset="0"></div>
+
+Zeigt die Windrichtung anhand der Gradzahl im Reading wind_direction eines Device vom Modul [Weather](http://fhem.de/commandref.html#Weather) an.
+
+### Attribute
+
+#### size
+
+Größe des Widgets in Pixeln. Höhe und Breite sind immer gleich. Default: 150
+
+#### tickstep
+
+Abstand der Ticks in Grad auf der Compassrosette. Aus dem Abstand ergibt sich die Anzahl der Ticks. Default: 45 (8 Ticks)
+
+#### angleoffset
+
+Drehung der Compassrosette in Grad. Default: 0
+
+### Klassen
+
+#### small
+
+Voreinstellung für size=100
+
+#### mini
+
+Voreinstellung für size=52
+
+#### tiny
+
+Voreinstellung für size=12 und tickstep=90. Die Textdarstellung in der Mitte des Widgets wird bei class "tiny" nicht angezeigt.
