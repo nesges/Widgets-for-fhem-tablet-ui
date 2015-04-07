@@ -123,8 +123,8 @@ var widget_wind_direction = {
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*'){    
                 var value = getDeviceValue( $(this), 'get');
-                var part =  $(this).data('part') || -1;
-				var val = getPart(value,part);
+                var part = $(this).data('part') || -1;
+                var val = getPart(value,part);
                 
                 var knob_elem = $(this).find('input');
                 if (val) {
