@@ -146,7 +146,7 @@ var widget_wind_direction = {
                             valt='ERR';
                             console.log('wind_direction ' + ($(this).attr('data-device')?'('+$(this).attr('data-device')+')':'') + ': ' + getPart(value,part)+' is invalid');
                         } else if(speed==0) {
-                            valt=$(this).data('windstill')||'-';
+                            valt=$(this).data('calm')||'-';
                             console.log(speed);
                         } else {
                             // search compass for the literal representation to val
