@@ -359,33 +359,47 @@ Bildsammlung mit der die Wetterlagen dargestellt werden sollen. Zur Wahl stehen 
 
 ![wind_direction screenshot](/../screenshots/screenshots/wind_direction.png?raw=true)
 
-Zeigt die Windrichtung auf einer Windrose an. Benötigt ein Reading mit einer Textdarstellung der Windrichtung in der Form "N", "NNW" etc. oder mit der Gradzahl der Windrichtung.
+Zeigt die Windrichtung auf einer Windrose an. Benötigt ein Reading mit einer Textdarstellung der Windrichtung in der Form "N", "NNW" etc. oder mit der Gradzahl der Windrichtung (0-360). Kann zusätzlich die Windgeschwindigkeit auswerten um Windstille statt Windrichtung anzuzeigen.
 
 ### HTML
 
     <div data-type="wind_direction" 
         data-device="WETTERCOM"
-        data-get="fc0_windDir"></div>
+        data-direction="fc0_windDir"></div>
 
 Zeigt die Windrichtung anhand der Gradzahl im Reading fc0_windDir eines Device vom Modul [OPENWEATHER](http://fhem.de/commandref.html#OPENWEATHER) an.
 
     <div data-type="wind_direction" 
         data-device="YAHOO"
-        data-get="wind_condition"
+        data-direction="wind_condition"
         data-part="2"></div>
 
 Zeigt die Windrichtung anhand der Textdarstellung im Reading wind_condition eines Device vom Modul [Weather](http://fhem.de/commandref.html#Weather) an.
 
     <div data-type="wind_direction" 
         data-device="YAHOO"
-        data-get="wind_direction"
+        data-direction="wind_direction"
+        data-speed="wind_speed"
+        data-calm="-"
         data-size="150"
         data-tickstep="45"
         data-angleoffset="0"></div>
 
-Zeigt die Windrichtung anhand der Gradzahl im Reading wind_direction eines Device vom Modul [Weather](http://fhem.de/commandref.html#Weather) an.
+Zeigt die Windrichtung anhand der Gradzahl im Reading wind_direction eines Device vom Modul [Weather](http://fhem.de/commandref.html#Weather) an. 
 
 ### Attribute
+
+#### direction
+
+Reading mit der Windrichtung. Kann numerisch (0-360) oder in Textform ("NO") angegeben sein. Default: wind_direction
+
+#### speed
+
+Reading mit der Windgeschwindigkeit. Wird nur verwendet um Windstille zu erkennen und entsprechend anzuzeigen. Default: wind_speed
+
+#### calm
+
+Anzeigewert für Windstille. Default: -
 
 #### size
 
