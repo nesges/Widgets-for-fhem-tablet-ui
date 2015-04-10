@@ -56,8 +56,10 @@ var widget_wind_direction = {
             }).appendTo($(this));
             
             var device = $(this).data('device');
-            $(this).data('get', $(this).data('get') || 'STATE');
-            readings[$(this).data('get')] = true;
+            $(this).data('direction', $(this).data('direction') || $(this).data('get') || 'wind_direction');
+            $(this).data('speed', $(this).data('speed') || 'wind_speed');
+            readings[$(this).data('direction')] = true;
+            readings[$(this).data('speed')] = true;
             
             // height and width can't be different
             $(this).data('size', 1*$(this).attr('data-height')||1*$(this).attr('data-width')||1*$(this).attr('data-size')||150);
@@ -122,9 +124,10 @@ var widget_wind_direction = {
         
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*'){    
-                var value = getDeviceValue( $(this), 'get');
+                var value = getDeviceValue( $(this), 'direction');
                 var part = $(this).data('part') || -1;
                 var val = getPart(value,part);
+                var speed = getDeviceValue( $(this), 'speed');
                 
                 var knob_elem = $(this).find('input');
                 if (val) {
@@ -134,10 +137,6 @@ var widget_wind_direction = {
                         // if the reading ist something like 'NNO', fetch it's numerical representation from compass
                         val = compass[val]||-1;
                     }
-                    if ( knob_elem.val() != val ){
-                        // not sure if this is needed
-                        knob_elem.val( val ).trigger('change');
-                    }
                     if($(this).hasClass('tiny')) {
                         // don't display val in the middle of the widget
                         knob_elem.val('');
@@ -146,6 +145,8 @@ var widget_wind_direction = {
                         if(val < 0) {
                             valt='ERR';
                             console.log('wind_direction ' + ($(this).attr('data-device')?'('+$(this).attr('data-device')+')':'') + ': ' + getPart(value,part)+' is invalid');
+                        } else if(speed==0) {
+                            valt=$(this).data('windstill')||'-';
                         } else {
                             // search compass for the literal representation to val
                             var ckeys=Object.keys(compass);
