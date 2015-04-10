@@ -137,6 +137,10 @@ var widget_wind_direction = {
                         // if the reading ist something like 'NNO', fetch it's numerical representation from compass
                         val = (val in compass?compass[val]:-1);
                     }
+                    if ( knob_elem.val() != val ){
+                        // set value and redraw 
+                        knob_elem.val( val ).trigger('change');
+                    }
                     if($(this).hasClass('tiny')) {
                         // don't display val in the middle of the widget
                         knob_elem.val('');
@@ -147,7 +151,6 @@ var widget_wind_direction = {
                             console.log('wind_direction ' + ($(this).attr('data-device')?'('+$(this).attr('data-device')+')':'') + ': ' + getPart(value,part)+' is invalid');
                         } else if(speed==0) {
                             valt=$(this).data('calm')||'-';
-                            console.log(speed);
                         } else {
                             // search compass for the literal representation to val
                             var ckeys=Object.keys(compass);
