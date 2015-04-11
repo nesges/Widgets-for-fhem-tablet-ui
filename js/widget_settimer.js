@@ -69,7 +69,7 @@ var widget_settimer = {
                 disabled : true,
             }).appendTo(knob_hour_wrap);
             
-            var knob_min_wrap = $('<div class="widget_settimer_hour_wrap" style="display:inline;margin-left:10px !important" />').appendTo(knobs);
+            var knob_min_wrap = $('<div class="widget_settimer_minute_wrap" style="display:inline;margin-left:10px !important" />').appendTo(knobs);
             var knob_min = $('<input class="widget_settimer_minute" />', {
                 type: 'text',
                 value: $(this).attr('data-initvalue')||'0',
