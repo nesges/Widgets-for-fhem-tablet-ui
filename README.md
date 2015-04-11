@@ -434,7 +434,7 @@ Voreinstellung für size=12 und tickstep=90. Die Textdarstellung in der Mitte de
 
 ![widget_settimer screenshot](/../screenshots/screenshots/widget_settimer.png?raw=true)
 
-Controll zum Anzeigen/Einstellen einer Uhrzeit. Die Einstellung der Uhrzeit wird mit den Knob-Elementen vorgenommen (links Stunde, rechts Minute) und mit dem oberen Button abgesendet. Dazu werden Stunde und Uhrzeit mit Doppelpunkt verbunden und ggf. mit führender Null versehen (9+13 = 09:13). Der untere Button sendet ein "off" Kommando.
+Widget zum anzeigen und einstellen einer Uhrzeit. Die Einstellung der Uhrzeit wird mit den beiden Knob-Elementen vorgenommen (links Stunde, rechts Minute) und mit dem oberen Button abgesendet. Dabei werden Stunde und Uhrzeit mit Doppelpunkt verbunden und ggf. mit führender Null versehen (9+13 = 09:13). Der untere Button sendet ein "off" Kommando.
 
 ### HTML
 
@@ -481,7 +481,7 @@ Befehl mit dem Änderungen an Fhem gesendet werden. Default: set
 
 #### off
 
-Wert der Anstelle der eingestellten Uhrzeit als off-Kommando mit dem unteren Button gesendet werden soll. Default: off
+Wert der anstelle der eingestellten Uhrzeit als off-Kommando mit dem unteren Button gesendet werden soll. Default: off
 
 #### width
 
