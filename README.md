@@ -10,6 +10,7 @@ Widgets:
 * [clock] (#clock)
 * [weather] (#weather)
 * [wind_direction] (#wind_direction)
+* [settimer] (#settimer)
 
 ## klimatrend
 
@@ -322,6 +323,8 @@ Das Aktualisierungsinterval in Milisekunden. Default 1000.
 
 ![weather screenshot](/../screenshots/screenshots/weather-demo.png?raw=true)
 
+**Achtung:** "weather" wird mittlerweile mit fhem-tablet-ui ausgeliefert. Die hier noch vorhandene Version ist als Testversion für Neuerungen zu betrachten.
+
 Das Widget "weather" wandelt Bezeichnungen von Wetterlagen verschiedener Wetter-Module in Icons um. Der Screenshot zeigt neben dem eigentlichen "weather"-Widget verschiedene Labels. Der vollständige Code zur Erzeugung dieser Ansicht ist in [weather-demo](weather-demo.html) zu finden. Das "weather"-Widget ist die angezeigte Wolke.
 
 Insbesondere das Modul Weather liefert eine wesentlich differenziertere Beschreibung der Wetterlage, als mit diesem Widget darstellbar ist. Es sollte daher grundsätzlich zusammen mit einem normalen "label"-Widget verwendet werden, das die genaue Bezeichnung darstellt.
@@ -426,3 +429,56 @@ Voreinstellung für size=52
 #### tiny
 
 Voreinstellung für size=12 und tickstep=90. Die Textdarstellung in der Mitte des Widgets wird bei class "tiny" nicht angezeigt.
+
+## settimer
+
+![widget_settimer screenshot](/../screenshots/screenshots/widget_settimer.png?raw=true)
+
+Controll zum Anzeigen/Einstellen einer Uhrzeit. Die Einstellung der Uhrzeit wird mit den Knob-Elementen vorgenommen (links Stunde, rechts Minute) und mit dem oberen Button abgesendet. Dazu werden Stunde und Uhrzeit mit Doppelpunkt verbunden und ggf. mit führender Null versehen (9+13 = 09:13). Der untere Button sendet ein "off" Kommando.
+
+### HTML
+
+    <div data-type="settimer"
+        data-device="WECKER"></div>
+
+Liest und sendet die Uhrzeit aus STATE des Device WECKER.
+
+    <div data-type="settimer"
+        data-device="WECKER"
+        data-reading="time">
+
+Liest und sendet die Uhrzeit aus dem Reading time des Device WECKER.
+
+    <div data-type="settimer"
+        data-device="WECKER"
+        data-get="time"
+        data-cmd="setreading"
+        data-set="time"></div>
+        
+Liest und sendet die Uhrzeit aus dem Reading time des Device WECKER.
+
+### Attribute
+
+#### device
+
+Device das gelesen/beschickt werden soll. Typischerweise ein dummy-Device.
+
+#### reading
+
+Reading aus dem gelesen, bzw. das beschickt werden soll. Die Uhrzeit wird in der Form HH:MM erwartet und gesendet. Wird reading gesetzt, werden get, cmd und set automatisch richtig initialisiert (get=reading, set=reading, cmd=setreading)
+
+#### get
+
+Reading aus dem gelesen werden soll. Die Uhrzeit wird in der Form HH:MM erwartet. Default: STATE
+
+#### set
+
+Reading das beschickt werden soll. Die Uhrzeit wird in der Form HH:MM gesendet. Default: STATE
+
+#### cmd
+
+Befehl mit dem Änderungen an Fhem gesendet werden. Default: set
+
+#### off
+
+Wert der Anstelle der eingestellten Uhrzeit als off-Kommando mit dem unteren Button gesendet werden soll. Default: off
