@@ -49,12 +49,11 @@ var widget_settimer = {
         _settimer.elements = $('div[data-type="settimer"]');
         _settimer.elements.each(function(index) {
             var device = $(this).data('device');
-            $(this).data('get', $(this).data('get') || 'STATE');
+            $(this).data('get', $(this).data('get') || $(this).data('reading') || 'STATE');
             readings[$(this).data('get')] = true;
-            
-            $(this).data('cmd', $(this).data('cmd')||'set');
+            $(this).data('set', $(this).data('reading'));
+            $(this).data('cmd', $(this).data('cmd')||($(this).data('reading')?'setreading':'set'));
             $(this).data('off', $(this).data('off')||'off');
-
             
             var container = $('<div style="position:relative"/>').appendTo($(this));
             
@@ -128,8 +127,8 @@ var widget_settimer = {
                     var parent = $(this).parents('div[data-type="settimer"]');
                     var knob_hour = parent.find('input[class=widget_settimer_hour]');
                     var knob_min = parent.find('input[class=widget_settimer_minute]');
-                    var hour = knob_hour.val();
-                    var min = knob_min.val();
+                    var hour = knob_hour.val()*1;
+                    var min = knob_min.val()*1;
                     
                     hour = hour<10?'0'+hour:hour;
                     min = min<10?'0'+min:min;
