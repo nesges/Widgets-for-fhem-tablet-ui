@@ -482,3 +482,39 @@ Befehl mit dem Änderungen an Fhem gesendet werden. Default: set
 #### off
 
 Wert der Anstelle der eingestellten Uhrzeit als off-Kommando mit dem unteren Button gesendet werden soll. Default: off
+
+### Styling
+
+Um das Aussehen des Widgets ans eigene Layout anzupassen, haben die Elemente CSS-Klassen, die überschrieben werden können.
+
+#### widget_settimer_buttons
+
+Container-Element, das die beiden Buttons enthält
+
+#### widget_settimer_set
+
+Oberer Button
+
+#### widget_settimer_off
+
+Unterer Button
+
+#### widget_settimer_knobs
+
+Container-Element, das die beiden Knobs enthält
+
+#### widget_settimer_hour_wrap
+
+Container-Element, das den Stunden-Knob enthält
+
+#### widget_settimer_hour
+
+Der Stunden-Knob, bzw. dessen zentrales Input-Element
+
+#### widget_settimer_minute_wrap
+
+Container-Element, das den Minuten-Knob enthält
+
+#### widget_settimer_minute
+
+Der Minuten-Knob, bzw. dessen zentrales Input-Element
