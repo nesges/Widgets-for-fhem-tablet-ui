@@ -483,9 +483,17 @@ Befehl mit dem Änderungen an Fhem gesendet werden. Default: set
 
 Wert der Anstelle der eingestellten Uhrzeit als off-Kommando mit dem unteren Button gesendet werden soll. Default: off
 
+#### width
+
+Breite des Widgets in Pixeln. Mit data-width="auto" werden die Knobs am linken und die Buttons am rechten Rand des umgebenden Elementes plaziert. Default: 380
+
 ### Styling
 
 Um das Aussehen des Widgets ans eigene Layout anzupassen, haben die Elemente CSS-Klassen, die überschrieben werden können.
+
+#### widget_settimer_container
+
+Container-Element, das alle Elemene des Widgets enthält
 
 #### widget_settimer_buttons
 
