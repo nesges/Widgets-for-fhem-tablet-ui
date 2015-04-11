@@ -53,7 +53,6 @@ var widget_settimer = {
             readings[$(this).data('get')] = true;
             
             $(this).data('cmd', $(this).data('cmd')||'set');
-            $(this).data('set', $(this).data('set')||$(this).data('get'));
             $(this).data('off', $(this).data('off')||'off');
 
             
