@@ -54,22 +54,23 @@ var widget_settimer = {
             $(this).data('set', $(this).data('reading'));
             $(this).data('cmd', $(this).data('cmd')||($(this).data('reading')?'setreading':'set'));
             $(this).data('off', $(this).data('off')||'off');
+            $(this).data('width', ($(this).attr('data-width')?$(this).data('width'):380));
             
-            var container = $('<div style="position:relative"/>').appendTo($(this));
+            var container = $('<div style="position:relative;'+ ($.isNumeric($(this).data('width'))?'width:'+$(this).data('width')+'px':'') +'" class="widget_settimer_container"/>').appendTo($(this));
             
-            var buttons = $('<div style="position:absolute;top:0;right:0" class="widget_settimer_buttons" />').appendTo(container);
+            var buttons = $('<div style="position:absolute;top:0;right:0;margin-top:5px;margin-right:25px" class="widget_settimer_buttons" />').appendTo(container);
             var button_set = $('<div class="widget_settimer_set" style="display:block" />').appendTo(buttons);
             var button_off = $('<div class="widget_settimer_off" style="display:block" />').appendTo(buttons);
             
-            var knobs = $('<div style="position:absolute;top:0;left:0" class="widget_settimer_knobs" />').appendTo(container);
+            var knobs = $('<div style="position:absolute;top:0;left:0;margin-top:5px;margin-left:20px" class="widget_settimer_knobs" />').appendTo(container);
             var knob_hour_wrap = $('<div class="widget_settimer_hour_wrap" style="display:inline;margin-right:10px !important" />').appendTo(knobs);
             var knob_hour = $('<input class="widget_settimer_hour" />', {
                 type: 'text',
                 value: $(this).attr('data-initvalue')||'0',
                 disabled : true,
             }).appendTo(knob_hour_wrap);
-            
-            var knob_min_wrap = $('<div class="widget_settimer_minute_wrap" style="display:inline;margin-left:10px !important" />').appendTo(knobs);
+
+            var knob_min_wrap = $('<div class="widget_settimer_hour_wrap" style="display:inline;margin-left:10px !important" />').appendTo(knobs);
             var knob_min = $('<input class="widget_settimer_minute" />', {
                 type: 'text',
                 value: $(this).attr('data-initvalue')||'0',
