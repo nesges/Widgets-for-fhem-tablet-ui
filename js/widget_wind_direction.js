@@ -125,9 +125,12 @@ var widget_wind_direction = {
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*'){    
                 var value = getDeviceValue( $(this), 'direction');
-                var part = $(this).data('part') || -1;
+                var part = $(this).data('part') || $(this).data('direction-part') || -1;
                 var val = getPart(value,part);
+
                 var speed = getDeviceValue( $(this), 'speed');
+                var speed_part = $(this).data('speed-part') || -1;
+                var speed = getPart(speed, part);
                 
                 var knob_elem = $(this).find('input');
                 if (val) {
