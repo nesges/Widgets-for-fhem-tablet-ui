@@ -396,9 +396,17 @@ Zeigt die Windrichtung anhand der Gradzahl im Reading wind_direction eines Devic
 
 Reading mit der Windrichtung. Kann numerisch (0-360) oder in Textform ("NO") angegeben sein. Default: wind_direction
 
+#### direction-part
+
+Position der Windrichtungsangabe innerhalb des per direction-Attribut angegebenen Readings. Das Reading wird dafür an Leerzeichen gesplittet. Siehe data-part im label-Widget. Default: -1
+
 #### speed
 
 Reading mit der Windgeschwindigkeit. Wird nur verwendet um Windstille zu erkennen und entsprechend anzuzeigen. Default: wind_speed
+
+#### speed-part
+
+Position der Windgeschwindigkeitsangabe innerhalb des per speed-Attribut angegebenen Readings. Siehe direction-part. Default: -1
 
 #### calm
 
