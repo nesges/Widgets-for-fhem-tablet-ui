@@ -239,11 +239,15 @@ URL die beim Klick auf den Button im Hintergrund per XMLHttpRequest aufgerufen w
 
 Fhem-Befehl der beim Klick auf den Button gesetzt werden soll. fhem-cmd und url können nicht gleichzeitig verwendet werden. url hat Vorrang, wenn beide notiert werden.
 
-#### color
+#### (deprecated!) color
 
-Hintergrundfarbe des Buttons im Status "on". Default #aa6900.
+Das Attribut wird nicht mehr empfohlen und in einem zukünftigen Release entfernt. Bitte statt dessen data-on-color, data-off-color, data-on-background-color, data-off-background-color verwenden.
 
-#### offColor
+Hintergrundfarbe des Buttons im Status "on". Default #aa6900. 
+
+#### (deprecated!) offColor 
+
+Das Attribut wird nicht mehr empfohlen und in einem zukünftigen Release entfernt. Bitte statt dessen data-on-color, data-off-color, data-on-background-color, data-off-background-color verwenden.
 
 Hintergrundfarbe des Buttons im Status "off". Default #aa6900.
                 
