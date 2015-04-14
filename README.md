@@ -223,7 +223,7 @@ Ruft den URL http://server/?action=do als XMLHttpRequest im Hintergrund auf. D.h
 
     <div data-type="button" data-fhem-cmd="set+MILIGHT_Zone1_Wohnzimmer+hue+50" data-icon="fa-paint-brush" data-color="hsl(50,100%,50%)" class="cell"></div>
     
-Sendet den Befehl "set MILIGHT_Zone1_Wohnzimmer hue 50" an fhem. Als Icon wird ein Malpinsel auf gelbem (HUE 50) Hintergrund angezeigt. Der Befehl muss urlencoded notiert werden. Fhem wird über den Metatag fhemweb_url lokalisiert, ist der Metatag nicht gesetzt wird "/fhem" als Default angenommen.
+Sendet den Befehl "set MILIGHT_Zone1_Wohnzimmer hue 50" an fhem. Als Icon wird ein Malpinsel auf gelbem (HUE 50) Hintergrund angezeigt. 
     
 ### Attribute
 
