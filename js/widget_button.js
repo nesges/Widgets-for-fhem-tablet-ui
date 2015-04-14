@@ -26,11 +26,21 @@ var widget_button = {
             $(this).data('get-on', $(this).attr('data-get-on') || 'on');
             $(this).data('get-off', $(this).attr('data-get-off') || 'off');
             
+            if($(this).attr('data-color') || $(this).attr('data-offcolor')) {
+                console.log('Attributes data-color/data-offcolor are deprecated in widget "button" on ' + document.location 
+                    + ($(this).attr('data-device')?' device: '+$(this).attr('data-device'):'')
+                    + ($(this).attr('data-url')?' url: '+$(this).attr('data-url'):'')
+                    + ($(this).attr('data-url-xhr')?' url-xhr: '+$(this).attr('data-url-xhr'):'')
+                    + ($(this).attr('data-fhem-cmd')?' fhem-cmd: '+$(this).attr('data-fhem-cmd'):'')
+                    + ' use any of data-on-color, data-off-color, data-on-background-color, data-off-background-color instead'
+                );
+            }
+            
             var elem = $(this).famultibutton({
                 icon: 'fa-check-circle',
                 backgroundIcon: 'fa-circle',
-                onBackgroundColor:$(this).data('color')||'#aa6900',
-                offBackgroundColor:$(this).data('offcolor')||'#505050',
+                onBackgroundColor:($(this).attr('data-color')?$(this).data('color'):'#aa6900'),
+                offBackgroundColor:($(this).attr('data-offcolor')?$(this).data('offcolor'):'#aa6900'),
                 offColor: '#2A2A2A',
                 onColor: '#2A2A2A',
             
