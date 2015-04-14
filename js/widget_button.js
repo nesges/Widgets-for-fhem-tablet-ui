@@ -40,7 +40,7 @@ var widget_button = {
                 icon: 'fa-check-circle',
                 backgroundIcon: 'fa-circle',
                 onBackgroundColor:($(this).attr('data-color')?$(this).data('color'):'#aa6900'),
-                offBackgroundColor:($(this).attr('data-offcolor')?$(this).data('offcolor'):'#aa6900'),
+                offBackgroundColor:($(this).attr('data-offcolor')?$(this).data('offcolor'):'#505050'),
                 offColor: '#2A2A2A',
                 onColor: '#2A2A2A',
             
@@ -92,10 +92,14 @@ var widget_button = {
                             $(this).data('famultibutton').setOn();
                         } else if ( state == $(this).data('get-off') ) {
                             $(this).data('famultibutton').setOff();
-                        }else if ( state.match(RegExp('^' + $(this).data('get-on') + '$')) ) {
+                        } else if ( state.match(RegExp('^' + $(this).data('get-on') + '$')) ) {
                             $(this).data('famultibutton').setOn();
                         } else if ( state.match(RegExp('^' + $(this).data('get-off') + '$')) ) {
                             $(this).data('famultibutton').setOff();
+                        } else if ( $(this).data('get-off')=='!on' && state != $(this).data('get-on') ) {
+					        $(this).data('famultibutton').setOff();
+                        } else if ( $(this).data('get-on')=='!off' && state != $(this).data('get-off') ) {
+                            $(this).data('famultibutton').setOn();
                         }
                     }
                 }
