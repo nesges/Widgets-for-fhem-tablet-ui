@@ -14,12 +14,12 @@ var widget_button = {
 
         switch(type) {
             case 'url':
-                document.location.href = encodeURIComponent(target);
+                document.location.href = target;
                 break;
             case 'url-xhr':
-                $.get(encodeURIComponent(target));
+                $.get(target);
                 break;
-            case 'fhem-cmd':
+	    case 'fhem-cmd':
                 setFhemStatus(target);
                 break;
         }
