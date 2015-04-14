@@ -1,26 +1,34 @@
-function widget_button_clicked(target, type) {
-    switch(type) {
-        case 'url':
-            document.location.href = target;
-            break;
-        case 'url-xhr':
-            $.get(target);
-            break;
-        case 'fhem-cmd':
-            var fhem = $("meta[name='fhemweb_url']").attr("content") || "../fhem";
-            $.get(fhem + '?cmd='+ target +'&XHR=1');
-            break;
-    }
-    return 1;
-}
-
 var widget_button = {
-    _button: null,
-    elements: null,
+    clicked: function(target, type) {
+        console.log(target);
+        // this code may be harmfull if target must contain urlencoded parts.
+        // but it shouldn't since it checks for unencoded chars first
+        // anyways it should be removed after a while
+        if(target.match(/[{ }?\&$§"',;:#]/)) {
+            // definitely not urlencoded
+        } else if(target.match(/%(7B|7D|20|3F)/)) {
+            // probably urlencoded
+            _target = decodeURIComponent(target);
+            console.log('widget_button: urlencoding the target of '+type+' is deprecated. decoding '+target+' to '+_target);
+            target = _target;
+        }
+
+        switch(type) {
+            case 'url':
+                document.location.href = encodeURIComponent(target);
+                break;
+            case 'url-xhr':
+                $.get(encodeURIComponent(target));
+                break;
+            case 'fhem-cmd':
+                setFhemStatus(target);
+                break;
+        }
+    },
     init: function () {
-        _button=this;
-        _button.elements = $('div[data-type="button"]');
-        _button.elements.each(function(index) {
+        base = this;
+        this.elements = $('div[data-type="button"]');
+        this.elements.each(function(index) {
             var device = $(this).data('device');
             $(this).data('get', $(this).data('get') || 'STATE');
             $(this).data('get-on', $(this).attr('data-get-on') || 'on');
@@ -35,7 +43,6 @@ var widget_button = {
                     + ' use any of data-on-color, data-off-color, data-on-background-color, data-off-background-color instead'
                 );
             }
-            
             var elem = $(this).famultibutton({
                 icon: 'fa-check-circle',
                 backgroundIcon: 'fa-circle',
@@ -47,21 +54,21 @@ var widget_button = {
                 // Called in toggle on state.
                 toggleOn: function( ) {
                     if($(this).attr('data-url')) {
-                        widget_button_clicked($(this).attr('data-url'), 'url');
+                        widget_button.clicked($(this).attr('data-url'), 'url');
                     } else if($(this).attr('data-url-xhr')) {
-                        widget_button_clicked($(this).attr('data-url-xhr'), 'url-xhr');
+                        widget_button.clicked($(this).attr('data-url-xhr'), 'url-xhr');
                     } else if($(this).attr('data-fhem-cmd')) {
-                        widget_button_clicked($(this).attr('data-fhem-cmd'), 'fhem-cmd');
+                        widget_button.clicked($(this).attr('data-fhem-cmd'), 'fhem-cmd');
                     }
                     setInterval(function() {elem.setOff()}, 200);
                 },
                 toggleOff: function( ) {
                     if($(this).attr('data-url')) {
-                        widget_button_clicked($(this).attr('data-url'), 'url');
+                        widget_button.clicked($(this).attr('data-url'), 'url');
                     } else if($(this).attr('data-url-xhr')) {
-                        widget_button_clicked($(this).attr('data-url-xhr'), 'url-xhr');
+                        widget_button.clicked($(this).attr('data-url-xhr'), 'url-xhr');
                     } else if($(this).attr('data-fhem-cmd')) {
-                        widget_button_clicked($(this).attr('data-fhem-cmd'), 'fhem-cmd');
+                        widget_button.clicked($(this).attr('data-fhem-cmd'), 'fhem-cmd');
                     }
                     setInterval(function() {elem.setOn()}, 200);
                 },
@@ -75,9 +82,9 @@ var widget_button = {
     update: function (dev,par) {
         var deviceElements;
         if ( dev == '*' )
-            deviceElements= _button.elements;
+            deviceElements= this.elements;
         else
-            deviceElements= _button.elements.filter('div[data-device="'+dev+'"]');
+            deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*'){    
