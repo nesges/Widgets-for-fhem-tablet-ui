@@ -1,6 +1,5 @@
 var widget_button = {
     clicked: function(target, type) {
-        console.log(target);
         // this code may be harmfull if target must contain urlencoded parts.
         // but it shouldn't since it checks for unencoded chars first
         // anyways it should be removed after a while
