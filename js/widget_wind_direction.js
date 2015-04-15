@@ -27,7 +27,6 @@ var widget_wind_direction = {
         for (tick = this.startAngle; tick < this.endAngle + 0.00001; tick+=tick_w*dist) {
             i = step * (tick-this.startAngle)+this.o.min;
             c.beginPath();
-            // draw normal ticks
             c.strokeStyle = this.o.tkColor;
             w = tick_w;
             w *= (c.strokeStyle != this.o.tkColor) ? 2 : (this.o.tiny?6:1);
@@ -37,7 +36,6 @@ var widget_wind_direction = {
         
         // draw selection cursor
         c.beginPath();
-            
         c.strokeStyle = this.o.hdColor;
         c.lineWidth = this.lineWidth * 2;
         c.arc(this.xy, this.xy, this.radius-this.lineWidth/2, a.s, a.e, a.d);
@@ -137,7 +135,7 @@ var widget_wind_direction = {
                     var compass = $(this).data('compass');
 
                     if(!$.isNumeric(val)) {
-                        // if the reading ist something like 'NNO', fetch it's numerical representation from compass
+                        // if the reading is something like 'NNO', fetch it's numerical representation from compass
                         val = (val in compass?compass[val]:-1);
                     }
                     if ( knob_elem.val() != val ){
@@ -155,17 +153,21 @@ var widget_wind_direction = {
                         } else if(speed==0) {
                             valt=$(this).data('calm')||'-';
                         } else {
-                            // search compass for the literal representation to val
-                            var ckeys=Object.keys(compass);
-                            for(var k=0; k<ckeys.length; k++) {
-                                var key = ckeys[k];
-                                var kev = compass[key];
-                                // the compass is divided into 16 sections, which are split into 11,25 degrees before val and 11,25 degrees after val
-                                // iow: val is the middle of a 22,5 degree wide section of the compass
-                                if(val > kev - 360/32 && val <= kev + 360/32 ) {
-                                    valt=key;
-                                    break;
+                            if(!$(this).data('display-numeric')) {
+                                // search compass for the literal representation to val
+                                var ckeys=Object.keys(compass);
+                                for(var k=0; k<ckeys.length; k++) {
+                                    var key = ckeys[k];
+                                    var kev = compass[key];
+                                    // the compass is divided into 16 sections, which are split into 11,25 degrees before val and 11,25 degrees after val
+                                    // iow: val is the middle of a 22,5 degree wide section of the compass
+                                    if(val > kev - 360/32 && val <= kev + 360/32 ) {
+                                        valt=key;
+                                        break;
+                                    }
                                 }
+                            } else {
+                                valt = val;
                             }
                         }
                         knob_elem.val(valt=="N2"?"N":valt);
