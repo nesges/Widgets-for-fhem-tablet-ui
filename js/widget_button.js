@@ -1,4 +1,5 @@
 var widget_button = {
+    widgetname : 'button',
     clicked: function(target, type) {
         // this code may be harmfull if target must contain urlencoded parts.
         // but it shouldn't since it checks for unencoded chars first
@@ -19,14 +20,14 @@ var widget_button = {
             case 'url-xhr':
                 $.get(target);
                 break;
-	    case 'fhem-cmd':
+            case 'fhem-cmd':
                 setFhemStatus(target);
                 break;
         }
     },
     init: function () {
         base = this;
-        this.elements = $('div[data-type="button"]');
+        this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             var device = $(this).data('device');
             $(this).data('get', $(this).data('get') || 'STATE');
@@ -34,7 +35,7 @@ var widget_button = {
             $(this).data('get-off', $(this).attr('data-get-off') || 'off');
             
             if($(this).attr('data-color') || $(this).attr('data-offcolor')) {
-                console.log('Attributes data-color/data-offcolor are deprecated in widget "button" on ' + document.location 
+                console.log('Attributes data-color/data-offcolor are deprecated in widget "'+this.widgetname+'" on ' + document.location 
                     + ($(this).attr('data-device')?' device: '+$(this).attr('data-device'):'')
                     + ($(this).attr('data-url')?' url: '+$(this).attr('data-url'):'')
                     + ($(this).attr('data-url-xhr')?' url-xhr: '+$(this).attr('data-url-xhr'):'')
