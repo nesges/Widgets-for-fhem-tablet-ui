@@ -9,7 +9,7 @@ find ./www/tablet -type d \( ! -iname ".*" \) -print0 | while IFS= read -r -d ''
 
 find ./www -type f \( ! -iname ".*" \) -print0 | while IFS= read -r -d '' f; 
     do
-        out="UPD `stat --format "%z %s" README.md | sed -e "s#\([0-9-]*\)\ \([0-9:]*\)\.[0-9]*\ [+0-9]*#\1_\2#"` $f"
+        out="UPD `stat --format "%z %s" $f | sed -e "s#\([0-9-]*\)\ \([0-9:]*\)\.[0-9]*\ [+0-9]*#\1_\2#"` $f"
         echo ${out//.\//} >> controls_widgets-for-fhem-tablet-ui.txt
     done
 

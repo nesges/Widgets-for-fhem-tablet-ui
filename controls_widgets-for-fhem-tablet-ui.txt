@@ -1,8 +1,8 @@
 DIR www/tablet
 DIR www/tablet/js
-UPD 2015-04-16_20:30:31 17943 www/tablet/js/widget_kodinowplaying.js
-UPD 2015-04-16_20:30:31 17943 www/tablet/js/widget_button.js
-UPD 2015-04-16_20:30:31 17943 www/tablet/js/widget_clock.js
-UPD 2015-04-16_20:30:31 17943 www/tablet/js/widget_klimatrend.js
-UPD 2015-04-16_20:30:31 17943 www/tablet/js/widget_wind_direction.js
-UPD 2015-04-16_20:30:31 17943 www/tablet/js/widget_settimer.js
+UPD 2015-04-16_21:54:37 7532 www/tablet/js/widget_kodinowplaying.js
+UPD 2015-04-16_21:58:11 5523 www/tablet/js/widget_button.js
+UPD 2015-04-16_20:30:31 2471 www/tablet/js/widget_clock.js
+UPD 2015-04-16_21:54:50 3966 www/tablet/js/widget_klimatrend.js
+UPD 2015-04-16_22:09:35 7680 www/tablet/js/widget_wind_direction.js
+UPD 2015-04-16_21:54:26 8769 www/tablet/js/widget_settimer.js
