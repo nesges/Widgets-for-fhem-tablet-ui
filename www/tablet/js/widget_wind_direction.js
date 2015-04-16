@@ -108,20 +108,15 @@ var widget_wind_direction = {
                 'draw' : _wind_direction.drawDial,
                 'readOnly' : true,
                 'change' : function (v) { 
-                      startInterval();
+                      startPollInterval();
                 }
             });
         });
     },
     update: function (dev,par) {
-        var deviceElements;
-        if ( dev == '*' )
-            deviceElements= _wind_direction.elements;
-        else
-            deviceElements= _wind_direction.elements.filter('div[data-device="'+dev+'"]');
-        
+        var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
-            if ( $(this).data('get')==par || par =='*'){    
+            if ( $(this).data('direction')==par || par =='*'){    
                 var value = getDeviceValue( $(this), 'direction');
                 var part = $(this).data('part') || $(this).data('direction-part') || -1;
                 var val = getPart(value,part);

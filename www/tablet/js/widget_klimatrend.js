@@ -10,13 +10,7 @@ var widget_klimatrend = {
         });
     },
     update: function (dev,par) {
-        var deviceElements;
-        if ( dev == '*' ) {
-            deviceElements= _klimatrend.elements;
-        } else {
-            deviceElements= _klimatrend.elements.filter('div[data-device="'+dev+'"]');
-        }
-        
+        var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*'){
                 var value = getDeviceValue( $(this), 'get' );

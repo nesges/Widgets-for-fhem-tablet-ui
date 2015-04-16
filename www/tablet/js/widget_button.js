@@ -80,12 +80,7 @@ var widget_button = {
     },
   
     update: function (dev,par) {
-        var deviceElements;
-        if ( dev == '*' )
-            deviceElements= this.elements;
-        else
-            deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
-        
+        var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*'){    
                 if(! $(this).data('device')) {

@@ -81,13 +81,7 @@ var widget_kodinowplaying = {
     },
     
     update: function (dev,par) {
-        var deviceElements;
-        if ( dev == '*' ) {
-            deviceElements= _kodinowplaying.elements;
-        } else {
-            deviceElements= _kodinowplaying.elements.filter('div[data-device="'+dev+'"]');
-        }
-
+        var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             var type        = getDeviceValue($(this), 'type');
             var show        = getDeviceValue($(this), 'currentShowtitle');

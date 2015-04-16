@@ -165,12 +165,7 @@ var widget_settimer = {
         });
     },
     update: function (dev,par) {
-        var deviceElements;
-        if ( dev == '*' )
-            deviceElements= _settimer.elements;
-        else
-            deviceElements= _settimer.elements.filter('div[data-device="'+dev+'"]');
-        
+        var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*'){    
                 var val = getDeviceValue( $(this), 'get' );
