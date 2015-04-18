@@ -94,6 +94,8 @@ var widget_kodinowplaying = {
             var totaltime   = getDeviceValue($(this), 'totaltime');
             var playStatus  = getDeviceValue($(this), 'playStatus');
             
+            console.log(show);
+            
             var dateformat = $(this).attr('data-timeformat');
             
             if(!dateformat) {
