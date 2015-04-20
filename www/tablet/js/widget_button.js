@@ -11,7 +11,6 @@ var widget_button = $.extend({}, widget_famultibutton, {
     },
 
     toggleOff : function(elem) {
-        console.log(elem);
         this.clicked(elem);
         setInterval(function() {elem.setOn()}, 200);
     },
