@@ -1,3 +1,3 @@
 FHEM Widgets for Fhem Tablet UI last change:
-2015-04-16
- - adjustments for ftui 1.4
+2015-04-20
+ - moved svgplot to testing
