@@ -26,11 +26,13 @@ echo ""
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    echo "...preparing controlfile"
-    ./prepare_update.sh
     echo "...adding files"
     git add -A
     echo "...commit changes"
+    git commit -a -m "$*"
+    echo "...preparing controlfile"
+    ./prepare_update.sh
+    echo "...commit controlfile"
     git commit -a -m "$*"
     echo "...pull from github"
     git pull
