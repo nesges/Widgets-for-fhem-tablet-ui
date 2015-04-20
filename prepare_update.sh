@@ -14,6 +14,6 @@ find ./www -type f \( ! -iname ".*" \) -print0 | while IFS= read -r -d '' f;
     done
 
 # CHANGED file
-echo "FHEM Widgets for Fhem Tablet UI last change:" > CHANGED
+# echo "FHEM Widgets for Fhem Tablet UI last change:" > CHANGED
 echo $(date +"%Y-%m-%d") >> CHANGED
 echo " - $(git log -1 --pretty=%B)" >> CHANGED

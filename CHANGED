@@ -1,3 +1,4 @@
-FHEM Widgets for Fhem Tablet UI last change:
 2015-04-20
  - moved svgplot to testing
+2015-04-20
+ - consolidation of toggle-functions
