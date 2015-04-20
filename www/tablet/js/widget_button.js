@@ -6,24 +6,13 @@ var widget_button = $.extend({}, widget_famultibutton, {
     widgetname : 'button',
 
     toggleOn : function(elem) {
-        if(elem.attr('data-url')) {
-            widget_button.clicked(elem.attr('data-url'), 'url');
-        } else if(elem.attr('data-url-xhr')) {
-            widget_button.clicked(elem.attr('data-url-xhr'), 'url-xhr');
-        } else if(elem.attr('data-fhem-cmd')) {
-            widget_button.clicked(elem.attr('data-fhem-cmd'), 'fhem-cmd');
-        }
+        this.clicked(elem);
         setInterval(function() {elem.setOff()}, 200);
     },
 
     toggleOff : function(elem) {
-        if(elem.attr('data-url')) {
-            widget_button.clicked(elem.attr('data-url'), 'url');
-        } else if(elem.attr('data-url-xhr')) {
-            widget_button.clicked(elem.attr('data-url-xhr'), 'url-xhr');
-        } else if(elem.attr('data-fhem-cmd')) {
-            widget_button.clicked(elem.attr('data-fhem-cmd'), 'fhem-cmd');
-        }
+        console.log(elem);
+        this.clicked(elem);
         setInterval(function() {elem.setOn()}, 200);
     },
 
@@ -65,7 +54,21 @@ var widget_button = $.extend({}, widget_famultibutton, {
             base.init_ui($(this));
         });
     },
-    clicked: function(target, type) {
+    clicked: function(elem) {
+        var target;
+        var type;
+        
+        if(elem.attr('data-url')) {
+            target = elem.attr('data-url');
+            type = 'url';
+        } else if(elem.attr('data-url-xhr')) {
+            target = elem.attr('data-url-xhr');
+            type = 'url-xhr';
+        } else if(elem.attr('data-fhem-cmd')) {
+            target = elem.attr('data-fhem-cmd');
+            type = 'fhem-cmd';
+        }
+        
         // this code may be harmfull if target must contain urlencoded parts.
         // but it shouldn't since it checks for unencoded chars first
         // anyways it should be removed after a while
