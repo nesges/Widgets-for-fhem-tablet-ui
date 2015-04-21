@@ -1,10 +1,10 @@
+2015-04-21
+ Controlfile-Erzeugung in commit.sh aufgenommen
 2015-04-20
- - moved svgplot to testing
+ automatisches commit skript
 2015-04-20
- - consolidation of toggle-functions
+ moved svgplot to testing
 2015-04-20
- - no default value for set-on / set-off
+ consolidation of toggle-functions
 2015-04-20
- - fhem update
-2015-04-20
- - automatisches commit skript
+ no default value for set-on / set-off
