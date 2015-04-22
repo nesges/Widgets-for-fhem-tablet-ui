@@ -37,19 +37,19 @@ var plugins = {
 		var module = eval(name);
 		plugins.addModule(module);
         module.init();
-        //update all what we have until now
-        for (var reading in readings) {
-            for (var device in devices) {
-                module.update(device,reading);
-            }
-        }
-        //request missing readings
-        for (var reading in readings) {
-            if (pars.indexOf(reading)<0){
-                pars.push(reading);
-                requestFhem(reading);
-            }
-        }
+        ////update all what we have until now
+        //for (var reading in readings) {
+        //    for (var device in devices) {
+        //        module.update(device,reading);
+        //    }
+        //}
+        ////request missing readings
+        //for (var reading in readings) {
+        //    if (pars.indexOf(reading)<0){
+        //        pars.push(reading);
+        //        requestFhem(reading);
+        //    }
+        //}
 
     },null,true);
   },
@@ -176,9 +176,10 @@ function initWidgets() {
 
     //get current values of readings
     DEBUG && console.log('Request readings from FHEM');
-    for (var reading in readings) {
-        requestFhem(reading);
-    }
+    //for (var reading in readings) {
+    //    requestFhem(reading);
+    //}
+    requestFhem();
 
     ready = true;
 
@@ -215,9 +216,10 @@ function startPollInterval() {
      clearInterval(timer);
      timer = setInterval(function () {
 		//get current values of readings every x seconds
-		for (var reading in readings) {
-			requestFhem(reading);
-        }
+		//for (var reading in readings) {
+		//	requestFhem(reading);
+        //}
+        requestFhem();
      }, shortpollInterval); 
  }
 
@@ -238,9 +240,10 @@ function setFhemStatus(cmdline) {
   	.done ( function( data ) {
   		if ( !doLongPoll ){
 			setTimeout(function(){
-				for (var reading in readings) {
-					requestFhem(reading);
-				}
+				//for (var reading in readings) {
+				//	requestFhem(reading);
+				//}
+				requestFhem()
 			}, 4000);
 		}
 	});
@@ -334,7 +337,6 @@ function longPoll(roomName) {
 	});
 }
 
-var requested=0;
 var r_start;
 var r_last;
 var r_done;
@@ -394,36 +396,32 @@ var r_done;
 
 function benchmsg(message) {
     r_now = new Date().getTime();
-    console.log('requestFhem: ' + message + ' after ' + (r_now - r_start) + ' (' + (r_now - r_last) + ')');
+    // r_now - r_last is the time between benchmsg's
+    console.log('['+r_now+'] requestFhem: ' + message + ' after ' + (r_now - r_start) + 'ms (' + (r_now - r_last) + 'ms)');
     r_last = r_now;
 }
 
-function requestFhem(paraname) {
+function requestFhem() {
     r_start = new Date().getTime();
-    // ensure requestFhem is called only once
-    if(requested==1) {
-        return;
-    }
-    
+
+    // only for benchmarking
     $.ajax({
         async: true,
         timeout: 15000,
         cache: false,
-        context:{paraname: paraname},
         url: $("meta[name='fhemweb_url']").attr("content") || "../fhem/",
         data: {
-            cmd: "list " + devs.join() + " " + paraname,
+            cmd: "list " + devs.join() + " STATE",
             XHR: "1"
         }
     }).done (function( data ) {
-        benchmsg('* ajax list');
+        benchmsg('* ajax list STATE');
     });
 
 	$.ajax({
 		async: true,
         timeout: 15000,
 		cache: false,
-		context:{paraname: paraname},
 		url: $("meta[name='fhemweb_url']").attr("content") || "../fhem/",
 		data: {
 			cmd: "jsonlist2 " + devs.join(),
@@ -534,11 +532,7 @@ function requestFhem(paraname) {
             }
             r_done = new Date().getTime();
             benchmsg('all done');
-            // min:  142
-            // avg: ~180
-            // max: 3484
 	});
-    requested=1;
 }
 
 function loadplugin(plugin, success, error, async) {
