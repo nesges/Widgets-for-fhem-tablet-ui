@@ -11,6 +11,7 @@ Widgets:
 * [weather] (#weather)
 * [wind_direction] (#wind_direction)
 * [settimer] (#settimer)
+* [iframe] (#iframe)
 
 ## klimatrend
 
@@ -538,3 +539,78 @@ Container-Element, das den Minuten-Knob enthält
 #### widget_settimer_minute
 
 Der Minuten-Knob, bzw. dessen zentrales Input-Element
+
+
+## iframe
+
+Widget zum Einbinden externer Inhalte in einem Iframe. Vor der Anzeige des Iframes wird geprüft, ob die externe Seite erreichbar ist (HEAD Request). Während der Prüfung wird ein rotierendes Spinner-Icon angezeigt. Konnte die Seite geladen werden, wird der Iframe eingeblendet, ansonsten ein Error-Symbol.
+
+### HTML
+
+    <div data-type="iframe"
+        data-src="http://server.intranet/externer/inhalt.html"
+    ></div>
+    
+Versucht die Seite "http://server.intranet/externer/inhalt.html" in einem 100x100 Pixel gro�en IFrame anzuzeigen.
+
+    <div data-type="iframe"
+        data-src="http://server.intranet/externer/inhalt.html"
+        data-fill="yes"
+    ></div>
+
+Versucht die Seite "http://server.intranet/externer/inhalt.html" in einem IFrame anzuzeigen, der das umgebende Element vollständig ausfüllt.
+
+    <div data-type="iframe"
+        data-src="http://server.intranet/externer/inhalt.html"
+        data-fill="no"
+        data-height="100"
+        data-width="100"
+        data-icon-spinner="fa-spinner fa-spin"
+        data-color-spinner="#aa6900"
+        data-icon-error="fa-frown-o"
+        data-color-error="#505050"
+        data-scrolling="no"
+        data-timeout="3000"
+    ></div>
+
+### Attribute
+
+#### src
+
+URL des externen Inhalts.
+
+#### fill
+
+Soll das umgebende Element vom Iframe ausgefüllt werden? Höhere Priorität als height und width. Mögliche Werte: yes, no. Default: no
+
+#### height
+
+Höhe des Iframes in Pixeln. Default: 100
+
+#### width
+
+Breite des Iframes in Pixeln. Default: 100
+
+#### icon-spinner
+
+Icon das während der Verfügbarkeitsprüfung angezeigt werden soll. Durch hinzufügen der Klassen "fa-spin" wird das Icon drehend angezeigt. Default: fa-spinner fa-spin
+
+#### color-spinner
+
+Farbe für icon-spinner. Default: #aa6900
+
+#### icon-error
+
+Icon das bei fehlgeschlagener Verfügbarkeitsprüfung angezeigt werden soll. Default: fa-frown-o
+
+#### color-error
+
+Farbe für icon-error. Default: #505050
+
+#### scrolling
+
+Sollen Scrollbars im Iframe angezeigt werden? Mögliche Werte: yes,no,auto. Default: no
+
+#### timeout
+
+Timeout für die Verfügbarkeitsprüfung in Milisekunden. Default: 3000
