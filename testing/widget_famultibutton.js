@@ -21,13 +21,13 @@ var widget_famultibutton = $.extend({}, widget_widget, {
         }
     },
     init_attr : function(elem) {
-        elem.data('get',        elem.data('get') || 'STATE');
-        elem.data('cmd',        elem.data('cmd') || 'set');
-        elem.data('get-on',     elem.attr('data-get-on')    || elem.attr('data-on')     || 'on');
-        elem.data('get-off',    elem.attr('data-get-off')   || elem.attr('data-off')    || 'off');
-        elem.data('set-on',     elem.attr('data-set-on')    || elem.data('get-on'));
-        elem.data('set-off',    elem.attr('data-set-off')   || elem.data('get-off'));
-        elem.data('mode',       elem.data('mode')|| 'toggle');
+        elem.data('get',        elem.data('get')        || 'STATE');
+        elem.data('cmd',        elem.data('cmd')        || 'set');
+        elem.data('get-on',     elem.data('get-on')     || 'on');
+        elem.data('get-off',    elem.data('get-off')    || 'off');
+        elem.data('set-on',     elem.data('set-on')     || elem.data('get-on'));
+        elem.data('set-off',    elem.data('set-off')    || elem.data('get-off'));
+        elem.data('mode',       elem.data('mode')       || 'toggle');
         readings[elem.data('get')] = true;
     },
     init_ui : function(elem) {
@@ -37,6 +37,7 @@ var widget_famultibutton = $.extend({}, widget_widget, {
             toggleOn: function() { base.toggleOn(elem) },
             toggleOff: function() { base.toggleOff(elem) },
         });
+        return elem;
     },
     init: function () {
         var base = this;
@@ -51,6 +52,9 @@ var widget_famultibutton = $.extend({}, widget_widget, {
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*') {   
                 var state = getDeviceValue( $(this), 'get' );
+                if(state && $(this).data('value') && state != $(this).data('value')) {
+                    eval( $(this).data('change-action') );
+                }
                 if (state) {
                     var states=$(this).data('get-on');
                     if ( $.isArray(states)) {
@@ -80,6 +84,7 @@ var widget_famultibutton = $.extend({}, widget_widget, {
                             $(this).data('famultibutton').setOn();
                     }
                 }
+                $(this).data('value', state);
             }
         });
     }
