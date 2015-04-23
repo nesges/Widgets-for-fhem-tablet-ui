@@ -545,6 +545,8 @@ Der Minuten-Knob, bzw. dessen zentrales Input-Element
 
 Widget zum Einbinden externer Inhalte in einem Iframe. Vor der Anzeige des Iframes wird geprüft, ob die externe Seite erreichbar ist (HEAD Request). Während der Prüfung wird ein rotierendes Spinner-Icon angezeigt. Konnte die Seite geladen werden, wird der Iframe eingeblendet, ansonsten ein Error-Symbol.
 
+Same Origin Policy: Aufrund der (Same Origin Policy)[http://de.wikipedia.org/wiki/Same-Origin-Policy] ist es nicht ohne weiteres möglich Inhalte von fremden Servern per Javascript zu laden. Sollte eine entsprechende Fehlermeldung in der JS Console angezeigt werden, sind in (Ways to circumvent the same origin policy)[http://stackoverflow.com/questions/3076414/ways-to-circumvent-the-same-origin-policy] einige Wege beschrieben, wie die SOP zu umgehen ist.
+
 ### HTML
 
     <div data-type="iframe"
