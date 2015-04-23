@@ -52,8 +52,10 @@ var widget_famultibutton = $.extend({}, widget_widget, {
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*') {   
                 var state = getDeviceValue( $(this), 'get' );
+                var changed = false;
                 if(state && $(this).data('value') && state != $(this).data('value')) {
-                    eval( $(this).data('change-action') );
+                    eval( $(this).data('before-change-action') );
+                    changed = true;
                 }
                 if (state) {
                     var states=$(this).data('get-on');
@@ -85,6 +87,9 @@ var widget_famultibutton = $.extend({}, widget_widget, {
                     }
                 }
                 $(this).data('value', state);
+                if(changed) {
+                    eval( $(this).data('after-change-action') );
+                }
             }
         });
     }
