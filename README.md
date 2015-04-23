@@ -17,7 +17,7 @@ Widgets:
 
 ![klimatrend screenshot](/../screenshots/screenshots/klimatrend.png?raw=true)
 
-klimatrend wandelt Daten aus dem [statistics-Modul](http://fhem.de/commandref.html#statistics) in einen Pfeil um, der den aktuellen Trend anzeigt. Steigender Wert: Pfeil nach oben; Fallender Wert: Pfeil nach unten. Dazu farbcodiert und mit Extra-Icon versehene Marken für steile Bewegungen im Trend. 
+klimatrend wandelt Daten aus dem [statistics-Modul](http://fhem.de/commandref.html#statistics) in einen Pfeil um, der den aktuellen Trend anzeigt. Steigender Wert: Pfeil nach oben; Fallender Wert: Pfeil nach unten. Dazu farbcodiert und mit Extra-Icon versehene Marken fÃ¼r steile Bewegungen im Trend. 
 
 
 ### Voraussetzung: [statistics-Modul](http://fhem.de/commandref.html#statistics)
@@ -37,7 +37,7 @@ Diese Readings werden im klimatrend-Widget verwendet. Das statistics-Modul direk
 
     <div data-type="klimatrend" data-device="W_HUMID" data-get="statTemperatureTendency"></div>
 
-Dadurch wird (mit den Beispieldaten) ein leuchtend roter Doppelpfeil nach oben erzeugt, der einen steilen Anstieg der Temperatur in der letzten Stunde symbolisiert. Ein vollständiger HTML-Code mit allen möglichen Attributen:
+Dadurch wird (mit den Beispieldaten) ein leuchtend roter Doppelpfeil nach oben erzeugt, der einen steilen Anstieg der Temperatur in der letzten Stunde symbolisiert. Ein vollstÃ¤ndiger HTML-Code mit allen mÃ¶glichen Attributen:
 
     <div data-type="klimatrend"
         data-device="W_HUMID"
@@ -59,34 +59,34 @@ Dadurch wird (mit den Beispieldaten) ein leuchtend roter Doppelpfeil nach oben e
 Name eines Devices mit statistics-Werten. Kein Default.
 
 #### get
-Name des Readings mit statistics-Werten. Default ist "statTemperatureTendency". Die Standardbelegung für data-get funktioniert derzeit nur, wenn ein gleichnamiges Reading auch einmal explizit im HTML-Code notiert wird. 
+Name des Readings mit statistics-Werten. Default ist "statTemperatureTendency". Die Standardbelegung fÃ¼r data-get funktioniert derzeit nur, wenn ein gleichnamiges Reading auch einmal explizit im HTML-Code notiert wird. 
 
 #### refperiod
-Referenzzeitraum mit dem der aktuelle Wert verglichen werden soll. statistics liefert die Werte für 1h, 2h, 3h und 6h. refperiod wird entsprechend mit 1,2,3,6 angegeben. Alternativ kann auch data-part 2,4,6,8 verwendet werden. Default ist 1
+Referenzzeitraum mit dem der aktuelle Wert verglichen werden soll. statistics liefert die Werte fÃ¼r 1h, 2h, 3h und 6h. refperiod wird entsprechend mit 1,2,3,6 angegeben. Alternativ kann auch data-part 2,4,6,8 verwendet werden. Default ist 1
 
 #### stagnating-color
-Farbcode für unveränderten Wert. Default ist rgb(80,80,80)
+Farbcode fÃ¼r unverÃ¤nderten Wert. Default ist rgb(80,80,80)
 
 #### icon
 Font-Awesome-Icon das zur Darstellung benutzt werden soll. Default ist: "fa-angle"
 
 #### rising-color
-Farbcode für ansteigenden Trend. Default ist rgb(180,80,80)
+Farbcode fÃ¼r ansteigenden Trend. Default ist rgb(180,80,80)
 
 #### falling-color
-Farbcode für fallenden Trend. Default ist rgb(80,80,180)
+Farbcode fÃ¼r fallenden Trend. Default ist rgb(80,80,180)
 
 #### highmark
-Wertunterschied ab der der Trend als "steil" gilt und entsprechend gekennzeichnet ist. Default ist "1" für Temperaturwerte und "5" für Humidity-Werte. 
+Wertunterschied ab der der Trend als "steil" gilt und entsprechend gekennzeichnet ist. Default ist "1" fÃ¼r Temperaturwerte und "5" fÃ¼r Humidity-Werte. 
 
 #### highmark-icon
 Font-Awesome-Icon das zur Darstellung oberhalb der highmark benutzt werden soll. Default ist: "fa-angle-double"
 
 #### highmark-rising-color
-Farbcode für steil ansteigenden Trend. Default ist rgb(255,80,80)
+Farbcode fÃ¼r steil ansteigenden Trend. Default ist rgb(255,80,80)
 
 #### highmark-falling-color
-Farbcode für steil fallenden Trend. Default ist rgb(80,80,255)
+Farbcode fÃ¼r steil fallenden Trend. Default ist rgb(80,80,255)
 
 ## kodinowplaying
 ![kodinowplaying screenshot](/../screenshots/screenshots/kodinowplaying_music.png?raw=true)
@@ -99,7 +99,7 @@ von CSS-Klassen stylebar.
 
     <div data-type="kodinowplaying" data-device="W_XBMC"></div>
     
-"W_XBMC" ist ein Device vom [Modul XBMC](http://fhem.de/commandref.html#XBMC). Dadurch wird ein Label erzeugt, dass Informationen zu den grade in der zugehörigen KODI-Installation abgespielten
+"W_XBMC" ist ein Device vom [Modul XBMC](http://fhem.de/commandref.html#XBMC). Dadurch wird ein Label erzeugt, dass Informationen zu den grade in der zugehÃ¶rigen KODI-Installation abgespielten
 Medien anzeigt. In der Standardkonfiguration wird angezeigt
 
 bei Musik:
@@ -114,7 +114,7 @@ bei Filmen:
 
     Titel [ Zeit(HH:MM:SS) / Gesamtzeit(HH:MM:SS) ] (paused/stopped)
 
-Ein vollständiger HTML-Code mit allen möglichen Attributen:  
+Ein vollstÃ¤ndiger HTML-Code mit allen mÃ¶glichen Attributen:  
 
     <div data-type="kodinowplaying" 
         data-device="W_XBMC" 
@@ -179,7 +179,7 @@ Anzeige des Titels. Default yes.
 
 #### artist
 
-Anzeige des Künstlers bei Musik. Default yes.
+Anzeige des KÃ¼nstlers bei Musik. Default yes.
 
 #### album
 
@@ -187,7 +187,7 @@ Anzeige des Albums bei Musik. Default yes.
 
 #### time
 
-Anzeige des aktuellen Zeitpunktes. Achtung: Wird nur bei Ãƒâ€nderung des Playstatus o.ä. aktualisiert. Default yes.
+Anzeige des aktuellen Zeitpunktes. Achtung: Wird nur bei ÃƒÆ’Ã¢â‚¬Å¾nderung des Playstatus o.Ã¤. aktualisiert. Default yes.
 
 #### totaltime
 
@@ -195,7 +195,7 @@ Anzeige der Gesamtzeit. Default yes.
 
 #### timeformat
 
-Format für die Anzeige von time und totaltime in der Form "HH:MM:SS". Default "MM:SS" für Musik und "HH:MM" für andere Medien.
+Format fÃ¼r die Anzeige von time und totaltime in der Form "HH:MM:SS". Default "MM:SS" fÃ¼r Musik und "HH:MM" fÃ¼r andere Medien.
 
 #### playstatus
 
@@ -207,7 +207,7 @@ Playstatusanzeige nur bei Pause und Stop. Default yes.
 
 #### class-show|season...
 
-CSS-Klasse für das enstprechende Feld. Die Klasse wird auf ein span-Element das das Feld umschliesst angewendet. Kein Default.
+CSS-Klasse fÃ¼r das enstprechende Feld. Die Klasse wird auf ein span-Element das das Feld umschliesst angewendet. Kein Default.
 
 ## button
 Variante der push und switch Widgets, die entweder einen URL ansteuern oder einen Fhem-Befehl absetzen kann.
@@ -238,17 +238,17 @@ URL die beim Klick auf den Button im Hintergrund per XMLHttpRequest aufgerufen w
 
 #### fhem-cmd
 
-Fhem-Befehl der beim Klick auf den Button gesetzt werden soll. fhem-cmd und url können nicht gleichzeitig verwendet werden. url hat Vorrang, wenn beide notiert werden.
+Fhem-Befehl der beim Klick auf den Button gesetzt werden soll. fhem-cmd und url kÃ¶nnen nicht gleichzeitig verwendet werden. url hat Vorrang, wenn beide notiert werden.
 
 #### (deprecated!) color
 
-Das Attribut wird nicht mehr empfohlen und in einem zukünftigen Release entfernt. Bitte statt dessen data-on-color, data-off-color, data-on-background-color, data-off-background-color verwenden.
+Das Attribut wird nicht mehr empfohlen und in einem zukÃ¼nftigen Release entfernt. Bitte statt dessen data-on-color, data-off-color, data-on-background-color, data-off-background-color verwenden.
 
 Hintergrundfarbe des Buttons im Status "on". Default #aa6900. 
 
 #### (deprecated!) offColor 
 
-Das Attribut wird nicht mehr empfohlen und in einem zukünftigen Release entfernt. Bitte statt dessen data-on-color, data-off-color, data-on-background-color, data-off-background-color verwenden.
+Das Attribut wird nicht mehr empfohlen und in einem zukÃ¼nftigen Release entfernt. Bitte statt dessen data-on-color, data-off-color, data-on-background-color, data-off-background-color verwenden.
 
 Hintergrundfarbe des Buttons im Status "off". Default #aa6900.
                 
@@ -258,7 +258,7 @@ Icon zur Anzeige auf dem Button. Default fa-check-circle
 
 #### device
 
-Optional kann ein Device angegeben werden, dessen Status mit dem Button angezeigt wird. Es können keine Befehle an dieses Device gesendet werden.
+Optional kann ein Device angegeben werden, dessen Status mit dem Button angezeigt wird. Es kÃ¶nnen keine Befehle an dieses Device gesendet werden.
 
 #### get
 
@@ -266,28 +266,28 @@ Reading des Devices dass gelesen werden soll um den Status zu ermitteln. Default
 
 #### get-on
 
-Wert des o.g. Readings für den Status "on". Default "on"
+Wert des o.g. Readings fÃ¼r den Status "on". Default "on"
 
 #### get-off
 
-Wert des o.g. Readings für den Status "off". Default "off"
+Wert des o.g. Readings fÃ¼r den Status "off". Default "off"
 
 
 ## clock
 
 ![clock screenshot](/../screenshots/screenshots/clock.png?raw=true)
 
-Das Widget "clock" stellt eine einfach Uhr zur verfügung.
+Das Widget "clock" stellt eine einfach Uhr zur verfÃ¼gung.
 
 ### HTML
 
     <div data-type="clock"></div>
 
-Zeigt eine Uhr in der Form HH:MM:SS an, die sekündlich aktualisiert wird.
+Zeigt eine Uhr in der Form HH:MM:SS an, die sekÃ¼ndlich aktualisiert wird.
 
     <div data-type="clock" data-format="Y-m-d H:i:s"></div>
 
-Zeigt eine Uhr in der Form YYYY-MM-DD HH:MM:SS an, die sekündlich aktualisiert wird.
+Zeigt eine Uhr in der Form YYYY-MM-DD HH:MM:SS an, die sekÃ¼ndlich aktualisiert wird.
 
     <div data-type="clock" data-format="Y-m-d H:i:s.u" data-interval="1"></div>
 
@@ -301,24 +301,24 @@ Zeigt eine Uhr im UNIX-Timestamp Format an.
 
 #### format
 
-Die Formatangabe nutzt die gleichen Kennzeichner wie php date(), unterstützt aber nur die folgenden:
+Die Formatangabe nutzt die gleichen Kennzeichner wie php date(), unterstÃ¼tzt aber nur die folgenden:
 
     Y: Jahreszahl, vierstellig
     y: Jahreszahl, zweistellig
-    m: Monatszahl, mit führender Null
-    n: Monatszahl, ohne führende Null
-    d: Tag des Monats, mit führender Null
-    j: Tag des Monats, ohne führende Null
-    H: Stunde des Tages, mit führender Null
-    G: Stunde im 24-Stunden-Format, ohne führender Null
-    i: Minute der Stunde, mit führender Null
-    s: Sekunde der Minute, mit führender Null
+    m: Monatszahl, mit fÃ¼hrender Null
+    n: Monatszahl, ohne fÃ¼hrende Null
+    d: Tag des Monats, mit fÃ¼hrender Null
+    j: Tag des Monats, ohne fÃ¼hrende Null
+    H: Stunde des Tages, mit fÃ¼hrender Null
+    G: Stunde im 24-Stunden-Format, ohne fÃ¼hrender Null
+    i: Minute der Stunde, mit fÃ¼hrender Null
+    s: Sekunde der Minute, mit fÃ¼hrender Null
     w: Wochentagszahl (Sonntag = 0)
-    u: Millisekunden mit führender Null
+    u: Millisekunden mit fÃ¼hrender Null
     O: Zeitunterschied zur Greenwich time (GMT) in Stunden
     U: Sekunden seit Beginn der UNIX-Epoche (January 1 1970 00:00:00 GMT)
     
-Das Format wird als String angegeben, Kennzeichner werden ersetzt, die übrigen Zeichen bleiben stehen. Default "H:i:s"
+Das Format wird als String angegeben, Kennzeichner werden ersetzt, die Ã¼brigen Zeichen bleiben stehen. Default "H:i:s"
 
 #### interval
 
@@ -328,11 +328,11 @@ Das Aktualisierungsinterval in Milisekunden. Default 1000.
 
 ![weather screenshot](/../screenshots/screenshots/weather-demo.png?raw=true)
 
-**Achtung:** "weather" wird mittlerweile mit fhem-tablet-ui ausgeliefert. Die hier noch vorhandene Version ist als Testversion für Neuerungen zu betrachten.
+**Achtung:** "weather" wird mittlerweile mit fhem-tablet-ui ausgeliefert. Die hier noch vorhandene Version ist als Testversion fÃ¼r Neuerungen zu betrachten.
 
-Das Widget "weather" wandelt Bezeichnungen von Wetterlagen verschiedener Wetter-Module in Icons um. Der Screenshot zeigt neben dem eigentlichen "weather"-Widget verschiedene Labels. Der vollständige Code zur Erzeugung dieser Ansicht ist in [weather-demo](weather-demo.html) zu finden. Das "weather"-Widget ist die angezeigte Wolke.
+Das Widget "weather" wandelt Bezeichnungen von Wetterlagen verschiedener Wetter-Module in Icons um. Der Screenshot zeigt neben dem eigentlichen "weather"-Widget verschiedene Labels. Der vollstÃ¤ndige Code zur Erzeugung dieser Ansicht ist in [weather-demo](weather-demo.html) zu finden. Das "weather"-Widget ist die angezeigte Wolke.
 
-Insbesondere das Modul Weather liefert eine wesentlich differenziertere Beschreibung der Wetterlage, als mit diesem Widget darstellbar ist. Es sollte daher grundsätzlich zusammen mit einem normalen "label"-Widget verwendet werden, das die genaue Bezeichnung darstellt.
+Insbesondere das Modul Weather liefert eine wesentlich differenziertere Beschreibung der Wetterlage, als mit diesem Widget darstellbar ist. Es sollte daher grundsÃ¤tzlich zusammen mit einem normalen "label"-Widget verwendet werden, das die genaue Bezeichnung darstellt.
 
 ### HTML
 
@@ -352,11 +352,11 @@ In Verbindung mit dem Modul [PROPLANTA](http://fhem.de/commandref.html#PROPLANTA
 
 #### device
 
-Ein Device von einem der unterstützten Typen. Aktuell sind Weather, PROPLANTA und (eingeschränkt) OPENWEATHER möglich.
+Ein Device von einem der unterstÃ¼tzten Typen. Aktuell sind Weather, PROPLANTA und (eingeschrÃ¤nkt) OPENWEATHER mÃ¶glich.
 
 #### get
 
-Reading dessen Wettertext in ein Icon umgewandelt werden soll. Möglich sind alle Readings, die eine textuelle Beschreibung der Wetterlage enthalten. zB condition, fc#_condition, fc#_weather(Morning|Day|Evening|Night). Für das OPENWEATHER Modul können auch die weatherCode-Readings verwendet werden.
+Reading dessen Wettertext in ein Icon umgewandelt werden soll. MÃ¶glich sind alle Readings, die eine textuelle Beschreibung der Wetterlage enthalten. zB condition, fc#_condition, fc#_weather(Morning|Day|Evening|Night). FÃ¼r das OPENWEATHER Modul kÃ¶nnen auch die weatherCode-Readings verwendet werden.
 
 #### imageset
 
@@ -367,7 +367,7 @@ Bildsammlung mit der die Wetterlagen dargestellt werden sollen. Zur Wahl stehen 
 
 ![wind_direction screenshot](/../screenshots/screenshots/wind_direction.png?raw=true)
 
-Zeigt die Windrichtung auf einer Windrose an. Benötigt ein Reading mit einer Textdarstellung der Windrichtung in der Form "N", "NNW" etc. oder mit der Gradzahl der Windrichtung (0-360). Kann zusätzlich die Windgeschwindigkeit auswerten um Windstille statt Windrichtung anzuzeigen.
+Zeigt die Windrichtung auf einer Windrose an. BenÃ¶tigt ein Reading mit einer Textdarstellung der Windrichtung in der Form "N", "NNW" etc. oder mit der Gradzahl der Windrichtung (0-360). Kann zusÃ¤tzlich die Windgeschwindigkeit auswerten um Windstille statt Windrichtung anzuzeigen.
 
 ### HTML
 
@@ -403,7 +403,7 @@ Reading mit der Windrichtung. Kann numerisch (0-360) oder in Textform ("NO") ang
 
 #### direction-part
 
-Position der Windrichtungsangabe innerhalb des per direction-Attribut angegebenen Readings. Das Reading wird dafür an Leerzeichen gesplittet. Siehe data-part im label-Widget. Default: -1
+Position der Windrichtungsangabe innerhalb des per direction-Attribut angegebenen Readings. Das Reading wird dafÃ¼r an Leerzeichen gesplittet. Siehe data-part im label-Widget. Default: -1
 
 #### speed
 
@@ -415,11 +415,11 @@ Position der Windgeschwindigkeitsangabe innerhalb des per speed-Attribut angegeb
 
 #### calm
 
-Anzeigewert für Windstille. Default: -
+Anzeigewert fÃ¼r Windstille. Default: -
 
 #### size
 
-GröÃŸe des Widgets in Pixeln. Höhe und Breite sind immer gleich. Default: 150
+GrÃ¶ÃƒÅ¸e des Widgets in Pixeln. HÃ¶he und Breite sind immer gleich. Default: 150
 
 #### tickstep
 
@@ -433,21 +433,21 @@ Drehung der Compassrosette in Grad. Default: 0
 
 #### small
 
-Voreinstellung für size=100
+Voreinstellung fÃ¼r size=100
 
 #### mini
 
-Voreinstellung für size=52
+Voreinstellung fÃ¼r size=52
 
 #### tiny
 
-Voreinstellung für size=12 und tickstep=90. Die Textdarstellung in der Mitte des Widgets wird bei class "tiny" nicht angezeigt.
+Voreinstellung fÃ¼r size=12 und tickstep=90. Die Textdarstellung in der Mitte des Widgets wird bei class "tiny" nicht angezeigt.
 
 ## settimer
 
 ![widget_settimer screenshot](/../screenshots/screenshots/widget_settimer.png?raw=true)
 
-Widget zum anzeigen und einstellen einer Uhrzeit. Die Einstellung der Uhrzeit wird mit den beiden Knob-Elementen vorgenommen (links Stunde, rechts Minute) und mit dem oberen Button abgesendet. Dabei werden Stunde und Uhrzeit mit Doppelpunkt verbunden und ggf. mit führender Null versehen (9+13 = 09:13). Der untere Button sendet ein "off" Kommando.
+Widget zum anzeigen und einstellen einer Uhrzeit. Die Einstellung der Uhrzeit wird mit den beiden Knob-Elementen vorgenommen (links Stunde, rechts Minute) und mit dem oberen Button abgesendet. Dabei werden Stunde und Uhrzeit mit Doppelpunkt verbunden und ggf. mit fÃ¼hrender Null versehen (9+13 = 09:13). Der untere Button sendet ein "off" Kommando.
 
 ### HTML
 
@@ -490,7 +490,7 @@ Reading das beschickt werden soll. Die Uhrzeit wird in der Form HH:MM gesendet. 
 
 #### cmd
 
-Befehl mit dem Ã„nderungen an Fhem gesendet werden. Default: set
+Befehl mit dem Ãƒâ€nderungen an Fhem gesendet werden. Default: set
 
 #### off
 
@@ -502,15 +502,15 @@ Breite des Widgets in Pixeln. Mit data-width="auto" werden die Knobs am linken u
 
 ### Styling
 
-Um das Aussehen des Widgets ans eigene Layout anzupassen, haben die Elemente CSS-Klassen, die überschrieben werden können.
+Um das Aussehen des Widgets ans eigene Layout anzupassen, haben die Elemente CSS-Klassen, die Ã¼berschrieben werden kÃ¶nnen.
 
 #### widget_settimer_container
 
-Container-Element, das alle Elemene des Widgets enthält
+Container-Element, das alle Elemene des Widgets enthÃ¤lt
 
 #### widget_settimer_buttons
 
-Container-Element, das die beiden Buttons enthält
+Container-Element, das die beiden Buttons enthÃ¤lt
 
 #### widget_settimer_set
 
@@ -522,11 +522,11 @@ Unterer Button
 
 #### widget_settimer_knobs
 
-Container-Element, das die beiden Knobs enthält
+Container-Element, das die beiden Knobs enthÃ¤lt
 
 #### widget_settimer_hour_wrap
 
-Container-Element, das den Stunden-Knob enthält
+Container-Element, das den Stunden-Knob enthÃ¤lt
 
 #### widget_settimer_hour
 
@@ -534,7 +534,7 @@ Der Stunden-Knob, bzw. dessen zentrales Input-Element
 
 #### widget_settimer_minute_wrap
 
-Container-Element, das den Minuten-Knob enthält
+Container-Element, das den Minuten-Knob enthÃ¤lt
 
 #### widget_settimer_minute
 
@@ -543,7 +543,7 @@ Der Minuten-Knob, bzw. dessen zentrales Input-Element
 
 ## iframe
 
-Widget zum Einbinden externer Inhalte in einem Iframe. Vor der Anzeige des Iframes wird geprüft, ob die externe Seite erreichbar ist (HEAD Request). Während der Prüfung wird ein rotierendes Spinner-Icon angezeigt. Konnte die Seite geladen werden, wird der Iframe eingeblendet, ansonsten ein Error-Symbol.
+Widget zum Einbinden externer Inhalte in einem Iframe. Vor der Anzeige des Iframes wird geprÃ¼ft, ob die externe Seite erreichbar ist (HEAD Request). WÃ¤hrend der PrÃ¼fung wird ein rotierendes Spinner-Icon angezeigt. Konnte die Seite geladen werden, wird der Iframe eingeblendet, ansonsten ein Error-Symbol.
 
 ### HTML
 
@@ -551,14 +551,14 @@ Widget zum Einbinden externer Inhalte in einem Iframe. Vor der Anzeige des Ifram
         data-src="http://server.intranet/externer/inhalt.html"
     ></div>
     
-Versucht die Seite "http://server.intranet/externer/inhalt.html" in einem 100x100 Pixel großen IFrame anzuzeigen.
+Versucht die Seite "http://server.intranet/externer/inhalt.html" in einem 100x100 Pixel groÃŸen IFrame anzuzeigen.
 
     <div data-type="iframe"
         data-src="http://server.intranet/externer/inhalt.html"
         data-fill="yes"
     ></div>
 
-Versucht die Seite "http://server.intranet/externer/inhalt.html" in einem IFrame anzuzeigen, der das umgebende Element vollständig ausfüllt.
+Versucht die Seite "http://server.intranet/externer/inhalt.html" in einem IFrame anzuzeigen, der das umgebende Element vollstÃ¤ndig ausfÃ¼llt.
 
     <div data-type="iframe"
         data-src="http://server.intranet/externer/inhalt.html"
@@ -581,11 +581,11 @@ URL des externen Inhalts.
 
 #### fill
 
-Soll das umgebende Element vom Iframe ausgefüllt werden? Höhere Priorität als height und width. Mögliche Werte: yes, no. Default: no
+Soll das umgebende Element vom Iframe ausgefÃ¼llt werden? HÃ¶here PrioritÃ¤t als height und width. MÃ¶gliche Werte: yes, no. Default: no
 
 #### height
 
-Höhe des Iframes in Pixeln. Default: 100
+HÃ¶he des Iframes in Pixeln. Default: 100
 
 #### width
 
@@ -593,24 +593,24 @@ Breite des Iframes in Pixeln. Default: 100
 
 #### icon-spinner
 
-Icon das während der Verfügbarkeitsprüfung angezeigt werden soll. Durch hinzufügen der Klassen "fa-spin" wird das Icon drehend angezeigt. Default: fa-spinner fa-spin
+Icon das wÃ¤hrend der VerfÃ¼gbarkeitsprÃ¼fung angezeigt werden soll. Durch hinzufÃ¼gen der Klassen "fa-spin" wird das Icon drehend angezeigt. Default: fa-spinner fa-spin
 
 #### color-spinner
 
-Farbe für icon-spinner. Default: #aa6900
+Farbe fÃ¼r icon-spinner. Default: #aa6900
 
 #### icon-error
 
-Icon das bei fehlgeschlagener Verfügbarkeitsprüfung angezeigt werden soll. Default: fa-frown-o
+Icon das bei fehlgeschlagener VerfÃ¼gbarkeitsprÃ¼fung angezeigt werden soll. Default: fa-frown-o
 
 #### color-error
 
-Farbe für icon-error. Default: #505050
+Farbe fÃ¼r icon-error. Default: #505050
 
 #### scrolling
 
-Sollen Scrollbars im Iframe angezeigt werden? Mögliche Werte: yes,no,auto. Default: no
+Sollen Scrollbars im Iframe angezeigt werden? MÃ¶gliche Werte: yes,no,auto. Default: no
 
 #### timeout
 
-Timeout für die Verfügbarkeitsprüfung in Milisekunden. Default: 3000
+Timeout fÃ¼r die VerfÃ¼gbarkeitsprÃ¼fung in Milisekunden. Default: 3000
