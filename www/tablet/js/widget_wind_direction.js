@@ -123,7 +123,7 @@ var widget_wind_direction = {
 
                 var speed = getDeviceValue( $(this), 'speed');
                 var speed_part = $(this).data('speed-part') || -1;
-                var speed = getPart(speed, part);
+                speed = getPart(speed, part);
                 
                 var knob_elem = $(this).find('input');
                 if (val) {
@@ -145,7 +145,7 @@ var widget_wind_direction = {
                         if(val < 0) {
                             valt='ERR';
                             console.log('wind_direction ' + ($(this).attr('data-device')?'('+$(this).attr('data-device')+')':'') + ': ' + getPart(value,part)+' is invalid');
-                        } else if(speed==0) {
+                        } else if(!speed || speed==0) {
                             valt=$(this).data('calm')||'-';
                         } else {
                             if(!$(this).data('display-numeric')) {
