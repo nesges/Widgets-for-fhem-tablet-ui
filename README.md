@@ -545,7 +545,7 @@ Der Minuten-Knob, bzw. dessen zentrales Input-Element
 
 Widget zum Einbinden externer Inhalte in einem Iframe. Vor der Anzeige des Iframes wird geprüft, ob die externe Seite erreichbar ist (HEAD Request). Während der Prüfung wird ein rotierendes Spinner-Icon angezeigt. Konnte die Seite geladen werden, wird der Iframe eingeblendet, ansonsten ein Error-Symbol.
 
-Same Origin Policy: Aufrund der [Same Origin Policy](http://de.wikipedia.org/wiki/Same-Origin-Policy) ist es nicht ohne weiteres möglich Inhalte von fremden Servern per Javascript zu laden. Sollte eine entsprechende Fehlermeldung in der JS Console angezeigt werden, sind in [Ways to circumvent the same origin policy](http://stackoverflow.com/questions/3076414/ways-to-circumvent-the-same-origin-policy) einige Wege beschrieben, wie die SOP zu umgehen ist.
+Same Origin Policy: Aufgrund der [Same Origin Policy](http://de.wikipedia.org/wiki/Same-Origin-Policy) ist es nicht ohne weiteres möglich Inhalte von fremden Servern per Javascript zu laden. Sollte eine entsprechende Fehlermeldung in der JS Console angezeigt werden, sind in [Ways to circumvent the same origin policy](http://stackoverflow.com/questions/3076414/ways-to-circumvent-the-same-origin-policy) einige Wege beschrieben, wie die SOP zu umgehen ist. Wenn es nicht möglich die SOP für einen Dienst zu umgehen, es aber eine alternative Prüf-URL gibt, die zur Verfügbarkeitsprüfung heran gezogen werden kann, dann kann das Attribut "check-src" verwendet werden.
 
 ### HTML
 
@@ -564,6 +564,7 @@ Versucht die Seite "http://server.intranet/externer/inhalt.html" in einem IFrame
 
     <div data-type="iframe"
         data-src="http://server.intranet/externer/inhalt.html"
+        data-check-src="http://server.intranet/externer/inhalt.html"
         data-fill="no"
         data-height="100"
         data-width="100"
@@ -579,7 +580,11 @@ Versucht die Seite "http://server.intranet/externer/inhalt.html" in einem IFrame
 
 #### src
 
-URL des externen Inhalts.
+URL des externen Inhalts, der im Iframe angezeigt werden soll
+
+#### check-src
+
+URL des externen Inhalts, deren Verfügbarkeit geprüft werden soll. Default: Wert des Attributes "src"
 
 #### fill
 
