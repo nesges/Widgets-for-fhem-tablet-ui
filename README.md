@@ -565,6 +565,9 @@ Versucht die Seite "http://server.intranet/externer/inhalt.html" in einem IFrame
     <div data-type="iframe"
         data-src="http://server.intranet/externer/inhalt.html"
         data-check-src="http://server.intranet/externer/inhalt.html"
+        data-device="SERVER"
+        data-get="presence"
+        date-get-refresh="present"
         data-fill="no"
         data-height="100"
         data-width="100"
@@ -585,6 +588,18 @@ URL des externen Inhalts, der im Iframe angezeigt werden soll
 #### check-src
 
 URL des externen Inhalts, deren Verfügbarkeit geprüft werden soll. Default: Wert des Attributes "src"
+
+#### device
+
+Name eines Fhem-Devices das überwacht werden soll. Bei Zustandsänderung kann ein Refresh des Widgets ausgelöst werden. Default: nicht gesetzt
+
+#### get
+
+Name eines Readings eines Fhem-Devices das überwacht werden soll. Bei Zustandsänderung kann ein Refresh des Widgets ausgelöst werden. Default: STATE
+
+#### get-refresh
+
+Wert des überwachten Zustands (siehe device/get) der einen Refresh des Widgets auslösen soll. Ist get-refresh nicht gesetzt, löst jede Zustandsänderung einen Refresh aus. Default: nicht gesetzt
 
 #### fill
 
