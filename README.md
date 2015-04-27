@@ -13,10 +13,12 @@ Widgets:
 * [weather] (https://github.com/nesges/Widgets-for-fhem-tablet-ui/wiki/weather)
 * [wind_direction] (https://github.com/nesges/Widgets-for-fhem-tablet-ui/wiki/wind_direction)
 
-Sämtliche Dokumentation zu den Widgets befinde sich jetzt im Wiki. Folge einfach den Links!
+Sämtliche Dokumentation zu den Widgets befindet sich jetzt im Wiki. Folge einfach den Links!
 
-![weather screenshot](/../screenshots/screenshots/weather-demo.png?raw=true)
+![](https://raw.githubusercontent.com/nesges/TabletUI-Demo-WOPR/master/screenshots/small/index.png)
 
-![kodinowplaying screenshot](/../screenshots/screenshots/kodinowplaying_music.png?raw=true)
+![](https://raw.githubusercontent.com/nesges/TabletUI-Demo-WOPR/master/screenshots/small/aussen.png)
 
-![widget_settimer screenshot](/../screenshots/screenshots/widget_settimer.png?raw=true)
+![](https://raw.githubusercontent.com/nesges/TabletUI-Demo-WOPR/master/screenshots/small/wohnzimmer-xbmc-simple.png)
+
+
