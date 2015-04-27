@@ -15,6 +15,8 @@ Widgets:
 
 Sämtliche Dokumentation zu den Widgets befinde sich jetzt im Wiki. Folge einfach den Links!
 
-![kodinowplaying screenshot](/../screenshots/screenshots/kodinowplaying_music.png?raw=true)
 ![weather screenshot](/../screenshots/screenshots/weather-demo.png?raw=true)
+
+![kodinowplaying screenshot](/../screenshots/screenshots/kodinowplaying_music.png?raw=true)
+
 ![widget_settimer screenshot](/../screenshots/screenshots/widget_settimer.png?raw=true)
