@@ -1,3 +1,5 @@
+2015-04-27
+ widget_iframe: Möglichkeit zur Überwachung eines Devices ergänzt (Reload by Statusänderung); widget_weather: data-image-path ergänzt
 2015-04-25
  widget_wind_direction: added check for speed==null (occurs when speed-reading is not set yet)
 2015-04-24

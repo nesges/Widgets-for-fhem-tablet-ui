@@ -3,7 +3,7 @@ DIR www/tablet/js
 UPD 2015-04-25_00:54:33 7576 www/tablet/js/widget_kodinowplaying.js
 UPD 2015-04-25_00:54:33 3600 www/tablet/js/widget_button.js
 UPD 2015-04-25_00:54:33 2471 www/tablet/js/widget_clock.js
-UPD 2015-04-25_00:54:33 2736 www/tablet/js/widget_iframe.js
+UPD 2015-04-27_11:47:27 3755 www/tablet/js/widget_iframe.js
 UPD 2015-04-25_00:54:33 3966 www/tablet/js/widget_klimatrend.js
 UPD 2015-04-25_01:35:34 7686 www/tablet/js/widget_wind_direction.js
 UPD 2015-04-25_00:54:33 8769 www/tablet/js/widget_settimer.js

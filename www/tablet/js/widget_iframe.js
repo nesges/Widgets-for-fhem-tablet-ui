@@ -16,8 +16,13 @@ var widget_iframe = $.extend({}, widget_widget, {
         elem.data('color-spinner',  elem.data('color-spinner')  || '#aa6900');
         elem.data('icon-error',     elem.data('icon-error')     || 'fa-frown-o');
         elem.data('color-error',    elem.data('color-error')    || '#505050');
+        elem.data('device',         elem.data('device'));
+        elem.data('get',            elem.data('get')            || 'STATE');
+        elem.data('get-refresh',    elem.data('get-refresh'));
+        
     },
     init_ui: function(elem) {
+        elem.empty();
         var spinner = $('<div />').appendTo(elem);
         spinner.famultibutton({
             mode: 'signal',
@@ -60,5 +65,22 @@ var widget_iframe = $.extend({}, widget_widget, {
             base.init_ui($(this));
         });
     },
-    update: function () {}
+    update: function (dev,par) {
+        base = this;
+        var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
+        deviceElements.each(function(index) {
+            if ( $(this).data('get')==par || par =='*') {   
+                var value = getDeviceValue( $(this), 'get' );
+                if (value) {
+                    if ( value == $(this).data('get-refresh') )
+                        base.init_ui($(this))
+                    else if ( value.match(RegExp('^' + $(this).data('get-refresh') + '$')) )
+                        base.init_ui($(this))
+                    else if (!$(this).data('get-refresh') && $(this).data('value') != value )
+                        base.init_ui($(this))
+                }
+                $(this).data('value', value);
+            }
+        });
+    }
 });
