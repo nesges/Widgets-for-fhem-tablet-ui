@@ -6,13 +6,21 @@ var widget_button = $.extend({}, widget_famultibutton, {
     widgetname : 'button',
 
     toggleOn : function(elem) {
-        this.clicked(elem);
-        setInterval(function() {elem.setOff()}, 200);
+        if(this._doubleclicked(elem, 'on')) {
+            this.clicked(elem);
+            if(! elem.data('device')) {
+                setInterval(function() {elem.setOff()}, 200);
+            }
+        }
     },
 
     toggleOff : function(elem) {
-        this.clicked(elem);
-        setInterval(function() {elem.setOn()}, 200);
+        if(this._doubleclicked(elem, 'off')) {
+            this.clicked(elem);
+            if(! elem.data('device')) {
+                setInterval(function() {elem.setOn()}, 200);
+            }
+        }
     },
 
     init_ui : function(elem) {

@@ -19,43 +19,55 @@ var widget_iframe = $.extend({}, widget_widget, {
         elem.data('device',         elem.data('device'));
         elem.data('get',            elem.data('get')            || 'STATE');
         elem.data('get-refresh',    elem.data('get-refresh'));
-        
+        elem.data('check',          elem.attr('data-check')?elem.data('check'):true);
     },
     init_ui: function(elem) {
-        elem.empty();
-        var spinner = $('<div />').appendTo(elem);
-        spinner.famultibutton({
-            mode: 'signal',
-            icon: elem.data('icon-spinner'),
-            backgroundIcon: null,
-            offColor: elem.data('color-spinner'),
-        });
-        $.ajax({
-            type: 'HEAD',
-            url: elem.data('check-src'),
-            timeout: elem.data('timeout'),
-            success: function(){
-                elem.empty();
-                var style = '';
-                if(elem.data('fill')=='yes') {
-                    style = 'position:absolute;left:0;top:0;height:100%;width:100%;';
-                } else {
-                    style = 'height:'+elem.data('height')+'px;width:'+elem.data('width')+'px;';
+        if(elem.data('check')) {
+            elem.empty();
+            var spinner = $('<div />').appendTo(elem);
+            spinner.famultibutton({
+                mode: 'signal',
+                icon: elem.data('icon-spinner'),
+                backgroundIcon: null,
+                offColor: elem.data('color-spinner'),
+            });
+        
+            $.ajax({
+                type: 'HEAD',
+                url: elem.data('check-src'),
+                timeout: elem.data('timeout'),
+                success: function(){
+                    elem.empty();
+                    var style = '';
+                    if(elem.data('fill')=='yes') {
+                        style = 'position:absolute;left:0;top:0;height:100%;width:100%;';
+                    } else {
+                        style = 'height:'+elem.data('height')+'px;width:'+elem.data('width')+'px;';
+                    }
+                    $("<iframe src='"+elem.data('src')+"' style='"+style+"border:none' scrolling='"+elem.data('scrolling')+"'/>").appendTo(elem);
+                },
+                error: function(x,t,m) {
+                    elem.empty();
+                    console.log('Error trying to load '+elem.data('src')+':',t,'-',m);
+                    var spinner = $('<div />').appendTo(elem);
+                    spinner.famultibutton({
+                        mode: 'signal',
+                        icon: elem.data('icon-error'),
+                        backgroundIcon: null,
+                        offColor: elem.data('color-error'),
+                    });
                 }
-                $("<iframe src='"+elem.data('src')+"' style='"+style+"border:none' scrolling='"+elem.data('scrolling')+"'/>").appendTo(elem);
-            },
-            error: function(x,t,m) {
-                elem.empty();
-                console.log('Error trying to load '+elem.data('src')+':',t,'-',m);
-                var spinner = $('<div />').appendTo(elem);
-                spinner.famultibutton({
-                    mode: 'signal',
-                    icon: elem.data('icon-error'),
-                    backgroundIcon: null,
-                    offColor: elem.data('color-error'),
-                });
+            });
+        } else {
+            elem.empty();
+            var style = '';
+            if(elem.data('fill')=='yes') {
+                style = 'position:absolute;left:0;top:0;height:100%;width:100%;';
+            } else {
+                style = 'height:'+elem.data('height')+'px;width:'+elem.data('width')+'px;';
             }
-        });
+            $("<iframe src='"+elem.data('src')+"' style='"+style+"border:none' scrolling='"+elem.data('scrolling')+"'/>").appendTo(elem);
+        }
     },
     init: function () {
         var base = this;
