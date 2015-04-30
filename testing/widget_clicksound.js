@@ -28,7 +28,7 @@ var widget_clicksound = $.extend({}, widget_widget, {
         elem.data('bind-play-to',       elem.data('bind-play-to')   || elem.data('bind-to')     ||  '');
         elem.data('bind-pause-to',      elem.data('bind-pause-to')  || '');
         elem.data('sound',              elem.data('sound')          || 'ion-button-tiny');
-        elem.data('volume',             elem.data('volume')         || 1);
+        elem.data('volume',             elem.data('volume')         || 100);
     },
     init: function () {
         base = this;
@@ -58,7 +58,7 @@ var widget_clicksound = $.extend({}, widget_widget, {
                 sounds : [{name:sound}],
                 preload: true,
                 path : path,
-                volume: $(this).data('volume'),
+                volume: $(this).data('volume')/100,
             });
 
             if($(this).data('bind-play-to')) {
