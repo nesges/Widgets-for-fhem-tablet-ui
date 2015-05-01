@@ -6,4 +6,4 @@ UPD 2015-04-25_00:54:33 2471 www/tablet/js/widget_clock.js
 UPD 2015-04-28_20:48:11 4481 www/tablet/js/widget_iframe.js
 UPD 2015-04-25_00:54:33 3966 www/tablet/js/widget_klimatrend.js
 UPD 2015-04-25_01:35:34 7686 www/tablet/js/widget_wind_direction.js
-UPD 2015-04-25_00:54:33 8769 www/tablet/js/widget_settimer.js
+UPD 2015-05-01_14:50:00 8748 www/tablet/js/widget_settimer.js

@@ -56,7 +56,7 @@ var widget_settimer = {
             $(this).data('off', $(this).data('off')||'off');
             $(this).data('width', ($(this).attr('data-width')?$(this).data('width'):380));
             
-            var container = $('<div style="position:relative;'+ ($.isNumeric($(this).data('width'))?'width:'+$(this).data('width')+'px':'') +'" class="widget_settimer_container"/>').appendTo($(this));
+            var container = $('<div style="position:relative;'+ ($.isNumeric($(this).data('width'))?'width:'+$(this).data('width')+'px':'') +';min-height:60px;" class="widget_settimer_container"/>').appendTo($(this));
             
             var buttons = $('<div style="position:absolute;top:0;right:0;margin-top:5px;margin-right:25px" class="widget_settimer_buttons" />').appendTo(container);
             var button_set = $('<div class="widget_settimer_set" style="display:block" />').appendTo(buttons);
@@ -155,7 +155,6 @@ var widget_settimer = {
                 toggleOn: function( ) {
                     var parent = $(this).parents('div[data-type="settimer"]');
                     var cmd = [parent.data('cmd'), device, parent.data('set'), parent.data('off')].join(' ');
-                    console.log(cmd);
                     setFhemStatus(cmd);
                     if( device && typeof device != "undefined") {
                         TOAST && $.toast(cmd);
