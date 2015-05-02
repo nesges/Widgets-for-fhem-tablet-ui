@@ -69,7 +69,7 @@ var widget_clicksound = $.extend({}, widget_widget, {
             var sound = $(this).data('sound');
             var path;
             if(sound.match(/^ion-/)) {
-                sound =  sound.replace(/^ion-/, '').replace(/-/, '_');
+                sound =  sound.replace(/^ion-/, '').replace(/-/g, '_');
                 
                 var dir = $('script[src$="fhem-tablet-ui.js"]').attr('src');
                 var name = dir.split('/').pop(); 

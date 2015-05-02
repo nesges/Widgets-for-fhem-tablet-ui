@@ -2,7 +2,7 @@
 /**
 * Just another dashboard for FHEM
 *
-* Version: 1.4.0
+* Version: 1.4.2
 * Requires: jQuery v1.7+, font-awesome, jquery.gridster, jquery.toast
 *
 * Copyright (c) 2015 Mario Stephan <mstephan@shared-files.de>
@@ -13,7 +13,6 @@ var deviceStates={};
 var readings = {"STATE":true};
 var devices = {};
 var types = {};
-var ready = false;
 var DEBUG = false;
 var TOAST = true;
 var doLongPoll = false
@@ -25,6 +24,7 @@ var shortpollInterval = 30 * 1000; // 30 seconds
 var devs=Array();
 var pars=Array();
 var gridster;
+var styleCollection={};
 
 var plugins = {
   modules: [],
@@ -54,12 +54,10 @@ var plugins = {
     },null,true);
   },
   update: function (dev,par) {  
-    ready = false;
     $.each(this.modules, function (index, module) {
       //Iterate each module and run update function
       module.update(dev,par);
     });
-    ready = true;
     DEBUG && console.log('update done for device:'+dev+' parameter:'+par);
   }
 }
@@ -71,6 +69,7 @@ $(document).on('ready', function() {
     //add background for modal dialogs
     $("<div id='shade' />").prependTo('body').hide();
 	
+    loadStyleSchema();
     initPage();
 
     if ( doLongPoll ){
@@ -180,9 +179,6 @@ function initWidgets() {
     //    requestFhem(reading);
     //}
     requestFhem();
-
-    ready = true;
-
 }
 
 function showDeprecationMsg() {
@@ -228,7 +224,7 @@ function setFhemStatus(cmdline) {
     DEBUG && console.log('send to FHEM: '+cmdline);
 	$.ajax({
 		async: true,
-        url: $("meta[name='fhemweb_url']").attr("content") || "../fhem/",
+		url: $("meta[name='fhemweb_url']").attr("content") || "/fhem/",
 		data: {
 			cmd: cmdline,
 			XHR: "1"
@@ -243,7 +239,7 @@ function setFhemStatus(cmdline) {
 				//for (var reading in readings) {
 				//	requestFhem(reading);
 				//}
-				requestFhem()
+				requestFhem();
 			}, 4000);
 		}
 	});
@@ -263,7 +259,7 @@ function longPoll(roomName) {
 	currLine=0;
 	
 	$.ajax({
-        url: $("meta[name='fhemweb_url']").attr("content") || "../fhem/",
+		url: $("meta[name='fhemweb_url']").attr("content") || "/fhem/",
 		cache: false,
 		complete: function() {
 			setTimeout(function() {
@@ -336,31 +332,26 @@ function longPoll(roomName) {
 			}
 	});
 }
-
-var r_start;
-var r_last;
-var r_done;
-         
+            
 //function requestFhem(paraname) {
-//    r_start = new Date();
 ///* 'list' is still the fastest cmd to get all important data
 //*/
 //    $.ajax({
 //        async: true,
 //        timeout: 15000,
-//        cache: false,
-//        context:{paraname: paraname},
-//        url: $("meta[name='fhemweb_url']").attr("content") || "../fhem/",
-//        data: {
-//            cmd: "list " + devs.join() + " " + paraname,
-//            XHR: "1"
-//        }
-//    })
-//    .fail (function(jqXHR, textStatus, errorThrown) {
-//            $.toast("Error: " + textStatus + ": " + errorThrown);
-//    })
-//    .done (function( data ) {
-//            var lines = data.replace(/\n\)/g,")\n").split(/\n/);
+//		cache: false,
+//		context:{paraname: paraname},
+//		url: $("meta[name='fhemweb_url']").attr("content") || "/fhem/",
+//		data: {
+//            cmd: "list " + $.map(devs, $.trim).join() + " " + paraname,
+//			XHR: "1"
+//		}
+//	})
+//	.fail (function(jqXHR, textStatus, errorThrown) {
+//    		$.toast("Error: " + textStatus + ": " + errorThrown);
+//  	})
+//  	.done (function( data ) {
+//			var lines = data.replace(/\n\)/g,")\n").split(/\n/);
 //            var regCapture = /^(\S*)\s*([0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-2][0-9]:[0-5][0-9]:[0-5][0-9])?\.?[0-9]{0,3}\s+(.*)$/;
 //            for (var i=0; i < lines.length; i++) {
 //                var date,key,val;
@@ -373,10 +364,6 @@ var r_done;
 //                    if (groups.length>2){
 //                        date = $.trim( groups[2]);
 //                        val = $.trim( groups[3]);
-//                        /*if(!date && paraname!="STATE") {
-//                                val=date;
-//                                date=  $.trim(groups[3]);
-//                         }*/
 //                    }
 //                    //console.log('paraname',paraname,'date:',date,'val',val);
 //                    var params = deviceStates[key] || {};
@@ -388,11 +375,13 @@ var r_done;
 //                    }
 //                }
 //            }
-//            r_done = new Date();
-//            console.log(r_done.getTime() - r_start.getTime());
 //    });
 //
 //}
+
+var r_start;
+var r_last;
+var r_done;
 
 function benchmsg(message) {
     r_now = new Date().getTime();
@@ -536,11 +525,15 @@ function requestFhem() {
 }
 
 function loadplugin(plugin, success, error, async) {
-    dir = $('script[src$="fhem-tablet-ui.js"]').attr('src');
+    dynamicload('js/'+plugin+'.js', success, error, async);
+}
+
+function dynamicload(file, success, error, async) {
+    var dir = $('script[src$="fhem-tablet-ui.js"]').attr('src');
     var name = dir.split('/').pop(); 
     dir = dir.replace('/'+name,"");
     $.ajax({
-        url: dir + '/'+plugin+'.js',
+        url: dir + '/../' + file,
         dataType: "script",
         cache: true,
         async: async || false,
@@ -550,8 +543,26 @@ function loadplugin(plugin, success, error, async) {
     });
 }
 
-function loadplugin_async(plugin, success, error) {
-    return loadplugin(plugin, success, error, true);
+function loadStyleSchema(){
+    $.each($('link[href$="-ui.css"]') , function (index, thisSheet) {
+        var rules = thisSheet.sheet.cssRules;
+        for (var r in rules){
+            if (rules[r].style){
+               var styles = rules[r].style.cssText.split(';');
+               styles.pop();
+               var elmName = rules[r].selectorText;
+               var params = {};
+               for (var s in styles){
+                   var param = styles[s].split(':');
+                   if (param[0].match(/color/)){
+                      params[$.trim(param[0])]=$.trim(param[1]);
+                   }
+               }
+               if (Object.keys(params).length>0)
+                    styleCollection[elmName]=params;
+            }
+        }
+    });
 }
 
 this.getPart = function (s,p) {
@@ -592,6 +603,11 @@ this.getParameter = function (device, src) {
     return null;
 }
 
+this.getStyle = function (selector, prop) {
+    var props = styleCollection[selector];
+    return ( props && props[prop] ) ? props[prop] : null;
+}
+
 // global helper functions
 this.showModal = function (modal) {
     if(modal)
@@ -627,8 +643,35 @@ Date.prototype.hhmmss = function() {
   return (hh[1]?hh:"0"+hh[0])+':'+ (mm[1]?mm:"0"+mm[0])+':'+(ss[1]?ss:"0"+ss[0]); // padding
  };
  
- Date.prototype.mmdd = function() {
+Date.prototype.mmdd = function() {
   var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
   var dd  = this.getDate().toString();
   return (mm[1]?mm:"0"+mm[0])+'-'+(dd[1]?dd:"0"+dd[0]); // padding
  };
+
+//sadly it not possible to use Array.prototype. here
+this.indexOfGeneric = function(array,find){
+  for (var i=0;i<array.length;i++) {
+    if (!$.isNumeric(array[i]))
+        return indexOfRegex(array,find);
+  }
+  return indexOfNumeric(array,find);
+};
+
+this.indexOfNumeric = function(array,val){
+   var ret=-1;
+   for (var i=0;i<array.length;i++) {
+       if (Number(val)>=Number(array[i]))
+           ret=i;
+   }
+   return ret;
+};
+
+this.indexOfRegex = function(array,find){
+  for (var i=0;i<array.length;i++) {
+      var match = find.match(new RegExp(array[i]));
+      if (match)
+            return i
+  }
+  return array.indexOf(find);
+};
