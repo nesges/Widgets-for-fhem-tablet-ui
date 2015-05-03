@@ -30,7 +30,7 @@ var widget_clicksound = $.extend({}, widget_widget, {
         for(var s=0; s<selectors.length; s++) {
             switch(selectors[s]) {
                 case '+buttons':
-                    resolved.push('[data-type=famultibutton]:not(.readonly),[data-type=button]:not(.readonly),[data-type=switch]:not(.readonly),[data-type=push]:not(.readonly)'); 
+                    resolved.push(':not(.circlemenu) > [data-type=famultibutton]:not(.readonly),:not(.circlemenu) > [data-type=button]:not(.readonly),:not(.circlemenu) > [data-type=switch]:not(.readonly),:not(.circlemenu) > [data-type=push]:not(.readonly)'); 
                     break;
                 case '+knobs':
                     resolved.push('[data-type=volume],[data-type=thermostat]'); 
@@ -66,46 +66,71 @@ var widget_clicksound = $.extend({}, widget_widget, {
 
             base.init_attr($(this));
 
-            var sound = $(this).data('sound');
             var path;
-            if(sound.match(/^ion-/)) {
-                sound =  sound.replace(/^ion-/, '').replace(/-/g, '_');
-                
-                var dir = $('script[src$="fhem-tablet-ui.js"]').attr('src');
-                var name = dir.split('/').pop(); 
-                path = dir.replace('/'+name, '') + '/../lib/ion.sound/sounds/';
-            } else {
-                var matches = sound.match(/^(.*\/)(.*?)\.(?:mp3|ogg|aac|mp4|wav)$/);
-                if(matches) {
-                    path = matches[1];
-                    sound = matches[2];
+            var sounds = $(this).data('sound');
+            var _sounds = new Array();
+            if(!$.isArray(sounds)) {
+                sounds = new Array(sounds);
+            }
+            
+            var length = $(this).data('length');
+            if(!$.isArray(length)) {
+                length = new Array(length);
+            }
+            
+            var bindPlayTo = $(this).data('bind-play-to');
+            if(!$.isArray(bindPlayTo)) {
+                bindPlayTo = new Array(bindPlayTo);
+            }
+            var bindPauseTo = $(this).data('bind-pause-to');
+            if(!$.isArray(bindPauseTo)) {
+                bindPauseTo = new Array(bindPauseTo);
+            }
+            
+            for(var s=0; s<sounds.length; s++) {
+                var sound = sounds[s];
+                if(sound.match(/^ion-/)) {
+                    sound =  sound.replace(/^ion-/, '').replace(/-/g, '_');
+                    if(typeof path=='undefined') {
+                        var dir = $('script[src$="fhem-tablet-ui.js"]').attr('src');
+                        var name = dir.split('/').pop(); 
+                        path = dir.replace('/'+name, '') + '/../lib/ion.sound/sounds/';
+                    }
                 } else {
-                    console.log(base.widgetname+' ERROR: unsupported soundfile');
+                    var matches = sound.match(/^(.*\/)(.*?)\.(?:mp3|ogg|aac|mp4|wav)$/);
+                    if(matches) {
+                        if(typeof path=='undefined') {
+                            path = matches[1];
+                        }
+                        sound = matches[2];
+                    } else {
+                        console.log(base.widgetname+' ERROR: unsupported soundfile', sound);
+                    }
+                }
+                _sounds.push({
+                    name:sound,
+                    sprite: { "short": [0,((length[s]||200)/1000)] }
+                });
+                
+                if(typeof bindPlayTo[s] != 'undefined') {
+                    $(base.selector(bindPlayTo[s])).click({sound:sound}, function(event){
+                        ion.sound.play(event.data.sound, {part:'short'});
+                    });
+                }
+                if(typeof bindPauseTo[s] != 'undefined') {
+                    $(base.selector(bindPauseTo[s])).click({sound:sound}, function(event){
+                        ion.sound.play(event.data.sound, {part:'short'});
+                    });
                 }
             }
             
             ion.sound({
-                sounds : [{
-                    name:sound,
-                    sprite: {
-                        "short": [0,($(this).data('length')/1000)]
-                    }
-                }],
+                sounds: _sounds,
                 preload: true,
+                multiplay: true,
                 path : path,
                 volume: $(this).data('volume')/100,
             });
-
-            if($(this).data('bind-play-to')) {
-                $(base.selector($(this).data('bind-play-to'))).click({elem:this}, function(event){
-                    ion.sound.play($(this).data('src'), {part:'short'});
-                });
-            }
-            if(base.selector($(this).data('bind-pause-to'))) {
-                $($(this).data('bind-pause-to')).click({elem:this}, function(event){
-                    ion.sound.pause($(this).data('sound'));
-                });
-            }
         });
         
     },
