@@ -1,4 +1,6 @@
 2015-05-04
+ widget_weather: Proplanta *Icon-Readings; imageset="reading"
+2015-05-04
  widget_clicksound: length-array, new selectors; widget_button: rm deprecated code
 2015-05-04
  widget_clicksound: arrays in data-sound, data-bind-X, data-length
