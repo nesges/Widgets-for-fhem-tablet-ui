@@ -1,8 +1,5 @@
 2015-05-05
  widget_tripush: Multistate Button mit set-Array
-2015-05-05
- widget_tripush: Multistate Button mit set-Array
-2015-05-04
  widget_weather: Proplanta *Icon-Readings; imageset="reading"
 2015-05-04
  widget_clicksound: length-array, new selectors; widget_button: rm deprecated code
@@ -14,10 +11,6 @@
  widget_clicksound: easy selectors; data-length
 2015-04-30
  Neu: widget_clicksound
-2015-04-30
- Neu: widget_clicksound
-2015-04-28
- widget_button: data-doubleclick added
 2015-04-28
  widget_button: data-doubleclick added
 2015-04-27
