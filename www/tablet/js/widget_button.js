@@ -76,17 +76,17 @@ var widget_button = $.extend({}, widget_famultibutton, {
             type = 'fhem-cmd';
         }
         
-        // this code may be harmfull if target must contain urlencoded parts.
-        // but it shouldn't since it checks for unencoded chars first
-        // anyways it should be removed after a while
-        if(target.match(/[{ }?\&$§"',;:#]/)) {
-            // definitely not urlencoded
-        } else if(target.match(/%(7B|7D|20|3F)/)) {
-            // probably urlencoded
-            _target = decodeURIComponent(target);
-            console.log('widget_button: urlencoding the target of '+type+' is deprecated. decoding '+target+' to '+_target);
-            target = _target;
-        }
+        // // this code may be harmfull if target must contain urlencoded parts.
+        // // but it shouldn't since it checks for unencoded chars first
+        // // anyways it should be removed after a while
+        // if(target.match(/[{ }?\&$§"',;:#]/)) {
+        //     // definitely not urlencoded
+        // } else if(target.match(/%(7B|7D|20|3F)/)) {
+        //     // probably urlencoded
+        //     _target = decodeURIComponent(target);
+        //     console.log('widget_button: urlencoding the target of '+type+' is deprecated. decoding '+target+' to '+_target);
+        //     target = _target;
+        // }
 
         switch(type) {
             case 'url':

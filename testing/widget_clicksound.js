@@ -29,14 +29,24 @@ var widget_clicksound = $.extend({}, widget_widget, {
         var selectors = $.map(selector.split(','), $.trim);
         for(var s=0; s<selectors.length; s++) {
             switch(selectors[s]) {
-                case '+buttons':
-                    resolved.push(':not(.circlemenu) > [data-type=famultibutton]:not(.readonly),:not(.circlemenu) > [data-type=button]:not(.readonly),:not(.circlemenu) > [data-type=switch]:not(.readonly),:not(.circlemenu) > [data-type=push]:not(.readonly)'); 
+                case '+button':
+                    resolved.push(':not(.circlemenu li) > [data-type=famultibutton]:not(.readonly),:not(.circlemenu li) > [data-type=button]:not(.readonly),:not(.circlemenu li) > [data-type=switch]:not(.readonly),:not(.circlemenu li) > [data-type=push]:not(.readonly)'); 
                     break;
-                case '+knobs':
+                case '+slider':
+                case '+dimmer':
+                    resolved.push('[data-type=slider],[data-type=dimmer]'); 
+                    break;
+                case '+knob':
                     resolved.push('[data-type=volume],[data-type=thermostat]'); 
                     break;
                 case '+circlemenu':
                     resolved.push('.circlemenu li'); 
+                    break;
+                case '+circlemenu-center':
+                    resolved.push('.circlemenu li:first-child'); 
+                    break;
+                case '+circlemenu-outer':
+                    resolved.push('.circlemenu li:not(:first-child)'); 
                     break;
                 case '+widgets':
                     resolved.push('[data-type]'); 
@@ -76,6 +86,11 @@ var widget_clicksound = $.extend({}, widget_widget, {
             var length = $(this).data('length');
             if(!$.isArray(length)) {
                 length = new Array(length);
+            }
+            for(var s=0; s<sounds.length; s++) {
+                if(typeof length[s] == 'undefined') {
+                    length[s]=length[s>0?s-1:0];
+                }
             }
             
             var bindPlayTo = $(this).data('bind-play-to');
