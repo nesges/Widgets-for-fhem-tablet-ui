@@ -54,8 +54,8 @@ var widget_multistatebutton = $.extend({}, widget_famultibutton, {
             $(this).data('set-default',             $(this).data('set-default')             || $(this).data('set')[0] );
             $(this).data('icon',                    $(this).data('icon')                    || 'fa-power-off');
             $(this).data('background-icon',         $(this).data('background-icon')         || 'fa-circle');
-            $(this).data('on-color',                $(this).data('on-color')                || $(this).data('on-color')                 || '#2a2a2a');
-            $(this).data('off-color',               $(this).data('on-color')                || $(this).data('off-color')                || $(this).data('on-color'));
+            $(this).data('on-color',                $(this).data('color')                   || $(this).data('on-color')                 || '#2a2a2a');
+            $(this).data('off-color',               $(this).data('color')                   || $(this).data('off-color')                || $(this).data('on-color'));
             $(this).data('on-background-color',     $(this).data('background-color')        || $(this).data('on-background-color')      || '#aa6900');
             $(this).data('off-background-color',    $(this).data('background-color')        || $(this).data('off-background-color')     || $(this).data('on-background-color'));
             
