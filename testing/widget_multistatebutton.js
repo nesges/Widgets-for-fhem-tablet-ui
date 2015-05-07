@@ -70,4 +70,10 @@ var widget_multistatebutton = $.extend({}, widget_famultibutton, {
             base.init_ui($(this));
         });
     },
+    update_cb : function(elem,state) {
+        if (elem.hasClass('warn') || elem.children().filter('#fg').hasClass('warn'))
+            this.showOverlay(elem,state);
+        else
+            this.showOverlay(elem,"");
+    },
 });
