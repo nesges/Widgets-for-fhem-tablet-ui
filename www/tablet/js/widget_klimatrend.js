@@ -43,13 +43,13 @@ var widget_klimatrend = {
                     var number = 1*text.replace(/[^0-9.]/g, '');
                     var sign = text.replace(/^([+-]).*/, '$1');
                     var reading = $(this).data('get');
-                    var highmark = 0;
+                    var highmark = 99;
                     if($(this).data('highmark')) {
                         highmark = $(this).data('highmark');
                     } else {
                         if(reading.match(/humidity/i)) {
                             highmark=5;
-                        } else if(reading.match(/temperature/i)) {
+                        } else if(reading.match(/temp/i)) {
                             highmark=1;
                         }
                     }

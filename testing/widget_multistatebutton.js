@@ -63,9 +63,6 @@ var widget_multistatebutton = $.extend({}, widget_famultibutton, {
             $(this).data('on-background-colors',    $(this).data('background-colors')       || $(this).data('on-background-colors')     || new Array($(this).data('on-background-color')) );
             $(this).data('icons',                   $(this).data('icons')                                                               || new Array($(this).data('icon')) );
             
-            console.log($(this).data('get-on'));
-            console.log($(this).data('set'));
-            
             base.init_attr($(this));
             base.init_ui($(this));
         });

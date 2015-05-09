@@ -1,3 +1,5 @@
+2015-05-09
+ klimatrend: highmark default 99, temperature highmark regex /temp/i
 2015-05-07
  widget_multistatebutton: warn Overlay zugefügt
 2015-05-06
