@@ -1,10 +1,13 @@
-var widget_kodinowplaying = {
-    _kodinowplaying: null,
-    elements: null,
+if(typeof widget_widget == 'undefined') {
+    loadplugin('widget_widget');
+}
+
+var widget_kodinowplaying = $.extend({}, widget_widget, {
+    widgetname:"kodinowplaying",
     init: function () {
-        _kodinowplaying=this;
-        _kodinowplaying.elements = $('div[data-type="kodinowplaying"]');
-        _kodinowplaying.elements.each(function(index) {
+        base=this;
+        this.elements = $('div[data-type="'+this.widgetname+'"]');
+        this.elements.each(function(index) {
             if($(this).hasClass('titleonly')){
                 $(this).attr('data-show', 'no');
                 $(this).attr('data-season', 'no');
@@ -94,17 +97,14 @@ var widget_kodinowplaying = {
             var totaltime   = getDeviceValue($(this), 'totaltime');
             var playStatus  = getDeviceValue($(this), 'playStatus');
             
-            console.log(show);
-            
+            // check dateformat and substitute accordingly
             var dateformat = $(this).attr('data-timeformat');
-            
             if(!dateformat) {
                 switch(type) {
                     case "song": dateformat = 'MM:SS'; break;
                     default: dateformat = 'HH:MM:SS'; break;
                 }
             }
-            
             var subst = '';
             if(dateformat) {
                 switch(dateformat.toUpperCase()) {
@@ -116,7 +116,6 @@ var widget_kodinowplaying = {
                     case "SS":          subst = '$3'; break;
                 }
             }
-            
             if(subst) {
                 if(time) {
                     time = time.replace(/^(\d\d):(\d\d):(\d\d).(.*)/, subst);
@@ -124,6 +123,28 @@ var widget_kodinowplaying = {
                 if(totaltime) {
                     totaltime = totaltime.replace(/^(\d\d):(\d\d):(\d\d).(.*)/, subst);
                 }
+            }
+            
+            // getDeviceValue might return a timestamp which is the readings updatetime
+            // this is a bug in requestFhem not yet solved
+            // check values which most likely would not contain a timestamp and empty them
+            if(show && show.match(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/)) {
+                show='';
+            }
+            if(season && season.match(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/)) {
+                season='';
+            }
+            if(episode && episode.match(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/)) {
+                episode='';
+            }
+            if(title && title.match(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/)) {
+                title='';
+            }
+            if(artist && artist.match(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/)) {
+                artist='';
+            }
+            if(album && album.match(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/)) {
+                album='';
             }
             
             $(this).empty();
@@ -144,4 +165,4 @@ var widget_kodinowplaying = {
             );
         });
     }
-};
+});

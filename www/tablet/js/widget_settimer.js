@@ -1,53 +1,13 @@
-var widget_settimer = {
-    _settimer: null,
-    elements: null,
-    
-    drawDial: function () {
-        var c = this.g, // context
-        a = this.arc(this.cv), // Arc
-        r = 1;
-        
-        c.lineWidth = this.lineWidth;
-        c.lineCap = this.lineCap;
-        if (this.o.bgColor !== "none") {
-            c.beginPath();
-            c.strokeStyle = this.o.bgColor;
-            c.arc(this.xy, this.xy, this.radius, this.endAngle - 0.00001, this.startAngle + 0.00001, true);
-            c.stroke();
-        }
-        
-        var tick_w = (2 * Math.PI) / 360;
-        var step =  (this.o.max - this.o.min) / this.angleArc;
-        var acAngle = ((this.o.isValue - this.o.min) / step) + this.startAngle;
-        var dist = this.o.tickdistance || 4;
-        
-        // draw ticks
-        for (tick = this.startAngle; tick < this.endAngle + 0.00001; tick+=tick_w*dist) {
-            i = step * (tick-this.startAngle)+this.o.min;
-            
-            c.beginPath();
-            c.strokeStyle = this.o.tkColor;//'#4477ff';
-            
-            w = tick_w;
-            w *= (c.strokeStyle != this.o.tkColor) ? 2 : 1;
-                
-            c.arc( this.xy, this.xy, this.radius, tick, tick+w , false);
-            c.stroke();
-        }
-        
-        // draw selection cursor
-        c.beginPath();
-        c.strokeStyle = this.o.hdColor;
-        c.lineWidth = this.lineWidth * 2;
-        c.arc(this.xy, this.xy, this.radius-this.lineWidth/2, a.s, a.e, a.d);
-        c.stroke();
-        
-        return false;
-    },
+if(typeof widget_volume == 'undefined') {
+    loadplugin('widget_volume');
+}
+
+var widget_settimer = $.extend({}, widget_volume, {
+    widgetname: 'settimer',
     init: function () {
-        _settimer=this;
-        _settimer.elements = $('div[data-type="settimer"]');
-        _settimer.elements.each(function(index) {
+        base=this;
+        this.elements = $('div[data-type="'+this.widgetname+'"]');
+        this.elements.each(function(index) {
             var device = $(this).data('device');
             $(this).data('get', $(this).data('get') || $(this).data('reading') || 'STATE');
             readings[$(this).data('get')] = true;
@@ -56,22 +16,22 @@ var widget_settimer = {
             $(this).data('off', $(this).data('off')||'off');
             $(this).data('width', ($(this).attr('data-width')?$(this).data('width'):380));
             
-            var container = $('<div style="position:relative;'+ ($.isNumeric($(this).data('width'))?'width:'+$(this).data('width')+'px':'') +';min-height:60px;" class="widget_settimer_container"/>').appendTo($(this));
+            var container = $('<div style="position:relative;'+ ($.isNumeric($(this).data('width'))?'width:'+$(this).data('width')+'px':'') +';min-height:60px;" class="widget_'+base.widgetname+'_container"/>').appendTo($(this));
             
-            var buttons = $('<div style="position:absolute;top:0;right:0;margin-top:5px;margin-right:25px" class="widget_settimer_buttons" />').appendTo(container);
-            var button_set = $('<div class="widget_settimer_set" style="display:block" />').appendTo(buttons);
-            var button_off = $('<div class="widget_settimer_off" style="display:block" />').appendTo(buttons);
+            var buttons = $('<div style="position:absolute;top:0;right:0;margin-top:5px;margin-right:25px" class="widget_'+base.widgetname+'_buttons" />').appendTo(container);
+            var button_set = $('<div class="widget_'+base.widgetname+'_set" style="display:block" />').appendTo(buttons);
+            var button_off = $('<div class="widget_'+base.widgetname+'_off" style="display:block" />').appendTo(buttons);
             
-            var knobs = $('<div style="position:absolute;top:0;left:0;margin-top:5px;margin-left:20px" class="widget_settimer_knobs" />').appendTo(container);
-            var knob_hour_wrap = $('<div class="widget_settimer_hour_wrap" style="display:inline;margin-right:10px !important" />').appendTo(knobs);
-            var knob_hour = $('<input class="widget_settimer_hour" />', {
+            var knobs = $('<div style="position:absolute;top:0;left:0;margin-top:5px;margin-left:20px" class="widget_'+base.widgetname+'_knobs" />').appendTo(container);
+            var knob_hour_wrap = $('<div class="widget_'+base.widgetname+'_hour_wrap" style="display:inline;margin-right:10px !important" />').appendTo(knobs);
+            var knob_hour = $('<input class="widget_'+base.widgetname+'_hour" />', {
                 type: 'text',
                 value: $(this).attr('data-initvalue')||'0',
                 disabled : true,
             }).appendTo(knob_hour_wrap);
 
-            var knob_min_wrap = $('<div class="widget_settimer_hour_wrap" style="display:inline;margin-left:10px !important" />').appendTo(knobs);
-            var knob_min = $('<input class="widget_settimer_minute" />', {
+            var knob_min_wrap = $('<div class="widget_'+base.widgetname+'_hour_wrap" style="display:inline;margin-left:10px !important" />').appendTo(knobs);
+            var knob_min = $('<input class="widget_'+base.widgetname+'_minute" />', {
                 type: 'text',
                 value: $(this).attr('data-initvalue')||'0',
                 disabled : true,
@@ -94,7 +54,7 @@ var widget_settimer = {
                 'tickdistance': 20,
                 'cursor': 6,
                 'touchPosition': 'left',
-                'draw' : _settimer.drawDial,
+                'draw' : base.drawDial,
                 'readOnly' : $(this).hasClass('readonly'),
             });
             knob_min.knob({
@@ -113,7 +73,7 @@ var widget_settimer = {
                 'tickdistance': 10,
                 'cursor': 6,
                 'touchPosition': 'left',
-                'draw' : _settimer.drawDial,
+                'draw' : base.drawDial,
                 'readOnly' : $(this).hasClass('readonly'),
             });
             
@@ -125,9 +85,9 @@ var widget_settimer = {
                 mode: 'push', 
                 // Called in toggle on state.
                 toggleOn: function( ) {
-                    var parent = $(this).parents('div[data-type="settimer"]');
-                    var knob_hour = parent.find('input[class=widget_settimer_hour]');
-                    var knob_min = parent.find('input[class=widget_settimer_minute]');
+                    var parent = $(this).parents('div[data-type="'+base.widgetname+'"]');
+                    var knob_hour = parent.find('input[class=widget_'+base.widgetname+'_hour]');
+                    var knob_min = parent.find('input[class=widget_'+base.widgetname+'_minute]');
                     var hour = knob_hour.val()*1;
                     var min = knob_min.val()*1;
                     
@@ -153,7 +113,7 @@ var widget_settimer = {
                 mode: 'push', 
                 // Called in toggle on state.
                 toggleOn: function( ) {
-                    var parent = $(this).parents('div[data-type="settimer"]');
+                    var parent = $(this).parents('div[data-type="'+base.widgetname+'"]');
                     var cmd = [parent.data('cmd'), device, parent.data('set'), parent.data('off')].join(' ');
                     setFhemStatus(cmd);
                     if( device && typeof device != "undefined") {
@@ -168,8 +128,8 @@ var widget_settimer = {
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*'){    
                 var val = getDeviceValue( $(this), 'get' );
-                var knob_hour = $(this).find('input[class=widget_settimer_hour]');
-                var knob_min = $(this).find('input[class=widget_settimer_minute]');
+                var knob_hour = $(this).find('input[class=widget_'+base.widgetname+'_hour]');
+                var knob_min = $(this).find('input[class=widget_'+base.widgetname+'_minute]');
                 if (val){
                     var v = val.split(':');
                     var hour = v[0];
@@ -188,5 +148,5 @@ var widget_settimer = {
                 knob_min.css({visibility:'visible'});
             }
         });
-    }           
-};
+    }
+});

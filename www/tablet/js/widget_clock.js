@@ -1,4 +1,8 @@
-var widget_clock = {
+if(typeof widget_widget == 'undefined') {
+    loadplugin('widget_widget');
+}
+
+var widget_clock = $.extend({}, widget_widget, {
     widgetname : 'clock',
     init: function () {
         this.elements = $('div[data-type="'+this.widgetname+'"]');
@@ -52,4 +56,4 @@ var widget_clock = {
         });
     },
     update: function (dev,par) {}
-};
+});

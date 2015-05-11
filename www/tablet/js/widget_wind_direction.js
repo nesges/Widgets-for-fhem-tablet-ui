@@ -1,52 +1,16 @@
 // idea by michiatlnx
 // http://forum.fhem.de/index.php/topic,34233.msg281124.html#msg281124
 
-var widget_wind_direction = {
-    _wind_direction: null,
-    elements: null,
-    drawDial: function () {
-        var c = this.g, // context
-        a = this.arc(this.cv), // Arc
-        r = 1;
-        
-        c.lineWidth = this.lineWidth;
-        c.lineCap = this.lineCap;
-        if (this.o.bgColor !== "none") {
-            c.beginPath();
-            c.strokeStyle = this.o.bgColor;
-            c.arc(this.xy, this.xy, this.radius, this.endAngle - 0.00001, this.startAngle + 0.00001, true);
-            c.stroke();
-        }
-        
-        var tick_w = (2 * Math.PI) / 360;
-        var step =  (this.o.max - this.o.min) / this.angleArc;
-        var acAngle = ((this.o.isValue - this.o.min) / step) + this.startAngle;
-        var dist = this.o.tickdistance || 4;
-        
-        // draw ticks
-        for (tick = this.startAngle; tick < this.endAngle + 0.00001; tick+=tick_w*dist) {
-            i = step * (tick-this.startAngle)+this.o.min;
-            c.beginPath();
-            c.strokeStyle = this.o.tkColor;
-            w = tick_w;
-            w *= (c.strokeStyle != this.o.tkColor) ? 2 : (this.o.tiny?6:1);
-            c.arc( this.xy, this.xy, this.radius, tick, tick+w , false);
-            c.stroke();
-        }
-        
-        // draw selection cursor
-        c.beginPath();
-        c.strokeStyle = this.o.hdColor;
-        c.lineWidth = this.lineWidth * 2;
-        c.arc(this.xy, this.xy, this.radius-this.lineWidth/2, a.s, a.e, a.d);
-        c.stroke();
+if(typeof widget_volume == 'undefined') {
+    loadplugin('widget_volume');
+}
 
-        return false;
-    },
+var widget_wind_direction = $.extend({}, widget_volume, {
+    widgetname: 'wind_direction',
     init: function () {
-        _wind_direction=this;
-        _wind_direction.elements = $('div[data-type="wind_direction"]');
-        _wind_direction.elements.each(function(index) {
+        base=this;
+        this.elements = $('div[data-type="'+this.widgetname+'"]');
+        this.elements.each(function(index) {
             var knob_elem =  jQuery('<input/>', {
                 type: 'text',
                 value: '0',
@@ -105,7 +69,7 @@ var widget_wind_direction = {
                 'tickdistance': $(this).data('tickstep') || ($(this).hasClass('tiny')?90:45),
                 'mode': 0,
                 'cursor': $(this).hasClass('tiny')?18:6,
-                'draw' : _wind_direction.drawDial,
+                'draw' : base.drawDial,
                 'readOnly' : true,
                 'change' : function (v) { 
                       startPollInterval();
@@ -144,7 +108,7 @@ var widget_wind_direction = {
                         var valt='WTF';
                         if(val < 0) {
                             valt='ERR';
-                            console.log('wind_direction ' + ($(this).attr('data-device')?'('+$(this).attr('data-device')+')':'') + ': ' + getPart(value,part)+' is invalid');
+                            console.log(base.widgetname, ($(this).attr('data-device')?'('+$(this).attr('data-device')+')':'') + ': ' + getPart(value,part)+' is invalid');
                         } else if(!speed || speed==0) {
                             valt=$(this).data('calm')||'-';
                         } else {
@@ -172,4 +136,4 @@ var widget_wind_direction = {
             }
         });
     }
-};
+});

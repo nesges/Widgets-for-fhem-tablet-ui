@@ -1,10 +1,13 @@
-var widget_klimatrend = {
-    _klimatrend: null,
-    elements: null,
+if(typeof widget_widget == 'undefined') {
+    loadplugin('widget_widget');
+}
+
+var widget_klimatrend = $.extend({}, widget_widget, {
+    widgetname : 'klimatrend',
     init: function () {
-        _klimatrend=this;
-        _klimatrend.elements = $('div[data-type="klimatrend"]');
-        _klimatrend.elements.each(function(index) {
+        base=this;
+        this.elements = $('div[data-type="'+this.widgetname+'"]');
+        this.elements.each(function(index) {
             $(this).data('get', $(this).data('get') || 'statTemperatureTendency'); 
             readings[$(this).data('get')] = true;
         });
@@ -78,4 +81,4 @@ var widget_klimatrend = {
             }
         });
     }
-};
+});
