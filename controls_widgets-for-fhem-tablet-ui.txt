@@ -3,8 +3,8 @@ DIR www/tablet/lib
 DIR www/tablet/lib/ion.sound
 DIR www/tablet/lib/ion.sound/sounds
 DIR www/tablet/js
-UPD 2015-04-30_13:43:15 26022 www/tablet/lib/ion.sound/ion.sound.js
-UPD 2015-04-30_13:43:15 11816 www/tablet/lib/ion.sound/ion.sound.min.js
+UPD 2015-05-12_20:46:38 26022 www/tablet/lib/ion.sound/ion.sound.js
+UPD 2015-05-12_20:54:18 11833 www/tablet/lib/ion.sound/ion.sound.min.js
 UPD 2015-04-30_13:43:16 13155 www/tablet/lib/ion.sound/sounds/button_push.mp3
 UPD 2015-04-30_13:43:15 13617 www/tablet/lib/ion.sound/sounds/beer_can_opening.ogg
 UPD 2015-04-30_13:43:16 5607 www/tablet/lib/ion.sound/sounds/pop_cork.aac
@@ -87,7 +87,7 @@ UPD 2015-04-28_20:48:11 4481 www/tablet/js/widget_iframe.js
 UPD 2015-05-11_18:59:45 3070 www/tablet/js/widget_mpdnowplaying.js
 UPD 2015-05-11_12:58:09 3870 www/tablet/js/widget_multistatebutton.js
 UPD 2015-05-11_13:13:42 4042 www/tablet/js/widget_klimatrend.js
-UPD 2015-05-06_11:18:05 6046 www/tablet/js/widget_clicksound.js
+UPD 2015-05-12_20:46:47 6046 www/tablet/js/widget_clicksound.js
 UPD 2015-05-11_13:36:32 6315 www/tablet/js/widget_wind_direction.js
 UPD 2015-05-11_13:33:15 7507 www/tablet/js/widget_settimer.js
 UPD 2015-05-11_19:54:30 3353 www/tablet/js/widget_joinedlabel.js
