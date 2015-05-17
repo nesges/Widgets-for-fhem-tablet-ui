@@ -74,6 +74,9 @@ var widget_button = $.extend({}, widget_famultibutton, {
         } else if(elem.attr('data-fhem-cmd')) {
             target = elem.attr('data-fhem-cmd');
             type = 'fhem-cmd';
+        } else if(elem.attr('data-cmd')) {
+            target = elem.attr('data-cmd');
+            type = 'fhem-cmd';
         }
         
         // // this code may be harmfull if target must contain urlencoded parts.
