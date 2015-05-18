@@ -1,4 +1,6 @@
 2015-05-18
+ clicksound: dynamicload jetzt in fhem-tablet-ui.js verfügbar
+2015-05-18
  widget_button: data-cmd als alias für data-fhem-cmd
 2015-05-13
  joinedlabel: neues Attribut mask, mpdnowplaying jetzt child von joinedlabel

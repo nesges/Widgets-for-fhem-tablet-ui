@@ -6,22 +6,6 @@ if(typeof ion == 'undefined' || typeof ion.sound == 'undefined') {
     dynamicload('lib/ion.sound/ion.sound.min.js');
 }
 
-/* this function should go to fhem-tablet-ui.js */
-function dynamicload(file, success, error, async) {
-    var dir = $('script[src$="fhem-tablet-ui.js"]').attr('src');
-    var name = dir.split('/').pop(); 
-    dir = dir.replace('/'+name,"");
-    $.ajax({
-        url: dir + '/../' + file,
-        dataType: "script",
-        cache: true,
-        async: async || false,
-        context:{name: name},
-        success: success||function(){ return true },
-        error: error||function(){ return false },
-    });
-}
-
 var widget_clicksound = $.extend({}, widget_widget, {
     widgetname: 'clicksound',
     selector: function(selector) {
