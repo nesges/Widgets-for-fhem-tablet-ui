@@ -84,7 +84,7 @@ UPD 2015-05-11_13:28:44 8584 www/tablet/js/widget_kodinowplaying.js
 UPD 2015-05-17_23:44:29 3996 www/tablet/js/widget_button.js
 UPD 2015-05-20_23:36:25 5862 www/tablet/js/widget_clock.js
 UPD 2015-04-28_20:48:11 4481 www/tablet/js/widget_iframe.js
-UPD 2015-05-13_00:12:32 1313 www/tablet/js/widget_mpdnowplaying.js
+UPD 2015-05-21_00:14:15 1313 www/tablet/js/widget_mpdnowplaying.js
 UPD 2015-05-11_12:58:09 3870 www/tablet/js/widget_multistatebutton.js
 UPD 2015-05-11_13:13:42 4042 www/tablet/js/widget_klimatrend.js
 UPD 2015-05-18_17:56:39 5533 www/tablet/js/widget_clicksound.js
