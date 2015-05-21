@@ -65,46 +65,58 @@ var widget_joinedlabel = $.extend({}, widget_widget, {
             var get = $(this).data('get');
             var val = new Array();
             
-            for(var g=0; g<get.length; g++) {
-                var device = $(this).data('_device'+g);
-                var reading = get[g];
-                if(get[g].match(/:/)) {
-                    var temp = get[g].split(':');
-                    device = temp[0];
-                    reading = temp[1];
-                }
-                
-                // set device
-                $(this).data('device', device);
-                
-                // get reading
-                var value = getDeviceValue($(this), reading);
-                value = base.update_value_cb(value);
-                
-                if(value) {
-                    val[g] = '<span class="' + base.widgetname + '_get_' + g + '">' + value + '</span>';
-                }
-            }
-
-            $(this).empty();
-            if(! $(this).data('mask')) {
-                $(this).html(val.join($(this).data('glue')));
-            } else {
-                var mask = $(this).data('mask');
+            // check if par is of interest to this device
+            var parok=false;
+            if($.isArray(get)) {
                 for(var g=0; g<get.length; g++) {
-                    v=1*g+1;
-                    // "[ pre $1 suf ]" 
-                    // is replaced with 
-                    // " pre " + val[1] + " suf "
-                    mask = mask.replace(new RegExp('\\[(.*?)\\$'+v+'(.*?)\\]'), (val[g]?'$1'+val[g]+'$2':''));
-                    // "$1"
-                    // is replaced with 
-                    // val[1]
-                    mask = mask.replace(new RegExp('\\$'+v), val[g]);
+                    if(par == get[g]) {
+                        parok = true;
+                        break;
+                    }
                 }
-                $(this).html(mask);
             }
-            $(this).data('device', $(this).data('__device'));
+            if(parok) {
+                for(var g=0; g<get.length; g++) {
+                    var device = $(this).data('_device'+g);
+                    var reading = get[g];
+                    if(get[g].match(/:/)) {
+                        var temp = get[g].split(':');
+                        device = temp[0];
+                        reading = temp[1];
+                    }
+                    
+                    // set device
+                    $(this).data('device', device);
+                    
+                    // get reading
+                    var value = getDeviceValue($(this), reading);
+                    value = base.update_value_cb(value);
+                    
+                    if(value) {
+                        val[g] = '<span class="' + base.widgetname + '_get_' + g + '">' + value + '</span>';
+                    }
+                }
+                
+                $(this).empty();
+                if(! $(this).data('mask')) {
+                    $(this).html(val.join($(this).data('glue')));
+                } else {
+                    var mask = $(this).data('mask');
+                    for(var g=0; g<get.length; g++) {
+                        v=1*g+1;
+                        // "[ pre $1 suf ]" 
+                        // is replaced with 
+                        // " pre " + val[1] + " suf "
+                        mask = mask.replace(new RegExp('\\[(.*?)\\$'+v+'(.*?)\\]'), (val[g]?'$1'+val[g]+'$2':''));
+                        // "$1"
+                        // is replaced with 
+                        // val[1]
+                        mask = mask.replace(new RegExp('\\$'+v), val[g]);
+                    }
+                    $(this).html(mask);
+                }
+                $(this).data('device', $(this).data('__device'));
+            }
         });
     }
 });

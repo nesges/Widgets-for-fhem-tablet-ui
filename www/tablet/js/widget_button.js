@@ -105,4 +105,10 @@ var widget_button = $.extend({}, widget_famultibutton, {
                 break;
         }
     },
+    update_cb : function(elem,state) {
+        if (elem.hasClass('warn') || elem.children().filter('#fg').hasClass('warn'))
+            this.showOverlay(elem,state);
+        else
+            this.showOverlay(elem,"");
+    },
 });
