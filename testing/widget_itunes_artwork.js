@@ -38,7 +38,8 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         elem.data('stoppedimg', elem.data('stoppedimg') || dir + '../images/stop.svg');
         elem.data('notfoundimg',elem.data('notfoundimg')|| dir + '../images/unknown.svg');
         
-        elem.find('img').attr('src', elem.data('loadingimg'));
+        var img = elem.find('img');
+        img.attr('src', elem.data('loadingimg'));
     },
     update_value_cb : function(value) {
         if(value && value.match(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/)) {
@@ -77,7 +78,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                         artwork = data.results[0].artworkUrl100;
                     }
                     if(artwork) {
-                        var pxratiosize = window.devicePixelRatio*this.size;
+                        var pxratiosize = Math.round(window.devicePixelRatio*this.size);
                         artwork = artwork.replace(/100x100/, pxratiosize+'x'+pxratiosize);
                         
                         this.img.attr('src', artwork);
@@ -157,7 +158,8 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
 	    });         
     }               
 });                 
-                    
+
+
 // https://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html
                     
                     
