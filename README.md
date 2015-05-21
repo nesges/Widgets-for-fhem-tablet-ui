@@ -21,4 +21,7 @@ Sämtliche Dokumentation zu den Widgets befindet sich jetzt im Wiki. Folge einfa
 
 ![](https://raw.githubusercontent.com/nesges/TabletUI-Demo-WOPR/master/screenshots/small/wohnzimmer-xbmc-simple.png)
 
+## Weitere Demos
+
+Viele Demos anderer Anwender werden im Repository [fhem-ftui-user-demos](https://github.com/ovibox/fhem-ftui-user-demos) gesammelt. Diskussion dazu in diesem [Thread im Forum](http://forum.fhem.de/index.php?topic=37378.msg296510#msg296510).
 
