@@ -34,7 +34,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         elem.data('media',      elem.data('media')      || 'music');
         elem.data('entity',     elem.data('entity')     || 'song');
         elem.data('timeout',    elem.data('timeout')    || 3000);
-        elem.data('loadingimg', elem.data('loadingimg') || dir + '../images/loading.svg');
+        elem.data('loadingimg', elem.data('loadingimg') || dir + '../images/unknown.svg');
         elem.data('stoppedimg', elem.data('stoppedimg') || dir + '../images/stop.svg');
         elem.data('notfoundimg',elem.data('notfoundimg')|| dir + '../images/unknown.svg');
         
