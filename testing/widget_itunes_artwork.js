@@ -77,28 +77,8 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                         var pxratiosize = window.devicePixelRatio*this.size;
                         artwork = artwork.replace(/100x100/, pxratiosize+'x'+pxratiosize);
                         
-                        // recheck readings, they might have changed in the meantime; this is to handle race conditions
-                        //var termsok=true;
-                        //var get = elem.data('get');
-                        //var reval = new Array();
-                        //for(var t=0; t<this.val.length; t++) {
-                        //    reval[t] = getDeviceValue(this.elem, get[t]);
-                        //    reval[t] = base.update_value_cb(reval[t]);
-                        //    if(this.val[t] != reval[t]) {
-                        //        termsok = false;
-                        //        console.log(this.base.widgetname, 'itunes.termsnotok', this.val[t], reval[t]);
-                        //        break;
-                        //    }
-                        //}
-                        //if(termsok) {
-                            this.img.attr('src', artwork);
-                            console.log(this.base.widgetname, 'itunes.artwork', artwork);
-                        //} else {
-                        //    //this.img.attr('src', this.elem.data('notfoundimg'));
-                        //    console.log(this.base.widgetname, 'ITUNES.OUTDATED', artwork, this.val.join(','), reval.join(','));
-                        //    // ..and give it another spin with reval
-                        //    this.base.itunes(elem, reval);
-                        //}
+                        this.img.attr('src', artwork);
+                        console.log(this.base.widgetname, 'itunes.artwork', artwork);
                     } else {
                         console.log(this.base.widgetname, 'itunes.artwork', '-');
                     }
@@ -137,6 +117,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
 
                 if(parok && ! $(this).data('updateinprogress')) {
                     $(this).data('updateinprogress', true);
+                    $(this).find('img').attr('src', $(this).data('loadingimg'));
                     // there's a timing issue with readings updates in MPD
                     var timedUpdate = setTimeout($.proxy(function() {
                         base = widget_itunes_artwork; // this shouldn't be necessary -> get rid of it
@@ -152,8 +133,8 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                                 done++;
                             }
                         }
-                        //
-                        //// fetch coverimage after all readings are read
+
+                        // fetch coverimage after all readings are read
                         if(val.length == done) {
 			                // delete timestamp values (workarroud for list-bug in requestFhem)
 			                for(var g=0; g<get.length; g++) {
