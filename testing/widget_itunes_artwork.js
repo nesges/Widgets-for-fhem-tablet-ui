@@ -24,6 +24,9 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         elem.data('get-stopped-value',  elem.data('get-stopped-value')  || 'stop');
         readings[elem.data('get-stopped')] = true;
         
+        // dir for standard images
+        var dir = $('script[src$="fhem-tablet-ui.js"]').attr('src').replace(/(.*\/).*/, '$1');
+        
         elem.data('opacity',    elem.data('opacity')    || 1);
         elem.data('size',       elem.data('size')       || 150);
         elem.data('height',     elem.data('size'));
@@ -31,9 +34,9 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         elem.data('media',      elem.data('media')      || 'music');
         elem.data('entity',     elem.data('entity')     || 'song');
         elem.data('timeout',    elem.data('timeout')    || 3000);
-        elem.data('loadingimg', elem.data('loadingimg') || 'http://vignette1.wikia.nocookie.net/knightsanddragons/images/c/c2/Peanut-butter-jelly-time.gif/revision/latest?cb=20140709170448'); // remember to change this
-        elem.data('stoppedimg', elem.data('stoppedimg') || 'http://upload.wikimedia.org/wikipedia/commons/7/7b/Canada_Stop_sign.svg'); // remember to change this
-        elem.data('notfoundimg',elem.data('notfoundimg')|| 'http://www.dyadmusic.co.uk/wp-content/uploads/2014/01/UnknownCopyrightLicence.png'); // remember to change this
+        elem.data('loadingimg', elem.data('loadingimg') || dir + '../images/loading.svg');
+        elem.data('stoppedimg', elem.data('stoppedimg') || dir + '../images/stop.svg');
+        elem.data('notfoundimg',elem.data('notfoundimg')|| dir + '../images/unknown.svg');
         
         elem.find('img').attr('src', elem.data('loadingimg'));
     },

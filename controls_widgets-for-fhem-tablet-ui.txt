@@ -4,6 +4,9 @@ DIR www/tablet/lib
 DIR www/tablet/lib/ion.sound
 DIR www/tablet/lib/ion.sound/sounds
 DIR www/tablet/js
+UPD 2015-05-21_16:02:19 410 www/tablet/images/stop.svg
+UPD 2015-05-21_15:52:48 2786 www/tablet/images/unknown.svg
+UPD 2015-05-21_15:34:09 1916 www/tablet/images/loading.svg
 UPD 2015-05-12_20:46:38 26022 www/tablet/lib/ion.sound/ion.sound.js
 UPD 2015-05-12_20:59:43 11864 www/tablet/lib/ion.sound/ion.sound.min.js
 UPD 2015-04-30_13:43:16 13155 www/tablet/lib/ion.sound/sounds/button_push.mp3
