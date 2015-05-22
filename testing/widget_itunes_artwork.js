@@ -20,9 +20,9 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         }
         
         // reading and reading-value that say "Player has stopped"
-        elem.data('get-stopped',        elem.data('get-stopped')        || 'STATE');
-        elem.data('get-stopped-value',  elem.data('get-stopped-value')  || 'stop');
-        readings[elem.data('get-stopped')] = true;
+        elem.data('get-playstatus',             elem.data('get-playstatus')         || 'STATE');
+        elem.data('get-playstatus-stop',        elem.data('get-playstatus-stopp')   || 'stop');
+        readings[elem.data('get-playstatus')] = true;
         
         // dir for standard images
         var dir = $('script[src$="fhem-tablet-ui.js"]').attr('src').replace(/(.*\/).*/, '$1');
@@ -34,7 +34,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         elem.data('media',          elem.data('media')          || 'music');
         elem.data('entity',         elem.data('entity')         || 'song');
         elem.data('timeout',        elem.data('timeout')        || 3000);
-        elem.data('loadingimg',     elem.data('loadingimg')     || dir + '../images/unknown.svg');
+        elem.data('loadingimg',     elem.data('loadingimg')     || dir + '../images/loading.svg');
         elem.data('stoppedimg',     elem.data('stoppedimg')     || dir + '../images/stop.svg');
         elem.data('notfoundimg',    elem.data('notfoundimg')    || dir + '../images/unknown.svg');
         elem.data('stripbrackets',  elem.data('stripbrackets')  || false);
@@ -106,45 +106,63 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         var deviceElements = this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             // is the music player stopped?
-            var valStopped = getDeviceValue($(this), 'get-stopped');
-            if(valStopped == $(this).data('get-stopped-value')) {
+            var playstatus = getDeviceValue($(this), 'get-playstatus');
+            if(playstatus == $(this).data('get-playstatus-stop')) {
                 $(this).find('img').attr('src', $(this).data('stoppedimg'));
-                console.log(base.widgetname, 'stopped', $(this).data('get-stopped'), valStopped);
+                console.log(base.widgetname, 'playstatus', $(this).data('get-playstatus'), playstatus);
             } else {
+                console.log(base.widgetname, 'playstatus', $(this).data('get-playstatus'), playstatus);
+                var parok=false;
                 var get = $(this).data('get');
                 // check if par is of interest to this device
-                var parok=false;
                 for(var g=0; g<get.length; g++) {
                     if(par == get[g]) {
                         parok = true;
                         break;
                     }
                 }
-
+                
+                // enforce update if playstatus has changed from stop to anything else
+                if(playstatus && $(this).data('_playstatus') && $(this).data('_playstatus') == $(this).data('get-playstatus-stop') && $(this).data('_playstatus') != playstatus) {
+                    parok = true;
+                    $(this).data('force', true);
+                    console.log(base.widgetname, 'enforce update', $(this).data('_playstatus'), playstatus);
+                } else {
+                    $(this).data('force', false);
+                }
+                
                 if(parok && ! $(this).data('updateinprogress')) {
                     $(this).data('updateinprogress', true);
-                    $(this).find('img').attr('src', $(this).data('loadingimg'));
                     // there's a timing issue with readings updates in MPD
                     var timedUpdate = setTimeout($.proxy(function() {
                         base = widget_itunes_artwork; // this shouldn't be necessary -> get rid of it
                         var get = $(this).data('get');
                         var done=0;
+                        var changed=false;
                         var val = new Array();
                         for(var g=0; g<get.length; g++) {
                             // get all readings
                             val[g] = getDeviceValue($(this), get[g]);
+                            // remember old readings and see if they've changed
+                            if($(this).data('ov'+g) != val[g]) {
+                                $(this).data('ov'+g, val[g]);
+                                changed=true;
+                            }
                             
-                            // count read values
+                            // count read values; update is done only if all values are available
                             if(val[g]) {
                                 done++;
                             }
                         }
-
+                        
                         // fetch coverimage after all readings are read
-                        if(val.length == done) {
+                        if((changed || $(this).data('force')) && val.length == done) {
+                            $(this).find('img').attr('src', $(this).data('loadingimg'));
+                            
 			                // delete timestamp values (workarroud for list-bug in requestFhem)
 			                for(var g=0; g<get.length; g++) {
 			                    val[g] = base.update_value_cb(val[g]);
+			                    // strip brackets
 			                    if($(this).data('stripbrackets')) {
 			                        var pre = val[g];
 			                        val[g] = val[g].replace(/\(.*?\)/g, '');
@@ -153,6 +171,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
 			                        val[g] = val[g].replace(/\<.*?\>/g, '');
 			                        console.log(base.widgetname, 'stripbrackets', pre, val[g]);
 			                    }
+			                    // strip regex
 			                    if($(this).data('stripregex')) {
 			                        var pre = val[g];
 			                        val[g] = val[g].replace(new RegExp($(this).data('stripregex'), 'g'), '');
@@ -167,15 +186,12 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                         $(this).data('updateinprogress', false);
                     }, this), 300);
                 } else {
-                    // console.log(base.widgetname, 'ignoring', par);
+                    console.log(base.widgetname, 'ignoring', par, parok, $(this).data('updateinprogress'));
                 }
-            }       
+            }
+            $(this).data('_playstatus', playstatus);
 	    });         
     }               
 });                 
 
-
 // https://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html
-                    
-                    
-                    
