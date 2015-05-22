@@ -27,16 +27,18 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         // dir for standard images
         var dir = $('script[src$="fhem-tablet-ui.js"]').attr('src').replace(/(.*\/).*/, '$1');
         
-        elem.data('opacity',    elem.data('opacity')    || 1);
-        elem.data('size',       elem.data('size')       || 150);
-        elem.data('height',     elem.data('size'));
-        elem.data('width',      elem.data('size'));
-        elem.data('media',      elem.data('media')      || 'music');
-        elem.data('entity',     elem.data('entity')     || 'song');
-        elem.data('timeout',    elem.data('timeout')    || 3000);
-        elem.data('loadingimg', elem.data('loadingimg') || dir + '../images/unknown.svg');
-        elem.data('stoppedimg', elem.data('stoppedimg') || dir + '../images/stop.svg');
-        elem.data('notfoundimg',elem.data('notfoundimg')|| dir + '../images/unknown.svg');
+        elem.data('opacity',        elem.data('opacity')        || 1);
+        elem.data('size',           elem.data('size')           || 150);
+        elem.data('height',         elem.data('size'));
+        elem.data('width',          elem.data('size'));
+        elem.data('media',          elem.data('media')          || 'music');
+        elem.data('entity',         elem.data('entity')         || 'song');
+        elem.data('timeout',        elem.data('timeout')        || 3000);
+        elem.data('loadingimg',     elem.data('loadingimg')     || dir + '../images/unknown.svg');
+        elem.data('stoppedimg',     elem.data('stoppedimg')     || dir + '../images/stop.svg');
+        elem.data('notfoundimg',    elem.data('notfoundimg')    || dir + '../images/unknown.svg');
+        elem.data('stripbrackets',  elem.data('stripbrackets')  || false);
+        elem.data('stripregex',     elem.data('stripregex')     || '');
         
         var img = elem.find('img');
         img.attr('src', elem.data('loadingimg'));
@@ -143,6 +145,19 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
 			                // delete timestamp values (workarroud for list-bug in requestFhem)
 			                for(var g=0; g<get.length; g++) {
 			                    val[g] = base.update_value_cb(val[g]);
+			                    if($(this).data('stripbrackets')) {
+			                        var pre = val[g];
+			                        val[g] = val[g].replace(/\(.*?\)/g, '');
+			                        val[g] = val[g].replace(/\[.*?\]/g, '');
+			                        val[g] = val[g].replace(/\{.*?\}/g, '');
+			                        val[g] = val[g].replace(/\<.*?\>/g, '');
+			                        console.log(base.widgetname, 'stripbrackets', pre, val[g]);
+			                    }
+			                    if($(this).data('stripregex')) {
+			                        var pre = val[g];
+			                        val[g] = val[g].replace(new RegExp($(this).data('stripregex'), 'g'), '');
+			                        console.log(base.widgetname, 'stripregex', $(this).data('stripregex'), pre, val[g]);
+			                    }
 			                }
                             console.log(base.widgetname, 'update', get, val);
 			                $(this).find('img').attr('src', $(this).data('loadingimg'));
