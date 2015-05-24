@@ -18,15 +18,15 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
             readings[get] = true;
             console.log(this.widgetname, 'init_attr', get);
         }
-        
+
         // reading and reading-value that say "Player has stopped"
         elem.data('get-playstatus',             elem.data('get-playstatus')         || 'STATE');
         elem.data('get-playstatus-stop',        elem.data('get-playstatus-stopp')   || 'stop');
         readings[elem.data('get-playstatus')] = true;
-        
+
         // dir for standard images
         var dir = $('script[src$="fhem-tablet-ui.js"]').attr('src').replace(/(.*\/).*/, '$1');
-        
+
         elem.data('opacity',        elem.data('opacity')        || 1);
         elem.data('size',           elem.data('size')           || 150);
         elem.data('height',         elem.data('size'));
@@ -39,7 +39,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         elem.data('notfoundimg',    elem.data('notfoundimg')    || dir + '../images/unknown.svg');
         elem.data('stripbrackets',  elem.data('stripbrackets')  || false);
         elem.data('stripregex',     elem.data('stripregex')     || '');
-        
+
         var img = elem.find('img');
         img.attr('src', elem.data('loadingimg'));
     },
@@ -82,7 +82,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                     if(artwork) {
                         var pxratiosize = Math.round(window.devicePixelRatio*this.size);
                         artwork = artwork.replace(/100x100/, pxratiosize+'x'+pxratiosize);
-                        
+
                         this.img.attr('src', artwork);
                         console.log(this.base.widgetname, 'itunes.artwork', artwork);
                     } else {
@@ -121,7 +121,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                         break;
                     }
                 }
-                
+
                 // enforce update if playstatus has changed from stop to anything else
                 if(playstatus && $(this).data('_playstatus') && $(this).data('_playstatus') == $(this).data('get-playstatus-stop') && $(this).data('_playstatus') != playstatus) {
                     parok = true;
@@ -130,7 +130,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                 } else {
                     $(this).data('force', false);
                 }
-                
+
                 if(parok && ! $(this).data('updateinprogress')) {
                     $(this).data('updateinprogress', true);
                     // there's a timing issue with readings updates in MPD
@@ -148,19 +148,19 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                                 $(this).data('ov'+g, val[g]);
                                 changed=true;
                             }
-                            
+
                             // count read values; update is done only if all values are available
                             if(val[g]) {
                                 done++;
                             }
                         }
-                        
+
                         // fetch coverimage after all readings are read
                         if((changed || $(this).data('force')) && val.length == done) {
                             $(this).find('img').attr('src', $(this).data('loadingimg'));
-                            
-			                // delete timestamp values (workarroud for list-bug in requestFhem)
+
 			                for(var g=0; g<get.length; g++) {
+			                    // delete timestamp values (workarroud for list-bug in requestFhem)
 			                    val[g] = base.update_value_cb(val[g]);
 			                    // strip brackets
 			                    if($(this).data('stripbrackets')) {
@@ -182,7 +182,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
 			                $(this).find('img').attr('src', $(this).data('loadingimg'));
 			                base.itunes($(this), val);
                         }
-                        
+
                         $(this).data('updateinprogress', false);
                     }, this), 300);
                 } else {
@@ -190,8 +190,8 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                 }
             }
             $(this).data('_playstatus', playstatus);
-	    });         
-    }               
-});                 
+	    });
+    }
+});
 
 // https://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html
