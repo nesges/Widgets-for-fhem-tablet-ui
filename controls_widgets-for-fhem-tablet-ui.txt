@@ -95,4 +95,4 @@ UPD 2015-05-11_13:13:42 4042 www/tablet/js/widget_klimatrend.js
 UPD 2015-05-18_17:56:39 5533 www/tablet/js/widget_clicksound.js
 UPD 2015-05-11_13:36:32 6315 www/tablet/js/widget_wind_direction.js
 UPD 2015-05-11_13:33:15 7507 www/tablet/js/widget_settimer.js
-UPD 2015-05-21_09:57:35 4702 www/tablet/js/widget_joinedlabel.js
+UPD 2015-05-25_02:12:59 5161 www/tablet/js/widget_joinedlabel.js

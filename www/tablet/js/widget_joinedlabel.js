@@ -97,9 +97,10 @@ var widget_joinedlabel = $.extend({}, widget_widget, {
                     }
                 }
                 
+                var html;
                 $(this).empty();
                 if(! $(this).data('mask')) {
-                    $(this).html(val.join($(this).data('glue')));
+                    html = val.join($(this).data('glue'));
                 } else {
                     var mask = $(this).data('mask');
                     for(var g=0; g<get.length; g++) {
@@ -113,8 +114,17 @@ var widget_joinedlabel = $.extend({}, widget_widget, {
                         // val[1]
                         mask = mask.replace(new RegExp('\\$'+v), val[g]);
                     }
-                    $(this).html(mask);
+                    
+                    html = mask;
                 }
+                if($(this).data('substitution') && $(this).data('substitution').match(/^s/)) {
+                    var substitution = $(this).data('substitution');
+                    var f = substitution.substr(1,1);
+                    var subst = substitution.split(f);
+                    html = html.replace(new RegExp(subst[1],subst[3]), subst[2]);
+                }
+                $(this).html(html);
+                
                 $(this).data('device', $(this).data('__device'));
             }
         });

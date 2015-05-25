@@ -1,4 +1,6 @@
 2015-05-25
+ joinedlabel: data-substitution
+2015-05-25
  widget_reload: pagereload getriggert aus Fhem
 2015-05-22
  itunes_artwork: Reload nach STOP (data-get-playstatus, data-get-playstatus-stop), kein Reload wenn Readings unverändert
