@@ -17,7 +17,7 @@ var widget_mpdnowplaying = $.extend({}, widget_joinedlabel, {
             $(this).data('get', new Array(name, artist, album, track, title));
             $(this).data('mask', $(this).data('mask') || "[$1<br>][$2 - ][ $3 - ][ $4: ][ $5]");
             
-            base.init_attr($(this));
+            widget_joinedlabel.init_attr($(this));
         });
     },
     update_value_cb : function(value) {

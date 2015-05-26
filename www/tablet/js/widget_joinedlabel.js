@@ -1,12 +1,13 @@
-if(typeof widget_widget == 'undefined') {
-    loadplugin('widget_widget');
+if(typeof widget_label == 'undefined') {
+    loadplugin('widget_label');
 }
 
-var widget_joinedlabel = $.extend({}, widget_widget, {
+var widget_joinedlabel = $.extend({}, widget_label, {
     widgetname:"joinedlabel",
     init_attr: function(elem) {
+        widget_label.init_attr(elem);
+        
         elem.data('__device',   elem.data('device'));
-        elem.data('get',        elem.data('get')        || 'STATE');
         elem.data('glue',       elem.data('glue')       || ' ');
         elem.data('mask',       elem.data('mask')       || '');
         
@@ -49,10 +50,9 @@ var widget_joinedlabel = $.extend({}, widget_widget, {
         }            
     },
     init: function () {
-        base=this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
-            base.init_attr($(this));
+            widget_joinedlabel.init_attr($(this));
         });
     },
     update_value_cb : function(value) {
@@ -63,6 +63,7 @@ var widget_joinedlabel = $.extend({}, widget_widget, {
         var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             var get = $(this).data('get');
+            var part = $(this).data('part');
             var val = new Array();
             
             // check if par is of interest to this device
@@ -90,6 +91,7 @@ var widget_joinedlabel = $.extend({}, widget_widget, {
                     
                     // get reading
                     var value = getDeviceValue($(this), reading);
+                    value = getPart(value,part);
                     value = base.update_value_cb(value);
                     
                     if(value) {
@@ -117,15 +119,19 @@ var widget_joinedlabel = $.extend({}, widget_widget, {
                     
                     html = mask;
                 }
-                if($(this).data('substitution') && $(this).data('substitution').match(/^s/)) {
-                    var substitution = $(this).data('substitution');
-                    var f = substitution.substr(1,1);
-                    var subst = substitution.split(f);
-                    html = html.replace(new RegExp(subst[1],subst[3]), subst[2]);
+                html = widget_label.update_substitution(html, $(this).data('substitution'));
+                html = widget_label.update_fix(html, $(this).data('fix'));
+                    
+                var unit = $(this).data('unit');
+                if(unit) {
+                    html += "<span style='font-size: 50%;'>"+unit+"</span>";
                 }
+                
                 $(this).html(html);
                 
                 $(this).data('device', $(this).data('__device'));
+                
+                widget_label.update_colorize(html, $(this));
             }
         });
     }
