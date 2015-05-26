@@ -88,10 +88,10 @@ var widget_clock = $.extend({}, widget_widget, {
                 d['s'] = d['s']<10?'0'+d['s']:d['s'];
                 d['u'] = d['u']<10?'000'+d['u']:d['u']<100?'00'+d['u']:d['u']<1000?'0'+d['u']:d['u'];
                 d['N'] = d['w']==0?7:d['w'];
-                d['l'] = f.elem.data('days')[(d['N']-1)];
+                d['l'] = f.elem.data('days')[(Number(d['N'])-1)];
                 d['D'] = d['l'].substr(0,f.elem.data('shortday-length'));
                 d['S'] = String(d['j']).match(/[23]?1$/)?'st':String(d['j']).match(/[23]?2$/)?'nd':String(d['j']).match(/[23]?3$/)?'rd':'th';
-                d['F'] = f.elem.data('months')[(d['n']-1)];
+                d['F'] = f.elem.data('months')[(Number(d['n'])-1)];
                 d['M'] = d['F'].substr(0,f.elem.data('shortmonth-length'));
                 d['g'] = d['G']<=12?d['G']:d['G']-12;
                 d['h'] = d['g']<10?'0'+d['g']:d['g'];
