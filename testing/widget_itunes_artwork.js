@@ -16,7 +16,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
             var get = elem.data('get')[g];
             elem.data(get, get);
             readings[get] = true;
-            console.log(this.widgetname, 'init_attr', get);
+            DEBUG && console.log(this.widgetname, 'init_attr', get);
         }
 
         // reading and reading-value that say "Player has stopped"
@@ -50,7 +50,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         return value;
     },
     itunes: function (elem, val) {
-        console.log(this.widgetname, 'itunes.start', val);
+        DEBUG && console.log(this.widgetname, 'itunes.start', val);
         $.ajax({
             url: "https://itunes.apple.com/search",
             dataType: "jsonp",
@@ -69,7 +69,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                 jqXHR.url = settings.url;
             },
             error: function (jqXHR, textStatus, message) {
-                console.log(this.base.widgetname, 'itunes.error', textStatus, message, jqXHR.url);
+                DEBUG && console.log(this.base.widgetname, 'itunes.error', textStatus, message, jqXHR.url);
             },
             success: function (data, textStatus, jqXHR) {
                 if($.isArray(data.results) && data.results[0] && data.results[0].artworkUrl100) {
@@ -84,13 +84,14 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                         artwork = artwork.replace(/100x100/, pxratiosize+'x'+pxratiosize);
 
                         this.img.attr('src', artwork);
-                        console.log(this.base.widgetname, 'itunes.artwork', artwork);
+                        DEBUG && console.log(this.base.widgetname, 'itunes.artwork', artwork);
                     } else {
-                        console.log(this.base.widgetname, 'itunes.artwork', '-');
+                        DEBUG && console.log(this.base.widgetname, 'itunes.artwork', '-');
                     }
                 } else {
                     // no results found for our search terms
-                    console.log(this.base.widgetname, 'itunes.results', '-');
+                    DEBUG && console.log(this.base.widgetname, 'itunes.results', '-');
+                    
                     this.img.attr('src', this.elem.data('notfoundimg'));
                     // ..shorten the terms by 1 and try again until only one term is left
                     if(val.length>1) {
@@ -109,9 +110,9 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
             var playstatus = getDeviceValue($(this), 'get-playstatus');
             if(playstatus == $(this).data('get-playstatus-stop')) {
                 $(this).find('img').attr('src', $(this).data('stoppedimg'));
-                console.log(base.widgetname, 'playstatus', $(this).data('get-playstatus'), playstatus);
+                DEBUG && console.log(base.widgetname, 'playstatus', $(this).data('get-playstatus'), playstatus);
             } else {
-                console.log(base.widgetname, 'playstatus', $(this).data('get-playstatus'), playstatus);
+                DEBUG && console.log(base.widgetname, 'playstatus', $(this).data('get-playstatus'), playstatus);
                 var parok=false;
                 var get = $(this).data('get');
                 // check if par is of interest to this device
@@ -126,7 +127,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                 if(playstatus && $(this).data('_playstatus') && $(this).data('_playstatus') == $(this).data('get-playstatus-stop') && $(this).data('_playstatus') != playstatus) {
                     parok = true;
                     $(this).data('force', true);
-                    console.log(base.widgetname, 'enforce update', $(this).data('_playstatus'), playstatus);
+                    DEBUG && console.log(base.widgetname, 'enforce update', $(this).data('_playstatus'), playstatus);
                 } else {
                     $(this).data('force', false);
                 }
@@ -169,16 +170,16 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
 			                        val[g] = val[g].replace(/\[.*?\]/g, '');
 			                        val[g] = val[g].replace(/\{.*?\}/g, '');
 			                        val[g] = val[g].replace(/\<.*?\>/g, '');
-			                        console.log(base.widgetname, 'stripbrackets', pre, val[g]);
+			                        DEBUG && console.log(base.widgetname, 'stripbrackets', pre, val[g]);
 			                    }
 			                    // strip regex
 			                    if($(this).data('stripregex')) {
 			                        var pre = val[g];
 			                        val[g] = val[g].replace(new RegExp($(this).data('stripregex'), 'g'), '');
-			                        console.log(base.widgetname, 'stripregex', $(this).data('stripregex'), pre, val[g]);
+			                        DEBUG && console.log(base.widgetname, 'stripregex', $(this).data('stripregex'), pre, val[g]);
 			                    }
 			                }
-                            console.log(base.widgetname, 'update', get, val);
+                            DEBUG && console.log(base.widgetname, 'update', get, val);
 			                $(this).find('img').attr('src', $(this).data('loadingimg'));
 			                base.itunes($(this), val);
                         }
@@ -186,7 +187,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                         $(this).data('updateinprogress', false);
                     }, this), 300);
                 } else {
-                    console.log(base.widgetname, 'ignoring', par, parok, $(this).data('updateinprogress'));
+                    DEBUG && console.log(base.widgetname, 'ignoring', par, parok, $(this).data('updateinprogress'));
                 }
             }
             $(this).data('_playstatus', playstatus);

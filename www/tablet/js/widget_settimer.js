@@ -14,7 +14,7 @@ var widget_settimer = $.extend({}, widget_volume, {
             $(this).data('set', $(this).data('reading'));
             $(this).data('cmd', $(this).data('cmd')||($(this).data('reading')?'setreading':'set'));
             $(this).data('off', $(this).data('off')||'off');
-            $(this).data('width', ($(this).attr('data-width')?$(this).data('width'):380));
+            $(this).data('width', ($(this).attr('data-width')?$(this).data('width'):($(this).hasClass('large')?520:380)));
             
             var container = $('<div style="position:relative;'+ ($.isNumeric($(this).data('width'))?'width:'+$(this).data('width')+'px':'') +';min-height:60px;" class="widget_'+base.widgetname+'_container"/>').appendTo($(this));
             
@@ -42,8 +42,8 @@ var widget_settimer = $.extend({}, widget_volume, {
                 'min': 0,
                 'max': 23,
                 'lastValue': 0,
-                'height':120,
-                'width':120,
+                'height': $(this).hasClass('large')?180:120,
+                'width': $(this).hasClass('large')?180:120,
                 'angleOffset': $(this).attr('data-angleoffset')?$(this).attr('data-angleoffset')*1:-120,
                 'angleArc': $(this).attr('data-anglearc')?$(this).attr('data-anglearc')*1:240,
                 'bgColor': $(this).data('bgcolor') || 'transparent',
@@ -61,8 +61,8 @@ var widget_settimer = $.extend({}, widget_volume, {
                 'min': 0,
                 'max': 59,
                 'lastValue': 0,
-                'height':120,
-                'width':120,
+                'height': $(this).hasClass('large')?180:120,
+                'width': $(this).hasClass('large')?180:120,
                 'angleOffset': $(this).attr('data-angleoffset')?$(this).attr('data-angleoffset')*1:-120,
                 'angleArc': $(this).attr('data-anglearc')?$(this).attr('data-anglearc')*1:240,
                 'bgColor': $(this).data('bgcolor') || 'transparent',

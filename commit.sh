@@ -19,6 +19,11 @@ echo "The following changes would be committed:"
 echo ""
 git commit -a -m "$*" --dry-run
 
+if [[ $* =~ ^test$ ]]
+then
+    exit
+fi
+
 echo ""
 echo "-------------------------------------------------------------------------"
 read -p "Proceed to commit? " -n 1 -r

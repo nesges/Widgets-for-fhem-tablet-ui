@@ -94,5 +94,5 @@ UPD 2015-05-11_12:58:09 3870 www/tablet/js/widget_multistatebutton.js
 UPD 2015-05-11_13:13:42 4042 www/tablet/js/widget_klimatrend.js
 UPD 2015-05-18_17:56:39 5533 www/tablet/js/widget_clicksound.js
 UPD 2015-05-11_13:36:32 6315 www/tablet/js/widget_wind_direction.js
-UPD 2015-05-11_13:33:15 7507 www/tablet/js/widget_settimer.js
-UPD 2015-05-25_11:43:27 5307 www/tablet/js/widget_joinedlabel.js
+UPD 2015-05-27_17:32:19 7663 www/tablet/js/widget_settimer.js
+UPD 2015-05-27_20:59:54 5307 www/tablet/js/widget_joinedlabel.js
