@@ -6,48 +6,8 @@ var widget_joinedlabel = $.extend({}, widget_label, {
     widgetname:"joinedlabel",
     init_attr: function(elem) {
         widget_label.init_attr(elem);
-        
-        elem.data('__device',   elem.data('device'));
         elem.data('glue',       elem.data('glue')       || ' ');
         elem.data('mask',       elem.data('mask')       || '');
-        
-        if(! $.isArray(elem.data('get'))) {
-            elem.data('get', new Array(elem.data('get')));
-        }
-        for(var g=0; g<elem.data('get').length; g++) {
-            var get = elem.data('get')[g];
-
-            var device = elem.data('device');
-            var reading = get;
-            
-            // advanced stuff: you could specify readings of different devices by
-            // specifiing device:reading in the get-array
-            // but this is limited by how ftui requests data from fhem: ftui collects
-            // "interesting" devices by running over data-device tags and requests data
-            // only for these. so you'd have to make shure that your devices are found 
-            // in the html code. Try this:
-            //
-            // <div data-type="joinedlabel"
-            //      data-device="DEVICE1"
-            //      data-get='["DEVICE1:readingA","DEVICE2:readingB","DEVICE3:readingC"]'
-            // ></div>
-            // <div data-device="DEVICE2"></div>
-            // <div data-device="DEVICE3"></div>
-            
-            if(get.match(/:/)) {
-                get = get.split(':');
-                device = get[0];
-                reading = get[1];
-            }
-            
-            // create a data-var with the name of the reading
-            elem.data(reading, reading);
-            // subscribe to the reading
-            readings[reading] = true;
-            
-            // save the readings device
-            elem.data('_device'+g, device);
-        }            
     },
     init: function () {
         this.elements = $('div[data-type="'+this.widgetname+'"]');
@@ -60,25 +20,15 @@ var widget_joinedlabel = $.extend({}, widget_label, {
     },
     update: function (dev,par) {
         base=this;
-        var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
+        var deviceElements= this.elements;
         deviceElements.each(function(index) {
             var get = $(this).data('get');
             var part = $(this).data('part');
             var val = new Array();
-            
             // check if par is of interest to this device
-            var parok=false;
-            if($.isArray(get)) {
+            if(hasSubscription($(this), par)) {
                 for(var g=0; g<get.length; g++) {
-                    if(par == get[g]) {
-                        parok = true;
-                        break;
-                    }
-                }
-            }
-            if(parok) {
-                for(var g=0; g<get.length; g++) {
-                    var device = $(this).data('_device'+g);
+                    var device = $(this).data('device');
                     var reading = get[g];
                     if(get[g].match(/:/)) {
                         var temp = get[g].split(':');
@@ -86,11 +36,8 @@ var widget_joinedlabel = $.extend({}, widget_label, {
                         reading = temp[1];
                     }
                     
-                    // set device
-                    $(this).data('device', device);
-                    
                     // get reading
-                    var value = getDeviceValue($(this), reading);
+                    var value = getDeviceValueByName(device, reading);
                     value = getPart(value,part);
                     value = base.update_value_cb(value);
                     
@@ -128,8 +75,6 @@ var widget_joinedlabel = $.extend({}, widget_label, {
                 }
                 
                 $(this).html(html);
-                
-                $(this).data('device', $(this).data('__device'));
                 
                 widget_label.update_colorize(html, $(this));
             }

@@ -91,8 +91,11 @@ UPD 2015-05-26_23:41:04 5878 www/tablet/js/widget_clock.js
 UPD 2015-04-28_20:48:11 4481 www/tablet/js/widget_iframe.js
 UPD 2015-05-25_11:43:03 1327 www/tablet/js/widget_mpdnowplaying.js
 UPD 2015-05-11_12:58:09 3870 www/tablet/js/widget_multistatebutton.js
+UPD 2015-05-28_00:03:30 879 www/tablet/js/widget_javascript.js
 UPD 2015-05-11_13:13:42 4042 www/tablet/js/widget_klimatrend.js
 UPD 2015-05-18_17:56:39 5533 www/tablet/js/widget_clicksound.js
 UPD 2015-05-11_13:36:32 6315 www/tablet/js/widget_wind_direction.js
+UPD 2015-05-28_00:03:22 1291 www/tablet/js/widget_reload.js
+UPD 2015-05-28_00:03:37 9773 www/tablet/js/widget_itunes_artwork.js
 UPD 2015-05-27_17:32:19 7663 www/tablet/js/widget_settimer.js
-UPD 2015-05-27_20:59:54 5307 www/tablet/js/widget_joinedlabel.js
+UPD 2015-05-27_21:11:26 3209 www/tablet/js/widget_joinedlabel.js
