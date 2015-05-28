@@ -42,6 +42,11 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
 
         var img = elem.find('img');
         img.attr('src', elem.data('loadingimg'));
+
+        if(elem.data('notfoundimg').match(/^[^:]+:[^:]+$/)) {
+            initReadingsArray(elem.data('notfoundimg'));
+            requestFhem(elem.data('notfoundimg'));
+        }
     },
     update_value_cb : function(value) {
         if(value && value.match(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/)) {
@@ -92,7 +97,26 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                     // no results found for our search terms
                     DEBUG && console.log(this.base.widgetname, 'itunes.results', '-');
                     
-                    this.img.attr('src', this.elem.data('notfoundimg'));
+                    var img;
+                    if(this.elem.data('notfoundimg') && this.elem.data('notfoundimg').match(/^[^:]+:[^:]+$/)) {
+                        var nfimg = this.elem.data('notfoundimg').split(':');
+                        var device = nfimg[0];
+                        var reading = nfimg[1];
+                        img = getDeviceValueByName(device, reading);
+                        if(!img) {
+                            // poor hack to overcome timing issues with asynchronous requestFhem
+                            setTimeout({elem:this}, function(){
+                                img = getDeviceValueByName(device, reading);
+                                elem.img.attr('src', img);
+                                console.log(this.base.widgetname, 'notfoundimage delayed', device, reading, img);
+                            },500);
+                        }
+                        console.log(this.base.widgetname, 'notfoundimage', device, reading, img);
+                    } else {
+                        img = this.elem.data('notfoundimg');
+                    }
+                    
+                    this.img.attr('src', img);
                     // ..shorten the terms by 1 and try again until only one term is left
                     if(val.length>1) {
                         this.val.pop();
@@ -106,10 +130,12 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         base = this;
         var deviceElements = this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
+            var img = $(this).find('img');
             // is the music player stopped?
             var playstatus = getDeviceValue($(this), 'get-playstatus');
             if(playstatus == $(this).data('get-playstatus-stop')) {
-                $(this).find('img').attr('src', $(this).data('stoppedimg'));
+                img.attr('src', $(this).data('stoppedimg'));
+                img.css('visibility','visible');
                 DEBUG && console.log(base.widgetname, 'playstatus', $(this).data('get-playstatus'), playstatus);
             } else {
                 DEBUG && console.log(base.widgetname, 'playstatus', $(this).data('get-playstatus'), playstatus);
@@ -159,6 +185,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                         // fetch coverimage after all readings are read
                         if((changed || $(this).data('force')) && val.length == done) {
                             $(this).find('img').attr('src', $(this).data('loadingimg'));
+                            $(this).find('img').css('visibility', 'visible');
 
 			                for(var g=0; g<get.length; g++) {
 			                    // delete timestamp values (workarroud for list-bug in requestFhem)
