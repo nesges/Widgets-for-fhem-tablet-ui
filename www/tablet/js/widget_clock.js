@@ -67,8 +67,7 @@ var widget_clock = $.extend({}, widget_widget, {
                 // TODO:
                 // z: Der Tag des Jahres
                 // W: ISO-8601 Wochennummer des Jahres
-                
-                
+                               
                 d['Y'] = now.getFullYear();
                 d['n'] = now.getMonth()+1;
                 d['j'] = now.getDate();
@@ -97,6 +96,10 @@ var widget_clock = $.extend({}, widget_widget, {
                 d['h'] = d['g']<10?'0'+d['g']:d['g'];
                 d['a'] = d['G']<=12?'am':'pm';
                 d['A'] = d['a'].toUpperCase();
+                
+                //console.log('clock', 'days', f.elem.data('days'));
+                //console.log('clock', 'months', f.elem.data('months'));
+                //console.log('clock', 'd', d);
                 
                 // split formatstring into it's letters and replace one after the other
                 var datearr = f.format.split('');
