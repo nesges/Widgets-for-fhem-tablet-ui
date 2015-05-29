@@ -20,6 +20,8 @@ var widget_iframe = $.extend({}, widget_widget, {
         elem.data('get',            elem.data('get')            || 'STATE');
         elem.data('get-refresh',    elem.data('get-refresh'));
         elem.data('check',          elem.attr('data-check')?elem.data('check'):true);
+        elem.data('value-url',      elem.data('value-url')      || false);
+        DEBUG && console.log('INIT ATTR : ', elem.data('value-url') );
     },
     init_ui: function(elem) {
         if(elem.data('check')) {
@@ -84,6 +86,10 @@ var widget_iframe = $.extend({}, widget_widget, {
             if ( $(this).data('get')==par || par =='*') {   
                 var value = getDeviceValue( $(this), 'get' );
                 if (value) {
+                    if (  $(this).data('value-url') ) {
+                       $(this).data('src', value);
+                      DEBUG && console.log('Got URL on update',value);
+                    }
                     if ( value == $(this).data('get-refresh') )
                         base.init_ui($(this))
                     else if ( value.match(RegExp('^' + $(this).data('get-refresh') + '$')) )
