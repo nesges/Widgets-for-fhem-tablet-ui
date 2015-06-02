@@ -35,7 +35,7 @@ var widget_clock = $.extend({}, widget_widget, {
         base = this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
-            base.init_attr($(this));
+            widget_clock.init_attr($(this));
             var f = function() {
                 var d = new Array();
                 now = new Date();
@@ -97,9 +97,9 @@ var widget_clock = $.extend({}, widget_widget, {
                 d['a'] = d['G']<=12?'am':'pm';
                 d['A'] = d['a'].toUpperCase();
                 
-                //console.log('clock', 'days', f.elem.data('days'));
-                //console.log('clock', 'months', f.elem.data('months'));
-                //console.log('clock', 'd', d);
+                DEBUG && console.log('clock', 'days', f.elem.data('days'));
+                DEBUG && console.log('clock', 'months', f.elem.data('months'));
+                DEBUG && console.log('clock', 'd', d);
                 
                 // split formatstring into it's letters and replace one after the other
                 var datearr = f.format.split('');
