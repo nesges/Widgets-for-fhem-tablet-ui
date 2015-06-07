@@ -9,12 +9,18 @@ var widget_settimer = $.extend({}, widget_volume, {
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             var device = $(this).data('device');
-            $(this).data('get', $(this).data('get') || $(this).data('reading') || 'STATE');
-            readings[$(this).data('get')] = true;
-            $(this).data('set', $(this).data('reading'));
-            $(this).data('cmd', $(this).data('cmd')||($(this).data('reading')?'setreading':'set'));
-            $(this).data('off', $(this).data('off')||'off');
-            $(this).data('width', ($(this).attr('data-width')?$(this).data('width'):($(this).hasClass('large')?520:380)));
+            $(this).data('get',             $(this).data('get')             || $(this).data('reading') || 'STATE');
+            $(this).data('set',             $(this).data('reading'));
+            $(this).data('cmd',             $(this).data('cmd')             || ($(this).data('reading')?'setreading':'set'));
+            $(this).data('off',             $(this).data('off')             || 'off');
+            $(this).data('running-get',     $(this).data('running-get')     || 'STATE');
+            $(this).data('running-get-on',  $(this).data('running-get-on')  || 'running');
+            $(this).data('running-blink',   $(this).data('running-blink')   || true);
+            $(this).data('running-color',   $(this).data('running-color')   || '#0069aa');
+            $(this).data('width',           ($(this).attr('data-width')?$(this).data('width'):($(this).hasClass('large')?520:380)));
+            
+            initReadingsArray($(this).data('running-get'));
+            requestFhem($(this).data('running-get'));
             
             var container = $('<div style="position:relative;'+ ($.isNumeric($(this).data('width'))?'width:'+$(this).data('width')+'px':'') +';min-height:60px;" class="widget_'+base.widgetname+'_container"/>').appendTo($(this));
             
@@ -113,7 +119,7 @@ var widget_settimer = $.extend({}, widget_volume, {
                 mode: 'push', 
                 // Called in toggle on state.
                 toggleOn: function( ) {
-                    var parent = $(this).parents('div[data-type="'+base.widgetname+'"]');
+                    var parent = $(this).parents('div[data-type="'+widget_settimer.widgetname+'"]');
                     var cmd = [parent.data('cmd'), device, parent.data('set'), parent.data('off')].join(' ');
                     setFhemStatus(cmd);
                     if( device && typeof device != "undefined") {
@@ -121,11 +127,15 @@ var widget_settimer = $.extend({}, widget_volume, {
                     }
                 },
             });
+            button_off.data('off-background-color', button_off.find('#bg').css('color'));
         });
     },
     update: function (dev,par) {
         var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
+            button_off = $(this).find('.widget_settimer_off');
+            var button_off_bg = button_off.find('#bg');
+            
             if ( $(this).data('get')==par || par =='*'){    
                 var val = getDeviceValue( $(this), 'get' );
                 var knob_hour = $(this).find('input[class=widget_'+base.widgetname+'_hour]');
@@ -134,6 +144,10 @@ var widget_settimer = $.extend({}, widget_volume, {
                     var v = val.split(':');
                     var hour = v[0];
                     var min = v[0]=='off'?v[0]:v[1];
+                    
+                    if(hour==$(this).data('running-get-on')) {
+                        hour = min = '!';
+                    }
                     
                     if ( knob_hour.val() != hour ){
                         knob_hour.val( hour ).trigger('change');
@@ -147,6 +161,20 @@ var widget_settimer = $.extend({}, widget_volume, {
                 knob_hour.css({visibility:'visible'});
                 knob_min.css({visibility:'visible'});
             }
+            
+            if ( $(this).data('running-get')==par || par =='*'){    
+                var val = getDeviceValue( $(this), 'running-get' );
+                if(val && val == $(this).data('running-get-on')) {
+                    button_off_bg.css('color', $(this).data('running-color'));
+                    if($(this).data('running-blink')) {
+                        button_off.addClass('blink');
+                    }
+                } else {
+                    button_off_bg.css('color', button_off.data('off-background-color'));
+                    button_off.removeClass('blink')
+                }
+            }
+            
         });
     }
 });

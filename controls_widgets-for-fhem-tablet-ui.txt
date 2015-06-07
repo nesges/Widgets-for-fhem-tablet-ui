@@ -97,5 +97,5 @@ UPD 2015-05-18_17:56:39 5533 www/tablet/js/widget_clicksound.js
 UPD 2015-05-11_13:36:32 6315 www/tablet/js/widget_wind_direction.js
 UPD 2015-05-28_00:03:22 1291 www/tablet/js/widget_reload.js
 UPD 2015-05-28_18:29:03 11204 www/tablet/js/widget_itunes_artwork.js
-UPD 2015-06-06_09:40:54 7663 www/tablet/js/widget_settimer.js
+UPD 2015-06-07_10:21:25 9215 www/tablet/js/widget_settimer.js
 UPD 2015-05-27_21:11:26 3209 www/tablet/js/widget_joinedlabel.js
