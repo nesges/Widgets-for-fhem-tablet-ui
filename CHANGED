@@ -1,4 +1,6 @@
 2015-06-07
+ clock: Workarround für falsch initialisiertes f (thx an Risiko)
+2015-06-07
  settimer: running-Options
 2015-06-06
  widget_settimer: DimGray statt 696969

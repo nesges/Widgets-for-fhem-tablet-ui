@@ -87,7 +87,7 @@ UPD 2015-04-30_13:43:16 16366 www/tablet/lib/ion.sound/sounds/water_droplet_2.mp
 UPD 2015-04-30_13:43:16 25716 www/tablet/lib/ion.sound/sounds/metal_plate_2.aac
 UPD 2015-05-11_13:28:44 8584 www/tablet/js/widget_kodinowplaying.js
 UPD 2015-05-29_17:43:15 2836 www/tablet/js/widget_button.js
-UPD 2015-06-02_20:00:14 6112 www/tablet/js/widget_clock.js
+UPD 2015-06-07_11:00:37 6219 www/tablet/js/widget_clock.js
 UPD 2015-05-29_22:52:43 4827 www/tablet/js/widget_iframe.js
 UPD 2015-05-25_11:43:03 1327 www/tablet/js/widget_mpdnowplaying.js
 UPD 2015-05-11_12:58:09 3870 www/tablet/js/widget_multistatebutton.js

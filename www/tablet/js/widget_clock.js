@@ -32,11 +32,11 @@ var widget_clock = $.extend({}, widget_widget, {
         
     },
     init: function () {
-        base = this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             widget_clock.init_attr($(this));
             var f = function() {
+                if(f.elem.data('days') == null) {return} // http://forum.fhem.de/index.php/topic,36122.msg299306.html#msg299306
                 var d = new Array();
                 now = new Date();
                 // Y: Jahreszahl, vierstellig
