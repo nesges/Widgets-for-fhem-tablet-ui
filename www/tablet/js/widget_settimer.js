@@ -12,11 +12,12 @@ var widget_settimer = $.extend({}, widget_volume, {
             $(this).data('get',             $(this).data('get')             || $(this).data('reading') || 'STATE');
             $(this).data('set',             $(this).data('reading'));
             $(this).data('cmd',             $(this).data('cmd')             || ($(this).data('reading')?'setreading':'set'));
-            $(this).data('off',             $(this).data('off')             || 'off');
+            $(this).data('set-off',         $(this).data('set-off') || $(this).data('off') || 'off');
             $(this).data('running-get',     $(this).data('running-get')     || 'STATE');
             $(this).data('running-get-on',  $(this).data('running-get-on')  || 'running');
             $(this).data('running-blink',   $(this).data('running-blink')   || true);
             $(this).data('running-color',   $(this).data('running-color')   || '#0069aa');
+            $(this).data('running-set-off', $(this).data('running-set-off') || $(this).data('set-off'));
             $(this).data('width',           ($(this).attr('data-width')?$(this).data('width'):($(this).hasClass('large')?520:380)));
             
             initReadingsArray($(this).data('running-get'));
@@ -120,7 +121,15 @@ var widget_settimer = $.extend({}, widget_volume, {
                 // Called in toggle on state.
                 toggleOn: function( ) {
                     var parent = $(this).parents('div[data-type="'+widget_settimer.widgetname+'"]');
-                    var cmd = [parent.data('cmd'), device, parent.data('set'), parent.data('off')].join(' ');
+                    var val = getDeviceValue( $(parent), 'running-get' );
+                    var setoff;
+                    if(val && val == parent.data('running-get-on')) {
+                        setoff = parent.data('running-set-off');
+                    } else {
+                        setoff = parent.data('set-off');
+                    }
+                    
+                    var cmd = [parent.data('cmd'), device, parent.data('set'), setoff].join(' ');
                     setFhemStatus(cmd);
                     if( device && typeof device != "undefined") {
                         TOAST && $.toast(cmd);
@@ -147,6 +156,9 @@ var widget_settimer = $.extend({}, widget_volume, {
                     
                     if(hour==$(this).data('running-get-on')) {
                         hour = min = '!';
+                    }
+                    if(hour==$(this).data('running-set-off')) {
+                        hour = min = '#';
                     }
                     
                     if ( knob_hour.val() != hour ){
