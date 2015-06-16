@@ -8,7 +8,7 @@ if(typeof widget_volume == 'undefined') {
 var widget_wind_direction = $.extend({}, widget_volume, {
     widgetname: 'wind_direction',
     init: function () {
-        base=this;
+        var base=this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             var knob_elem =  jQuery('<input/>', {

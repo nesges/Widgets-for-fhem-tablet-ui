@@ -19,7 +19,7 @@ var widget_joinedlabel = $.extend({}, widget_label, {
         return value;
     },
     update: function (dev,par) {
-        base=this;
+        var base=this;
         var deviceElements= this.elements;
         deviceElements.each(function(index) {
             var get = $(this).data('get');

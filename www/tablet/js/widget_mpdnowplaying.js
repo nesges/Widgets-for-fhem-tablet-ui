@@ -5,7 +5,7 @@ if(typeof widget_joinedlabel == 'undefined') {
 var widget_mpdnowplaying = $.extend({}, widget_joinedlabel, {
     widgetname:"mpdnowplaying",
     init: function () {
-        base=this;
+        var base=this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             var album   =  typeof $(this).data('album')  != 'undefined' ? $(this).data('album')  : 'album';
