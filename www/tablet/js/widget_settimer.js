@@ -10,9 +10,11 @@ var widget_settimer = $.extend({}, widget_volume, {
         this.elements.each(function(index) {
             var device = $(this).data('device');
             $(this).data('get',             $(this).data('get')             || $(this).data('reading') || 'STATE');
+            
             $(this).data('set',             $(this).data('reading'));
             $(this).data('cmd',             $(this).data('cmd')             || ($(this).data('reading')?'setreading':'set'));
             $(this).data('set-off',         $(this).data('set-off') || $(this).data('off') || 'off');
+            $(this).data('get-off',         $(this).data('get-off')         || $(this).data('set-off'));
             $(this).data('running-get',     $(this).data('running-get')     || 'STATE');
             $(this).data('running-get-on',  $(this).data('running-get-on')  || 'running');
             $(this).data('running-blink',   $(this).data('running-blink')   || true);
@@ -102,8 +104,8 @@ var widget_settimer = $.extend({}, widget_volume, {
                     min = min<10?'0'+min:min;
                     
                     var v = hour+':'+min;
-                    if(hour==parent.data('off') || min==parent.data('off') ) {
-                        v = parent.data('off');
+                    if(hour==parent.data('get-off') || min==parent.data('get-off') ) {
+                        v = parent.data('get-off');
                     }
 
                     var cmd = [parent.data('cmd'), device, parent.data('set'), v].join(' ');
@@ -152,13 +154,18 @@ var widget_settimer = $.extend({}, widget_volume, {
                 if (val){
                     var v = val.split(':');
                     var hour = v[0];
-                    var min = v[0]=='off'?v[0]:v[1];
+                    var min = v[1];
                     
-                    if(hour==$(this).data('running-get-on')) {
-                        hour = min = '!';
+                    if(hour==$(this).data('get-off')) {
+                        hour = min = $(this).data('get-off');
                     }
-                    if(hour==$(this).data('running-set-off')) {
+                    if(hour==$(this).data('running-set-off') && hour != $(this).data('get-off')) {
                         hour = min = '#';
+                    }
+                    
+                    var running = getDeviceValue( $(this), 'running-get' );
+                    if(running==$(this).data('running-get-on')) {
+                        hour = min = '!';
                     }
                     
                     if ( knob_hour.val() != hour ){
