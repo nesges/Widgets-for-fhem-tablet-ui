@@ -53,7 +53,7 @@ var widget_clicksound = $.extend({}, widget_widget, {
         elem.data('length',             elem.data('length')         || 200);
     },
     init: function () {
-        base = this;
+        var base = this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             $(this).css("display","none");

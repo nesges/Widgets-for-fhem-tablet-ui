@@ -9,14 +9,14 @@ var widget_javascript = $.extend({}, widget_widget, {
         elem.data('get',        elem.data('get')    ||  'STATE');
     },
     init: function () {
-        base = this;
+        var base = this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             base.init_attr($(this));
         });
     },
     update: function (dev,par) {
-        base = this;
+        var base = this;
         var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par){

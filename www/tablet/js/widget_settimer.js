@@ -5,7 +5,7 @@ if(typeof widget_volume == 'undefined') {
 var widget_settimer = $.extend({}, widget_volume, {
     widgetname: 'settimer',
     init: function () {
-        base=this;
+        var base=this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             var device = $(this).data('device');
@@ -143,6 +143,7 @@ var widget_settimer = $.extend({}, widget_volume, {
     },
     update: function (dev,par) {
         var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
+        var base=this;
         deviceElements.each(function(index) {
             button_off = $(this).find('.widget_settimer_off');
             var button_off_bg = button_off.find('#bg');

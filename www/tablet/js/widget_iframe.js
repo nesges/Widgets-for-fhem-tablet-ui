@@ -80,7 +80,7 @@ var widget_iframe = $.extend({}, widget_widget, {
         });
     },
     update: function (dev,par) {
-        base = this;
+        var base = this;
         var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par || par =='*') {   

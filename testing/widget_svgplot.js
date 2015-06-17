@@ -5,7 +5,7 @@ if(typeof widget_image == 'undefined') {
 var widget_svgplot = $.extend({}, widget_image, {
     widgetname : 'svgplot',
     init: function () {
-        base=this;
+        var base=this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             readings['+GPLOTFILE']=true;
@@ -23,6 +23,7 @@ var widget_svgplot = $.extend({}, widget_image, {
     },
     update: function (dev,par) {
         var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
+        var base=this;
 	    deviceElements.each(function(index) {
             var device = $(this).data('device');
             if(device && deviceStates[device]) {
