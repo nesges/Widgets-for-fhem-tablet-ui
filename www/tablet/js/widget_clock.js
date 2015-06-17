@@ -31,88 +31,94 @@ var widget_clock = $.extend({}, widget_widget, {
         }
         
     },
+    init_datearray: function(elem) {
+        var d = new Array();
+        now = new Date();
+        // Y: Jahreszahl, vierstellig
+        // y: Jahreszahl, zweistellig
+        // m: Monatszahl, mit fÃ¼hrender Null
+        // n: Monatszahl, ohne fÃ¼hrende Null
+        // d: Tag des Monats, mit fÃ¼hrender Null
+        // j: Tag des Monats, ohne fÃ¼hrende Null
+        // H: Stunde des Tages, mit fÃ¼hrender Null
+        // G: Stunde im 24-Stunden-Format, ohne fÃ¼hrender Null
+        // i: Minute der Stunde, mit fÃ¼hrender Null
+        // s: Sekunde der Minute, mit fÃ¼hrender Null
+        // u: Millisekunden mit fÃ¼hrender Null
+        // O: Zeitunterschied zur Greenwich time (GMT) in Stunden
+        // U: Sekunden seit Beginn der UNIX-Epoche (January 1 1970 00:00:00 GMT)
+        // w: Wochentagszahl (Sonntag = 0, Samstag = 6)
+        // N: Wochentagszahl nach ISO-8601 (Montag = 1, Sonntag = 7)
+        // l: Wochentag
+        // D: Wochentag gekürzt
+        // S: Anhang der englischen Aufzählung für einen Monatstag, zwei Zeichen
+        // F: Monat als ganzes Wort, wie January oder March
+        // M: Monatsname gekürzt
+        // g: Stunde im 12-Stunden-Format, ohne führende Nullen
+        // h: Stunde im 12-Stunden-Format, mit führenden Nullen
+        // a: am/pm
+        // A: AM/PM
+        
+        // TODO:
+        // z: Der Tag des Jahres
+        // W: ISO-8601 Wochennummer des Jahres
+                       
+        d['Y'] = now.getFullYear();
+        d['n'] = now.getMonth()+1;
+        d['j'] = now.getDate();
+        d['G'] = now.getHours();
+        d['i'] = now.getMinutes();
+        d['s'] = now.getSeconds();
+        d['w'] = now.getDay();
+        d['u'] = now.getMilliseconds();
+        d['O'] = now.getTimezoneOffset()/60;
+        d['U'] = Math.floor(now.getTime()/1000);
+        
+        d['y'] = d['Y']-2000;
+        d['d'] = d['j']<10?'0'+d['j']:d['j'];
+        d['m'] = d['n']<10?'0'+d['n']:d['n'];
+        d['H'] = d['G']<10?'0'+d['G']:d['G'];
+        d['i'] = d['i']<10?'0'+d['i']:d['i'];
+        d['s'] = d['s']<10?'0'+d['s']:d['s'];
+        d['u'] = d['u']<10?'000'+d['u']:d['u']<100?'00'+d['u']:d['u']<1000?'0'+d['u']:d['u'];
+        d['N'] = d['w']==0?7:d['w'];
+        d['l'] = elem.data('days')[(Number(d['N'])-1)];
+        d['D'] = d['l'].substr(0,elem.data('shortday-length'));
+        d['S'] = String(d['j']).match(/[23]?1$/)?'st':String(d['j']).match(/[23]?2$/)?'nd':String(d['j']).match(/[23]?3$/)?'rd':'th';
+        d['F'] = elem.data('months')[(Number(d['n'])-1)];
+        d['M'] = d['F'].substr(0,elem.data('shortmonth-length'));
+        d['g'] = d['G']<=12?d['G']:d['G']-12;
+        d['h'] = d['g']<10?'0'+d['g']:d['g'];
+        d['a'] = d['G']<=12?'am':'pm';
+        d['A'] = d['a'].toUpperCase();
+        
+        return d;
+    },
+    init_datetext: function(format, d) {
+        // split formatstring into it's letters and replace one after the other
+        var datearr = format.split('');
+        for(l=0; l<datearr.length; l++) {
+            for ( var key in d ) {
+                if(datearr[l] == key) {
+                    datearr[l] = d[key];
+                    // stop replacing after a match
+                    break;
+                }
+            }
+        }
+        return datearr.join('');
+    },
     init: function () {
+        var base = this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             widget_clock.init_attr($(this));
             var f = function() {
                 if(f.elem.data('days') == null) {return} // http://forum.fhem.de/index.php/topic,36122.msg299306.html#msg299306
-                var d = new Array();
-                now = new Date();
-                // Y: Jahreszahl, vierstellig
-                // y: Jahreszahl, zweistellig
-                // m: Monatszahl, mit fÃ¼hrender Null
-                // n: Monatszahl, ohne fÃ¼hrende Null
-                // d: Tag des Monats, mit fÃ¼hrender Null
-                // j: Tag des Monats, ohne fÃ¼hrende Null
-                // H: Stunde des Tages, mit fÃ¼hrender Null
-                // G: Stunde im 24-Stunden-Format, ohne fÃ¼hrender Null
-                // i: Minute der Stunde, mit fÃ¼hrender Null
-                // s: Sekunde der Minute, mit fÃ¼hrender Null
-                // u: Millisekunden mit fÃ¼hrender Null
-                // O: Zeitunterschied zur Greenwich time (GMT) in Stunden
-                // U: Sekunden seit Beginn der UNIX-Epoche (January 1 1970 00:00:00 GMT)
-                // w: Wochentagszahl (Sonntag = 0, Samstag = 6)
-                // N: Wochentagszahl nach ISO-8601 (Montag = 1, Sonntag = 7)
-                // l: Wochentag
-                // D: Wochentag gekürzt
-                // S: Anhang der englischen Aufzählung für einen Monatstag, zwei Zeichen
-                // F: Monat als ganzes Wort, wie January oder March
-                // M: Monatsname gekürzt
-                // g: Stunde im 12-Stunden-Format, ohne führende Nullen
-                // h: Stunde im 12-Stunden-Format, mit führenden Nullen
-                // a: am/pm
-                // A: AM/PM
-                
-                // TODO:
-                // z: Der Tag des Jahres
-                // W: ISO-8601 Wochennummer des Jahres
-                               
-                d['Y'] = now.getFullYear();
-                d['n'] = now.getMonth()+1;
-                d['j'] = now.getDate();
-                d['G'] = now.getHours();
-                d['i'] = now.getMinutes();
-                d['s'] = now.getSeconds();
-                d['w'] = now.getDay();
-                d['u'] = now.getMilliseconds();
-                d['O'] = now.getTimezoneOffset()/60;
-                d['U'] = Math.floor(now.getTime()/1000);
-                
-                d['y'] = d['Y']-2000;
-                d['d'] = d['j']<10?'0'+d['j']:d['j'];
-                d['m'] = d['n']<10?'0'+d['n']:d['n'];
-                d['H'] = d['G']<10?'0'+d['G']:d['G'];
-                d['i'] = d['i']<10?'0'+d['i']:d['i'];
-                d['s'] = d['s']<10?'0'+d['s']:d['s'];
-                d['u'] = d['u']<10?'000'+d['u']:d['u']<100?'00'+d['u']:d['u']<1000?'0'+d['u']:d['u'];
-                d['N'] = d['w']==0?7:d['w'];
-                d['l'] = f.elem.data('days')[(Number(d['N'])-1)];
-                d['D'] = d['l'].substr(0,f.elem.data('shortday-length'));
-                d['S'] = String(d['j']).match(/[23]?1$/)?'st':String(d['j']).match(/[23]?2$/)?'nd':String(d['j']).match(/[23]?3$/)?'rd':'th';
-                d['F'] = f.elem.data('months')[(Number(d['n'])-1)];
-                d['M'] = d['F'].substr(0,f.elem.data('shortmonth-length'));
-                d['g'] = d['G']<=12?d['G']:d['G']-12;
-                d['h'] = d['g']<10?'0'+d['g']:d['g'];
-                d['a'] = d['G']<=12?'am':'pm';
-                d['A'] = d['a'].toUpperCase();
-                
-                DEBUG && console.log('clock', 'days', f.elem.data('days'));
-                DEBUG && console.log('clock', 'months', f.elem.data('months'));
-                DEBUG && console.log('clock', 'd', d);
-                
-                // split formatstring into it's letters and replace one after the other
-                var datearr = f.format.split('');
-                for(l=0; l<datearr.length; l++) {
-                    for ( var key in d ) {
-                        if(datearr[l] == key) {
-                            datearr[l] = d[key];
-                            // stop replacing after a match
-                            break;
-                        }
-                    }
-                }
-                f.elem.text(datearr.join(''));
+
+                var d = base.init_datearray(f.elem);
+                var text = base.init_datetext(f.format, d);
+                f.elem.text(text);
             };
             f.elem = $(this);
             f.format = $(this).data('format');
