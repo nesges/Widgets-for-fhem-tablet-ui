@@ -5,7 +5,7 @@ if(typeof widget_widget == 'undefined') {
 var widget_kodinowplaying = $.extend({}, widget_widget, {
     widgetname:"kodinowplaying",
     init: function () {
-        base=this;
+        var base=this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             if($(this).hasClass('titleonly')){

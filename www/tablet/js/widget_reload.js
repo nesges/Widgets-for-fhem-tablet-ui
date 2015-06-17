@@ -11,14 +11,14 @@ var widget_reload = $.extend({}, widget_widget, {
         elem.data('get-off',    elem.data('get-off')    || elem.data('reset-to')     || 0);
     },
     init: function () {
-        base = this;
+        var base = this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             base.init_attr($(this));
         });
     },
     update: function (dev,par) {
-        base = this;
+        var base = this;
         var deviceElements= this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             if ( $(this).data('get')==par){

@@ -5,7 +5,7 @@ if(typeof widget_widget == 'undefined') {
 var widget_klimatrend = $.extend({}, widget_widget, {
     widgetname : 'klimatrend',
     init: function () {
-        base=this;
+        var base=this;
         this.elements = $('div[data-type="'+this.widgetname+'"]');
         this.elements.each(function(index) {
             $(this).data('get', $(this).data('get') || 'statTemperatureTendency'); 

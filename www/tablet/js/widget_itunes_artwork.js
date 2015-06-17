@@ -127,7 +127,7 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
         });
     },
     update: function (dev,par) {
-        base = this;
+        var base = this;
         var deviceElements = this.elements.filter('div[data-device="'+dev+'"]');
         deviceElements.each(function(index) {
             var img = $(this).find('img');
@@ -162,7 +162,6 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                     $(this).data('updateinprogress', true);
                     // there's a timing issue with readings updates in MPD
                     var timedUpdate = setTimeout($.proxy(function() {
-                        base = widget_itunes_artwork; // this shouldn't be necessary -> get rid of it
                         var get = $(this).data('get');
                         var done=0;
                         var changed=false;
