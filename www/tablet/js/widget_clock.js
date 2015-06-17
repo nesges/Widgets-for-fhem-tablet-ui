@@ -91,6 +91,10 @@ var widget_clock = $.extend({}, widget_widget, {
         d['h'] = d['g']<10?'0'+d['g']:d['g'];
         d['a'] = d['G']<=12?'am':'pm';
         d['A'] = d['a'].toUpperCase();
+        // 'W' by mc-hollin http://forum.fhem.de/index.php/topic,34233.msg304630.html#msg304630
+        var onejan = new Date(now.getFullYear(), 0, 1);
+        var kw = Math.ceil((((now - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+        d['W'] = kw<10?'0'+kw:kw;
         
         return d;
     },

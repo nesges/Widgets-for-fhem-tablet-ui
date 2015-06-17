@@ -1,4 +1,6 @@
 2015-06-17
+ clock: d[W]
+2015-06-17
  clock: init_datearray, init_datetext
 2015-06-17
  settimer: data-get-off added
