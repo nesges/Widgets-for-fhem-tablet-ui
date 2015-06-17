@@ -105,7 +105,7 @@ var widget_settimer = $.extend({}, widget_volume, {
                     
                     var v = hour+':'+min;
                     if(hour==parent.data('get-off') || min==parent.data('get-off') ) {
-                        v = parent.data('get-off');
+                        v = parent.data('set-off');
                     }
 
                     var cmd = [parent.data('cmd'), device, parent.data('set'), v].join(' ');
@@ -158,7 +158,7 @@ var widget_settimer = $.extend({}, widget_volume, {
                     var min = v[1];
                     
                     if(hour==$(this).data('get-off')) {
-                        hour = min = $(this).data('get-off');
+                        hour = min = 'off';
                     }
                     if(hour==$(this).data('running-set-off') && hour != $(this).data('get-off')) {
                         hour = min = '#';
