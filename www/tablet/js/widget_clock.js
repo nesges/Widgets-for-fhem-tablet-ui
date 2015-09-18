@@ -58,10 +58,10 @@ var widget_clock = $.extend({}, widget_widget, {
         // h: Stunde im 12-Stunden-Format, mit führenden Nullen
         // a: am/pm
         // A: AM/PM
+        // W: ISO-8601 Wochennummer des Jahres
         
         // TODO:
         // z: Der Tag des Jahres
-        // W: ISO-8601 Wochennummer des Jahres
                        
         d['Y'] = now.getFullYear();
         d['n'] = now.getMonth()+1;
