@@ -97,6 +97,6 @@ UPD 2015-06-17_09:47:11 4046 www/tablet/js/widget_klimatrend.js
 UPD 2015-06-17_09:47:11 5537 www/tablet/js/widget_clicksound.js
 UPD 2015-06-17_09:47:11 6319 www/tablet/js/widget_wind_direction.js
 UPD 2015-06-17_09:47:11 1299 www/tablet/js/widget_reload.js
-UPD 2015-06-17_09:47:11 11106 www/tablet/js/widget_itunes_artwork.js
+UPD 2015-09-28_14:21:45 11313 www/tablet/js/widget_itunes_artwork.js
 UPD 2015-06-17_09:56:27 10218 www/tablet/js/widget_settimer.js
 UPD 2015-06-17_09:47:11 3213 www/tablet/js/widget_joinedlabel.js

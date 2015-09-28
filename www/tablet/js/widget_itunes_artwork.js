@@ -85,7 +85,12 @@ var widget_itunes_artwork = $.extend({}, widget_image, {
                         artwork = data.results[0].artworkUrl100;
                     }
                     if(artwork) {
-                        var pxratiosize = Math.round(window.devicePixelRatio*this.size);
+                        var pxratiosize;
+                        if(window.devicePixelRatio) {
+                            pxratiosize = Math.round(window.devicePixelRatio*this.size);
+                        } else {
+                            pxratiosize = this.size;
+                        }
                         artwork = artwork.replace(/100x100/, pxratiosize+'x'+pxratiosize);
 
                         this.img.attr('src', artwork);
