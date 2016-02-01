@@ -51,7 +51,7 @@ var widget_countdown = $.extend({}, widget_widget, {
                 f.elem.addClass(f.elem.data('readyclass'));
             }
             if(f.elem.data('resettimeout')>=0) {
-                $(this).data('__timer', setInterval(function(){
+                $(this).data('__timer', setTimeout(function(){
                     f.elem.removeClass(f.elem.data('readyclass'));
                     f.elem.text(f.elem.data('resetmessage'));
                 }, f.elem.data('resettimeout')));

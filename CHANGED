@@ -1,4 +1,6 @@
 2016-02-01
+ widget_countdown: setTimeout statt setInterval bei resettimeout
+2016-02-01
  Neu: widget_countdown
 2016-02-01
  Neu: widget_countdown
