@@ -52,12 +52,9 @@ var widget_countdown = $.extend({}, widget_widget, {
             }
             if(f.elem.data('resettimeout')>=0) {
                 $(this).data('__timer', setInterval(function(){
-                    console.log('reset');
                     f.elem.removeClass(f.elem.data('readyclass'));
                     f.elem.text(f.elem.data('resetmessage'));
                 }, f.elem.data('resettimeout')));
-            } else {
-                console.log(f.elem.data('readytimeout'));
             }
         } else {
             // if time is set back after countdown was ready 
