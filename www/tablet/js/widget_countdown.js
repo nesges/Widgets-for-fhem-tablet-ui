@@ -90,7 +90,7 @@ var widget_countdown = $.extend({}, widget_widget, {
             f.elem = $(this);
             f.value = $(this).getReading('get').val;
             
-            $(this).data('__timer', setInterval(f, 1000));
+            $(this).data('__timer', setInterval(f, $(this).data('interval')));
         });
     },
     update: function (dev,par) {
@@ -104,7 +104,7 @@ var widget_countdown = $.extend({}, widget_widget, {
             f.value = $(this).getReading('get').val;
 
             clearInterval($(this).data('__timer'));
-            $(this).data('__timer', setInterval(f, 1000));
+            $(this).data('__timer', setInterval(f, $(this).data('interval')));
         });
     }
 });
