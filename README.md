@@ -1,3 +1,7 @@
+# Achtung, eingestellt!
+
+Die hier angebotenen Widgets sind mit der aktuellen Version von [fhem-tablet-ui](https://github.com/knowthelist/fhem-tablet-ui/) nicht lauffähig. Einige wurden dankenswerterweise aber bereits dorthin übernommen. Aktuell gehe ich nicht davon aus, dass ich die übrigen Widgets portieren werde. Wenn jemand einen laufenden Fork erstellt, übernehme ich an dieser Stelle gerne einen Link.
+
 # Widgets for fhem-tablet-ui
 
 Die Widgets dieser Sammlung sind zur Verwendung in [fhem-tablet-ui](https://github.com/knowthelist/fhem-tablet-ui/) bestimmt. Zur Installation werden die js-Dateien dieser Sammlung ins Verzeichnis "js" der fhem-tablet-ui-Installation kopiert. Näheres zur [Installation im Wiki](https://github.com/nesges/Widgets-for-fhem-tablet-ui/wiki/Installation).
