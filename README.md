@@ -10,6 +10,7 @@ Die Widgets dieser Sammlung sind zur Verwendung in [fhem-tablet-ui](https://gith
 
 * [button] (https://github.com/nesges/Widgets-for-fhem-tablet-ui/wiki/button)
 * [clock] (https://github.com/nesges/Widgets-for-fhem-tablet-ui/wiki/clock)
+* [countdown] (https://github.com/nesges/Widgets-for-fhem-tablet-ui/wiki/countdown)
 * [iframe] (https://github.com/nesges/Widgets-for-fhem-tablet-ui/wiki/iframe)
 * [klimatrend](https://github.com/nesges/Widgets-for-fhem-tablet-ui/wiki/klimatrend)
 * [kodinowplaying](https://github.com/nesges/Widgets-for-fhem-tablet-ui/wiki/kodinowplaying)

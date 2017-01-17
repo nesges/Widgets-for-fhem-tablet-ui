@@ -1,3 +1,5 @@
+2016-05-28
+ widget_countdown: use the interval attribute when setting a timer
 2016-02-01
  widget_countdown: setTimeout statt setInterval bei resettimeout
 2016-02-01
